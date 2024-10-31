@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 
 public class MainMenuUI : MonoBehaviour
 {
@@ -26,11 +25,10 @@ public class MainMenuUI : MonoBehaviour
 
     /***************************************************************************
 
-        Function:       controlsClick()
+        Function:       playClick
 
-        Description:    The OnClick listener for the controlsButton.
-                        Enables the controlsUI GameObject and disables
-                        all child GameObjects of the MainMenuUI.
+        Description:    The onClick listener for the playButton.
+                        Loads the next scene.
 
     ***************************************************************************/
     private void playClick()
@@ -41,9 +39,9 @@ public class MainMenuUI : MonoBehaviour
 
     /***************************************************************************
     
-        Function:       controlsClick()
+        Function:       controlsClick
 
-        Description:    The OnClick listener for the controlsButton.
+        Description:    The onClick listener for the controlsButton.
                         Enables the controlsUI GameObject and disables 
                         all child GameObjects of the MainMenuUI.
 
@@ -60,9 +58,9 @@ public class MainMenuUI : MonoBehaviour
 
     /***************************************************************************
 
-        Function:       exitClick()
+        Function:       exitClick
 
-        Description:    The OnClick listener for the exitButton.
+        Description:    The onClick listener for the exitButton.
                         Closes the application.
 
     ***************************************************************************/

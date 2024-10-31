@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 
 public class ControlsUI : MonoBehaviour
 {
@@ -15,7 +14,7 @@ public class ControlsUI : MonoBehaviour
         // Initialize the backButton onClick listener 
         backButton.onClick.AddListener(backClick);
 
-        // Hide the ControlsUI game object.
+        // Hide the ControlsUI GameObject.
         gameObject.SetActive(false);
     }
 
@@ -24,16 +23,16 @@ public class ControlsUI : MonoBehaviour
 
         Function:       backClick
 
-        Description:    The OnClick listener for the controlsButton.
+        Description:    The onClick listener for the controlsButton.
                         Enables the controlsUI GameObject and disables
                         all child GameObjects of the MainMenuUI.
 
     ***************************************************************************/
     private void backClick()
     {
-        // Hide the ControlsUI game object.
+        // Hide the ControlsUI GameObject.
         gameObject.SetActive(false);
-        // Show the previous UI game object.
+        // Show the previous UI GameObject.
         previousUI.SetActive(true);
     }
 }
