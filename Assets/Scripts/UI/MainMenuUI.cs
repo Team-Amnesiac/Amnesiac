@@ -50,14 +50,11 @@ public class MainMenuUI : MonoBehaviour
     ***************************************************************************/
     private void controlsClick()
     {
-        // Disable all child GameObjects of MainMenuUI.
-        for (int i = 0; i < transform.childCount; i++)
-        {
-            transform.GetChild(i).gameObject.SetActive(false);
-        }
-
-        // Enable the controlsUI game object.
+        // Enable the controlsUI GameObject.
         controlsUI.SetActive(true);
+
+        // Disable the MainMenuUI GameObject.
+        gameObject.SetActive(false);
     }
 
 
