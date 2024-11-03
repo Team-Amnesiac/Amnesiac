@@ -9,6 +9,8 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+
+        //not necessary anymore
         if (Camera.main != null)
         {
             cameraTransform = Camera.main.transform;
@@ -39,6 +41,20 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
             animator.SetTrigger("Jump");
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            animator.SetTrigger("Hit");
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            Debug.Log("Player engaged an enemy, transitioning to battle scene...");
+            GameManager.Instance.TriggerBattleScene();
         }
     }
 }
