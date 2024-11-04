@@ -42,7 +42,7 @@ public class BattleManager : MonoBehaviour
 
     void Start()
     {
-        if (SceneManager.GetActiveScene().name != "battlescene")
+        if (GameManager.Instance.GetGameState() == GameManager.GameState.Battle)
         {
             this.enabled = false;
             return;
@@ -63,8 +63,6 @@ public class BattleManager : MonoBehaviour
     {
         isPlayerTurn = playerInitiated;
         Debug.Log("Transitioning to battle scene...");
-        SceneManager.LoadScene("battlescene", LoadSceneMode.Single);
-        SceneManager.sceneLoaded += OnBattleSceneLoaded;
     }
 
     private void OnBattleSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -111,7 +109,6 @@ public class BattleManager : MonoBehaviour
         Debug.Log("Battle initialized! " + (isPlayerTurn ? "Player's turn first." : "Enemy's turn first."));
         UpdateUI();
         StartCoroutine(ShowTurnIndicator(isPlayerTurn));
-        SceneManager.sceneLoaded -= OnBattleSceneLoaded;
 
         SetButtonInteractability(isPlayerTurn);
     }

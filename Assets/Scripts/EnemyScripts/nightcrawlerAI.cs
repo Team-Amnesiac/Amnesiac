@@ -10,6 +10,7 @@ public class NightcrawlerAI : MonoBehaviour
     private Animator animator;
     private Transform playerTransform;
     private NavMeshAgent navMeshAgent;
+    private HealthSystem healthSystem;
 
     public float maxHealth = 150f;
     //private HealthSystem healthSystem;
@@ -76,7 +77,9 @@ public class NightcrawlerAI : MonoBehaviour
         if (Vector3.Distance(transform.position, playerTransform.position) <= attackRange)
         {
             Debug.Log("Nightcrawler hits the player, initiating battle with enemy turn first.");
-            GameManager.Instance.TriggerBattleScene();
+            // Change the game state to Battle, as a battle has been triggered.
+            // TODO: Inform the BattleManager script who is awarded the first turn (player or enemy).
+            GameManager.Instance.SetGameState(GameManager.GameState.Battle);
         }
     }
 

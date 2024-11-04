@@ -54,7 +54,8 @@ public class PlayerMovement : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             Debug.Log("Player engaged an enemy, transitioning to battle scene...");
-            GameManager.Instance.TriggerBattleScene();
+            // Set the game state to Battle.
+            GameManager.Instance.SetGameState(GameManager.GameState.Battle);
         }
     }
 }
