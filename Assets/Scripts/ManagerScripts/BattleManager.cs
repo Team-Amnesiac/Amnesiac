@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
@@ -6,26 +7,37 @@ using TMPro;
 
 public class BattleManager : MonoBehaviour
 {
+    public enum Attacker
+    {
+        Player,  // Player attacked the enemy.
+        Enemy,   // Enemy attacked the player,
+        None     // No battle has been initiated.
+    }
+
+    
+    // Singleton instance of the BattleManager class.
     public static BattleManager Instance;
-    public bool isPlayerTurn;
-    private bool battleInitialized = false;
-    public TMP_Text turnIndicatorText;
-    public TMP_Text roundText;
-    public TMP_Text turnsText;
-    public Button meleeAttackButton;
-    public Button skillCardButton1;
-    public Button skillCardButton2;
-    public Button skillCardButton3;
-    public Button skillCardButton4;
-    public Slider playerHealthSlider;
-    public Slider enemyHealthSlider;
-    private float playerMaxHealth = 100f;
-    private float enemyMaxHealth = 150f;
-    private float currentPlayerHealth;
-    private float currentEnemyHealth;
-    private int roundNumber = 1;
-    private int playerTurns = 1;
-    private bool playerUsedExtraTurn = false;
+
+    /* EVENTS */
+
+    // Attacker change event.
+    public event EventHandler OnAttackerChange;
+    // Health change event.
+    public event EventHandler OnHealthChange;
+
+    
+    private EnemyAI  enemyAI;
+    private BattleUI battleUI;
+
+    private bool  battleInitialized   = false;
+    private int   roundNumber         = 0;
+    private int   playerTurnCount     = 0;
+    private int   enemyTurnCount      = 0;
+    private bool  playerUsedExtraTurn = false;
+
+    // Represents who attacked who first, to initialize a battle.
+    private Attacker attacker = Attacker.None;
+
 
     void Awake()
     {
@@ -40,253 +52,152 @@ public class BattleManager : MonoBehaviour
         }
     }
 
-    void Start()
+
+    /* EVENT LISTENERS */
+
+    private void BattleUIMelee(object sender, EventArgs eventArgs)
     {
-        if (GameManager.Instance.GetGameState() == GameManager.GameState.Battle)
+        DealDamageToEnemy(PlayerManager.Instance.GetMeleeDamage(), SkillCard.SkillCardType.None);
+        OnHealthChange?.Invoke(this, EventArgs.Empty);
+    }
+
+
+    private void BattleUISkillCard(object sender, BattleUI.OnSkillCardEventArgs eventArgs)
+    {
+        SkillCard skillCard = PlayerManager.Instance.GetSkillCard(eventArgs.skillCardSlot);
+        DealDamageToEnemy(skillCard.damage, skillCard.type);
+        OnHealthChange?.Invoke(this, EventArgs.Empty);
+    }
+
+
+    /* PUBLIC FUNCTIONS */
+
+    public void InitializeBattle(Attacker attacker, EnemyAI enemyAI)
+    {
+        // Set the GameState to Battle.
+        GameManager.Instance.SetGameState(GameManager.GameState.Battle);
+        // Set the attacker to whoever attacked first.
+        this.attacker = attacker;
+        // Set the EnemyAI of the current battle.
+        this.enemyAI = enemyAI;
+    }
+
+
+    public void StartBattle()
+    {
+        // Retrieve the BattleUI script.
+        battleUI = GameObject.FindGameObjectWithTag("BattleUI").GetComponent<BattleUI>();
+
+        // Subscribe to the BattleUI events.
+        battleUI.OnMelee += BattleUIMelee;
+        battleUI.OnSkillCard += BattleUISkillCard;
+
+        if (attacker == Attacker.Enemy)  // Enemy's turn.
         {
-            this.enabled = false;
-            return;
+            EnemyTurn();
         }
-    
-        currentPlayerHealth = playerMaxHealth;
-        currentEnemyHealth = enemyMaxHealth;
-        UpdateHealthBars();
 
-        if (meleeAttackButton != null) meleeAttackButton.onClick.AddListener(OnMeleeAttackButtonClicked);
-        if (skillCardButton1 != null) skillCardButton1.onClick.AddListener(OnSkillCardButton1Clicked);
-        if (skillCardButton2 != null) skillCardButton2.onClick.AddListener(OnSkillCardButton2Clicked);
-        if (skillCardButton3 != null) skillCardButton3.onClick.AddListener(OnSkillCardButton3Clicked);
-        if (skillCardButton4 != null) skillCardButton4.onClick.AddListener(OnSkillCardButton4Clicked);
+        // Invoke the OnAttackerChange event, as the attacker has changed.
+        OnAttackerChange?.Invoke(this, EventArgs.Empty);
     }
 
-    public void StartBattle(bool playerInitiated)
+    /* PRIVATE FUNCTIONS */
+    private void EnemyTurn()
     {
-        isPlayerTurn = playerInitiated;
-        Debug.Log("Transitioning to battle scene...");
-    }
+        DealDamageToPlayer(enemyAI.GetStrength());
 
-    private void OnBattleSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        if (scene.name == "battlescene" && !battleInitialized)
-        {
-            battleInitialized = true;
-            InitializeBattle();
-        }
-    }
-
-    public void DealDamageToPlayer(float damage)
-    {
-        currentPlayerHealth -= damage;
-        currentPlayerHealth = Mathf.Clamp(currentPlayerHealth, 0, playerMaxHealth);
-        UpdateHealthBars();
-
-        Debug.Log("Player took " + damage + " damage.");
-
-        if (currentPlayerHealth <= 0)
+        if (PlayerManager.Instance.GetHealth() <= 0)  // Player defeated.
         {
             Debug.Log("Player defeated!");
             EndBattle();
         }
+
+        SwapTurns();
     }
 
-    public void DealDamageToEnemy(float damage)
+
+    private void SwapTurns()
     {
-        currentEnemyHealth -= damage;
-        currentEnemyHealth = Mathf.Clamp(currentEnemyHealth, 0, enemyMaxHealth);
-        UpdateHealthBars();
+        if (attacker == Attacker.Enemy)
+        {
+            attacker = Attacker.Player;
+        }
+        else
+        {
+            attacker = Attacker.Enemy;
+        }
+        // Invoke the OnAttackerChange event, as the attacker has changed.
+        OnAttackerChange?.Invoke(this, EventArgs.Empty);
+    }
+
+
+    private void DealDamageToPlayer(float damage)
+    {
+        // Deal damage to the player.
+        PlayerManager.Instance.TakeDamage(damage);
+        // Invoke the OnHealthChange event.
+        OnHealthChange?.Invoke(this, EventArgs.Empty);
+
+        Debug.Log("Player took " + damage + " damage.");
+    }
+
+
+    private void DealDamageToEnemy(float damage, SkillCard.SkillCardType type)
+    {
+        if (type == enemyAI.GetWeakness())
+        {
+            // Enemy weakness hit. Multiply the damage.
+            damage *= 1.5f;
+        }
+        // Apply the damage to the enemy.
+        enemyAI.TakeDamage(damage);
 
         Debug.Log("Enemy took " + damage + " damage.");
 
-        if (currentEnemyHealth <= 0)
+        if (enemyAI.GetHealth() <= 0)  // Enemy has been defeated.
         {
             Debug.Log("Enemy defeated!");
             EndBattle();
         }
     }
 
-    public void InitializeBattle()
-    {
-        Debug.Log("Battle initialized! " + (isPlayerTurn ? "Player's turn first." : "Enemy's turn first."));
-        UpdateUI();
-        StartCoroutine(ShowTurnIndicator(isPlayerTurn));
 
-        SetButtonInteractability(isPlayerTurn);
-    }
-
-    void ProcessTurn()
-    {
-        if (isPlayerTurn)
-        {
-            PlayerTurn();
-        }
-        else
-        {
-            EnemyTurn();
-        }
-    }
-
-    void PlayerTurn()
-    {
-        Debug.Log("Player's Turn now.");
-        SetButtonInteractability(true);
-        UpdateUI();
-        StartCoroutine(ShowTurnIndicator(true));
-    }
-
-    public void OnMeleeAttackButtonClicked()
-    {
-        if (isPlayerTurn)
-        {
-            PerformMeleeAttack();
-        }
-    }
-
-    //placeholders for all the skill cards now
-    public void OnSkillCardButton1Clicked()
-    {
-        if (isPlayerTurn)
-        {
-            Debug.Log("Player uses Skill Card 1.");
-        }
-    }
-
-    public void OnSkillCardButton2Clicked()
-    {
-        if (isPlayerTurn)
-        {
-            Debug.Log("Player uses Skill Card 2.");
-        }
-    }
-
-    public void OnSkillCardButton3Clicked()
-    {
-        if (isPlayerTurn)
-        {
-            Debug.Log("Player uses Skill Card 3.");
-        }
-    }
-
-    public void OnSkillCardButton4Clicked()
-    {
-        if (isPlayerTurn)
-        {
-            Debug.Log("Player uses Skill Card 4.");
-        }
-    }
-
-    void PerformMeleeAttack()
-    {
-        float damage = 20f;
-        Debug.Log("Player attacked the enemy, dealt: " + damage + " damage.");
-        DealDamageToEnemy(damage);
-
-        if (!playerUsedExtraTurn && EnemyIsWeakToAttack())
-        {
-            playerTurns++;
-            playerUsedExtraTurn = true;
-            Debug.Log("Player hits enemy's weakness and now has an extra turn.");
-        }
-
-        playerTurns--;
-        if (playerTurns <= 0)
-        {
-            EndPlayerTurn();
-        }
-        else
-        {
-            UpdateUI();
-        }
-    }
-
-    public void EndPlayerTurn()
-    {
-        isPlayerTurn = false;
-        SetButtonInteractability(false);
-        Debug.Log("Player's turn ends and so enemy's turn begins.");
-        ProcessTurn();
-    }
-
-    void EnemyTurn()
-    {
-        Debug.Log("Enemy's Turn now.");
-        UpdateUI();
-        StartCoroutine(ShowTurnIndicator(false));
-        EndEnemyTurn();
-    }
-
-    public void EndEnemyTurn()
-    {
-        isPlayerTurn = true;
-        SetButtonInteractability(true);
-        Debug.Log("Enemy's turn ends and so player's turn begins.");
-
-        if (isPlayerTurn && playerTurns == 1)
-        {
-            roundNumber++;
-            playerUsedExtraTurn = false;
-            Debug.Log("Round= " + roundNumber + " begins.");
-        }
-
-        UpdateUI();
-        ProcessTurn();
-    }
-
-    IEnumerator ShowTurnIndicator(bool isPlayerTurn)
-    {
-        turnIndicatorText.text = isPlayerTurn ? "Player's Turn" : "Enemy's Turn";
-        turnIndicatorText.gameObject.SetActive(true);
-        yield return new WaitForSeconds(5f);
-        turnIndicatorText.gameObject.SetActive(false);
-    }
-
-    void UpdateUI()
-    {
-        if (roundText != null)
-        {
-            roundText.text = "Round: " + roundNumber;
-        }
-
-        if (turnsText != null)
-        {
-            turnsText.text = "Turns: " + playerTurns;
-        }
-    }
-
-    void UpdateHealthBars()
-    {
-        if (playerHealthSlider != null)
-        {
-            playerHealthSlider.value = currentPlayerHealth / playerMaxHealth;
-        }
-
-        if (enemyHealthSlider != null)
-        {
-            enemyHealthSlider.value = currentEnemyHealth / enemyMaxHealth;
-        }
-    }
-
-    void SetButtonInteractability(bool interactable)
-    {
-        meleeAttackButton.interactable = interactable;
-        skillCardButton1.interactable = interactable;
-        skillCardButton2.interactable = interactable;
-        skillCardButton3.interactable = interactable;
-        skillCardButton4.interactable = interactable;
-    }
-
-    public void EndBattle()
+    private void EndBattle()
     {
         battleInitialized = false;
-        meleeAttackButton.onClick.RemoveListener(OnMeleeAttackButtonClicked);
-        skillCardButton1.onClick.RemoveListener(OnSkillCardButton1Clicked);
-        skillCardButton2.onClick.RemoveListener(OnSkillCardButton2Clicked);
-        skillCardButton3.onClick.RemoveListener(OnSkillCardButton3Clicked);
-        skillCardButton4.onClick.RemoveListener(OnSkillCardButton4Clicked);
+        GameManager.Instance.SetGameState(GameManager.GameState.Play);
+
         Debug.Log("Battle has ended for now.");
     }
 
-    bool EnemyIsWeakToAttack()
+
+    /* GET FUNCTIONS */
+
+    public int GetPlayerTurnCount()
     {
-        return false;
+        return playerTurnCount;
+    }
+
+
+    public int GetEnemyTurnCount()
+    {
+        return enemyTurnCount;
+    }
+
+    public int GetRound()
+    {
+        return roundNumber;
+    }
+
+
+    public EnemyAI GetEnemyAI()
+    {
+        return enemyAI;
+    }
+
+
+    public Attacker GetAttacker()
+    {
+        return attacker;
     }
 }

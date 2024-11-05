@@ -14,7 +14,7 @@ public class SceneLoader : MonoBehaviour
         Battle
     }
 
-
+    // Singleton instance of the SceneLoader class.
     public static SceneLoader Instance;
     
 
@@ -30,6 +30,7 @@ public class SceneLoader : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
 
     public void LoadScene(Scene scene)
     {

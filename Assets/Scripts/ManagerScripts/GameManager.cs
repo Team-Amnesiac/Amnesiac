@@ -5,13 +5,17 @@ public class GameManager : MonoBehaviour
 {
     public enum GameState
     {
-        Title,
-        Play,
-        Pause,
-        Battle
+        Title,     // Game is in the Title Scene.
+        Play,      // Game is in the play state (in a level).
+        Pause,     // Game is in the paused state.
+        Battle,    // Game is in the Battle Scene.
+        Shop,      // Game is in a shop menu.
+        Dialogue,  // Game is playing dialogue (text conversation).
+        Quest,     // Game is in dialogue quest menu (accept / reject).
     }
 
 
+    // Singleton instance of the GameManager class.
     public static GameManager Instance;
 
     // The current state of the game.
@@ -21,6 +25,8 @@ public class GameManager : MonoBehaviour
     // The previously loaded scene of the game.
     private SceneLoader.Scene previousScene;
 
+
+    /* UNITY FUNCTIONS */
 
     void Awake()
     {
@@ -39,9 +45,11 @@ public class GameManager : MonoBehaviour
     }
 
 
+    /* PRIVATE FUNCTIONS */
+
     private void HandleGameStateChange(GameState state)
     {
-        switch (gameState)
+        switch (state)
         {
             case GameState.Title:
                 // Load the title scene.
@@ -64,9 +72,11 @@ public class GameManager : MonoBehaviour
 
             case GameState.Pause:
                 // Handle any game changes caused by pausing.
+
                 break;
 
             case GameState.Battle:
+                // Load the Battle scene.
                 SceneLoader.Instance.LoadScene(SceneLoader.Scene.Battle);
 
                 break;
@@ -80,11 +90,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public GameState GetGameState()
-    {
-        return gameState;
-    }
-
+    /* SET FUNCTIONS */
 
     public void SetGameState(GameState state)
     {

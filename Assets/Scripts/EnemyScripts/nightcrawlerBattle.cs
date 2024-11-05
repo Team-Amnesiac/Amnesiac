@@ -3,17 +3,12 @@ using UnityEngine;
 public class NightcrawlerBattle : MonoBehaviour
 {
     public float maxHealth = 150f;
-    private HealthSystem healthSystem;
 
     private bool specialAttackUsed = false;
 
     void Start()
     {
-        healthSystem = GetComponent<HealthSystem>();
-        if (healthSystem != null)
-        {
-            healthSystem.maxHealth = maxHealth;
-        }
+
     }
 
     public void ExecuteAttack()
@@ -30,7 +25,7 @@ public class NightcrawlerBattle : MonoBehaviour
             Debug.Log("Nightcrawler used a standard attack. Deals 15 damage.");
         }
 
-        BattleManager.Instance.DealDamageToPlayer(damage);
+        //BattleManager.Instance.DealDamageToPlayer(damage);
     }
 
     public void ResetSpecialAttack()

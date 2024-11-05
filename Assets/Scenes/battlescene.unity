@@ -2264,11 +2264,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 717830594}
+  - component: {fileID: 717830597}
   - component: {fileID: 717830595}
   - component: {fileID: 717830596}
   m_Layer: 0
   m_Name: BattleUI
-  m_TagString: Untagged
+  m_TagString: BattleUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2286,8 +2287,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1151743611}
-  - {fileID: 1043374470}
   - {fileID: 68294224}
+  - {fileID: 1043374470}
   - {fileID: 1638579530}
   - {fileID: 1937341753}
   - {fileID: 1182193766}
@@ -2346,6 +2347,27 @@ MonoBehaviour:
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
   m_PresetInfoIsWorld: 0
+--- !u!114 &717830597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 717830593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef638cbbf27189340b6864d15744e2c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turnIndicatorTMP: {fileID: 68294225}
+  roundTMP: {fileID: 1043374471}
+  playerTurnTMP: {fileID: 738554081}
+  enemyTurnTMP: {fileID: 339354770}
+  meleeAttackButton: {fileID: 221325626}
+  skillCardButton1: {fileID: 1042587646}
+  skillCardButton2: {fileID: 993550795}
+  skillCardButton3: {fileID: 729353909}
+  skillCardButton4: {fileID: 212898264}
 --- !u!1 &729353907
 GameObject:
   m_ObjectHideFlags: 0
@@ -2789,9 +2811,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 877147044}
+  - component: {fileID: 877147047}
   - component: {fileID: 877147046}
   - component: {fileID: 877147045}
-  - component: {fileID: 877147047}
   m_Layer: 0
   m_Name: Abstract
   m_TagString: Untagged
@@ -2823,11 +2845,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 877147043}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee195d4b6f6091e4a9557279e6dfef9f, type: 3}
+  m_Script: {fileID: 11500000, guid: 65a61f2b3c364f64aa1bc90c9ddb93aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBar: {fileID: 610034812}
-  maxHealth: 100
+  maxPlayerHealth: 100
+  playerHealth: 0
+  meleeDamage: 25
+  EquipedSkillCardArray:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &877147046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2837,20 +2865,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 877147043}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e249ea08b5ecd84297b70ef5932ec1e, type: 3}
+  m_Script: {fileID: 11500000, guid: be2f33d8daec4c24eb0f3499730d7721, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPlayerTurn: 0
-  turnIndicatorText: {fileID: 68294225}
-  roundText: {fileID: 1043374471}
-  turnsText: {fileID: 738554081}
-  meleeAttackButton: {fileID: 221325626}
-  skillCardButton1: {fileID: 1042587646}
-  skillCardButton2: {fileID: 993550795}
-  skillCardButton3: {fileID: 729353909}
-  skillCardButton4: {fileID: 212898264}
-  playerHealthSlider: {fileID: 610034812}
-  enemyHealthSlider: {fileID: 90276134}
 --- !u!114 &877147047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2860,7 +2877,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 877147043}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be2f33d8daec4c24eb0f3499730d7721, type: 3}
+  m_Script: {fileID: 11500000, guid: 1e249ea08b5ecd84297b70ef5932ec1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &901935283
