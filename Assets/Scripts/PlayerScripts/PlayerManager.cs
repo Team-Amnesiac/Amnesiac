@@ -53,12 +53,6 @@ public class PlayerManager : MonoBehaviour
         playerHealth = maxPlayerHealth;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public float CalculateHealthPercent()
     {
         return playerHealth / maxPlayerHealth;
