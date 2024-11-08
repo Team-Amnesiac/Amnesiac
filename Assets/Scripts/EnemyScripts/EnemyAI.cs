@@ -12,7 +12,7 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private float maxHealth      = 150f;
     [SerializeField] private float strength       = 15.0f;
 
-    private float health;
+    [SerializeField] private float health;
     private bool  isAggroed = false;
     private bool  specialAttackUsed = false;
 
@@ -26,6 +26,7 @@ public class EnemyAI : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         navMeshAgent = GetComponent<NavMeshAgent>();
+        health = maxHealth;
 
         if (Camera.main != null)
         {
@@ -76,7 +77,6 @@ public class EnemyAI : MonoBehaviour
         if (Vector3.Distance(transform.position, playerTransform.position) <= attackRange)
         {
             Debug.Log("Nightcrawler hits the player, initiating battle with enemy turn first.");
-            gameObject.SetActive(false);
             // Start the battle.
             BattleManager.Instance.InitializeBattle(BattleManager.Attacker.Enemy, this);
             

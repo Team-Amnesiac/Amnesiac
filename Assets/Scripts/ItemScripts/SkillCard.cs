@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkillCard : MonoBehaviour
+public class SkillCard
 {
     public enum SkillCardType
     {
@@ -13,14 +13,16 @@ public class SkillCard : MonoBehaviour
         None
     }
 
+
+    private float damage;
+    private SkillCardType type;
+
+
     public SkillCard(float damage, SkillCardType type)
     {
         this.damage = damage;
         this.type = type;
     }
-
-    public float         damage = 35.0f;
-    public SkillCardType type   = SkillCardType.Fire;
 
 
     public float GetDamage()

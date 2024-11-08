@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    public enum SkillCardSlot
+    public enum SkillSlot
     {
         One,
         Two,
         Three,
-        Four
+        Four,
+        Melee
     }
 
 
@@ -35,7 +36,7 @@ public class PlayerManager : MonoBehaviour
             // TESTING CODE ARRAY
             EquippedSkillCardArray[0] = new SkillCard(35.0f, SkillCard.SkillCardType.Fire);
             EquippedSkillCardArray[1] = new SkillCard(35.0f, SkillCard.SkillCardType.Water);
-            EquippedSkillCardArray[2] = new SkillCard(35.0f, SkillCard.SkillCardType.Electric);
+            EquippedSkillCardArray[2] = new SkillCard(35.0f, SkillCard.SkillCardType.Electric); 
             EquippedSkillCardArray[3] = new SkillCard(35.0f, SkillCard.SkillCardType.Ground);
         }
         else
@@ -68,8 +69,13 @@ public class PlayerManager : MonoBehaviour
         playerHealth = Mathf.Clamp(playerHealth - damage, 0, maxPlayerHealth);
     }
 
-    public SkillCard GetSkillCard(SkillCardSlot slot)
+    public SkillCard GetSkillCard(SkillSlot slot)
     {
+        if (slot == SkillSlot.Melee)  
+        {
+            return null;  // Melee has no skill card.
+        }
+
         return EquippedSkillCardArray[(int)slot];
     }
 

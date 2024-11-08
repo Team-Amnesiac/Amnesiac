@@ -76,6 +76,7 @@ public class GameManager : MonoBehaviour
                 break;
 
             case GameState.Battle:
+                previousScene = currentScene;
                 // Load the Battle scene.
                 SceneLoader.Instance.LoadScene(SceneLoader.Scene.Battle);
 

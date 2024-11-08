@@ -1,32 +1,18 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Button = UnityEngine.UI.Button;
+using Slider = UnityEngine.UI.Slider;
 
 public class BattleUI : MonoBehaviour
 {
-    /* EVENTS */
-
-    // Melee used event.
-    public event EventHandler OnMelee;
-
-    // Skill card used event args.
-    public class OnSkillCardEventArgs : EventArgs
-    {
-        public PlayerManager.SkillCardSlot skillCardSlot;
-    }
-    // Skill card used event.
-    public event EventHandler<OnSkillCardEventArgs> OnSkillCard;
-    
-    
-
     [SerializeField] private TextMeshProUGUI turnIndicatorTMP;
     [SerializeField] private TextMeshProUGUI roundTMP;
     [SerializeField] private TextMeshProUGUI playerTurnTMP;
     [SerializeField] private TextMeshProUGUI enemyTurnTMP;
+    [SerializeField] private TextMeshProUGUI criticalHitTMP;
 
     [SerializeField] private Button meleeAttackButton;
     [SerializeField] private Button skillCardButton1;
@@ -36,13 +22,13 @@ public class BattleUI : MonoBehaviour
     [SerializeField] private Slider playerHealthSlider;
     [SerializeField] private Slider enemyHealthSlider;
 
+
     /* UNITY FUNCTIONS */
 
     void Start()
     {
-        // Attach the OnAttackerChange event listener.
-        BattleManager.Instance.OnAttackerChange += BattleManagerOnAttackerChange;
-        BattleManager.Instance.OnHealthChange += BattleManagerOnHealthChange;
+        turnIndicatorTMP.gameObject.SetActive(false);
+        criticalHitTMP.gameObject.SetActive(false);
 
         meleeAttackButton.onClick.AddListener(OnMeleeAttackButtonClicked);
         skillCardButton1.onClick.AddListener(OnSkillCardButton1Clicked);
@@ -50,15 +36,13 @@ public class BattleUI : MonoBehaviour
         skillCardButton3.onClick.AddListener(OnSkillCardButton3Clicked);
         skillCardButton4.onClick.AddListener(OnSkillCardButton4Clicked);
 
-        BattleManager.Instance.StartBattle();
+        // Start the battle and pass this object to the BattleManager.
+        BattleManager.Instance.StartBattle(this);
     }
     
 
     void OnDestroy()
     {
-        // Detach the event listeners.
-        BattleManager.Instance.OnAttackerChange -= BattleManagerOnAttackerChange;
-
         meleeAttackButton.onClick.RemoveListener(OnMeleeAttackButtonClicked);
         skillCardButton1.onClick.RemoveListener(OnSkillCardButton1Clicked);
         skillCardButton2.onClick.RemoveListener(OnSkillCardButton2Clicked);
@@ -67,87 +51,27 @@ public class BattleUI : MonoBehaviour
     }
 
 
-    /* EVENT LISTENERS */
+    /* PUBLIC FUNCTIONS */
 
-    private void BattleManagerOnAttackerChange(object sender, EventArgs eventArgs)
+    public void ShowCriticalHit()
     {
-        if (BattleManager.Instance.GetAttacker() == BattleManager.Attacker.Enemy)
-        {
-            // Enemy's turn.
-            StartCoroutine(ShowTurnIndicator(false));
-            SetButtonInteractability(false);
-        }
-        else
-        {
-            // Player's turn.
-            StartCoroutine(ShowTurnIndicator(true));
-            SetButtonInteractability(true);
-        }
+        StartCoroutine(CriticalHitCoroutine());
     }
 
-
-    private void BattleManagerOnHealthChange(object sender, EventArgs eventArgs)
+    public void UpdateHealthBars()
     {
         UpdatePlayerHealthBar();
         UpdateEnemyHealthBar();
     }
 
 
-    /* BUTTON ON CLICK LISTENERS */
-
-    public void OnMeleeAttackButtonClicked()
+    public void UpdateRoundCounter()
     {
-        OnMelee?.Invoke(this, EventArgs.Empty);
-    }
-
-    //placeholders for all the skill cards now
-    public void OnSkillCardButton1Clicked()
-    {
-        Debug.Log("Player uses Skill Card 1.");
-        OnSkillCardEventArgs args = new OnSkillCardEventArgs { skillCardSlot = PlayerManager.SkillCardSlot.One };
-        OnSkillCard?.Invoke(this, args);
-    }
-
-    public void OnSkillCardButton2Clicked()
-    {
-        Debug.Log("Player uses Skill Card 2.");
-        OnSkillCardEventArgs args = new OnSkillCardEventArgs
-        {
-            skillCardSlot = PlayerManager.SkillCardSlot.Two
-        };
-        OnSkillCard?.Invoke(this, args);
-    }
-
-    public void OnSkillCardButton3Clicked()
-    {
-        Debug.Log("Player uses Skill Card 3.");
-        OnSkillCardEventArgs args = new OnSkillCardEventArgs
-        {
-            skillCardSlot = PlayerManager.SkillCardSlot.Three
-        };
-        OnSkillCard?.Invoke(this, args);
-    }
-
-    public void OnSkillCardButton4Clicked()
-    {
-        Debug.Log("Player uses Skill Card 4.");
-        OnSkillCardEventArgs args = new OnSkillCardEventArgs { skillCardSlot = PlayerManager.SkillCardSlot.Four };
-        OnSkillCard?.Invoke(this, args);
+        roundTMP.text = "Round: " + BattleManager.Instance.GetRound() / 2;
     }
 
 
-    /* PRIVATE FUNCTIONS */
-
-    private IEnumerator ShowTurnIndicator(bool isPlayerTurn)
-    {
-        turnIndicatorTMP.text = isPlayerTurn ? "Player's Turn" : "Enemy's Turn";
-        turnIndicatorTMP.gameObject.SetActive(true);
-        yield return new WaitForSeconds(5f);
-        turnIndicatorTMP.gameObject.SetActive(false);
-    }
-
-
-    private void SetButtonInteractability(bool interactable)
+    public void SetButtonInteractability(bool interactable)
     {
         meleeAttackButton.interactable = interactable;
         skillCardButton1.interactable  = interactable;
@@ -157,9 +81,63 @@ public class BattleUI : MonoBehaviour
     }
 
 
-    private void UpdateRoundText()
+    public void UpdateTurnText(BattleManager.Attacker attacker)
     {
-        roundTMP.text = "Round: " + BattleManager.Instance.GetRound();
+        if (attacker == BattleManager.Attacker.Player)  // Player's turn.
+        {
+            turnIndicatorTMP.text = "Player's Turn";
+        }
+        else                                            // Enemy's turn.
+        {
+            turnIndicatorTMP.text = "Enemy's Turn";
+        }
+    }
+
+
+    /* BUTTON ON CLICK LISTENERS */
+
+    private void OnMeleeAttackButtonClicked()
+    {
+        Debug.Log("Player uses Melee attack.");
+        BattleManager.Instance.PlayerAttack(PlayerManager.SkillSlot.Melee);
+    }
+
+
+    private void OnSkillCardButton1Clicked()
+    {
+        Debug.Log("Player uses Skill Card 1.");
+        BattleManager.Instance.PlayerAttack(PlayerManager.SkillSlot.One);
+    }
+
+    private void OnSkillCardButton2Clicked()
+    {
+        Debug.Log("Player uses Skill Card 2.");
+        BattleManager.Instance.PlayerAttack(PlayerManager.SkillSlot.Two);
+    }
+
+
+    private void OnSkillCardButton3Clicked()
+    {
+        Debug.Log("Player uses Skill Card 3.");
+        BattleManager.Instance.PlayerAttack(PlayerManager.SkillSlot.Three);
+    }
+
+
+    private void OnSkillCardButton4Clicked()
+    {
+        Debug.Log("Player uses Skill Card 4.");
+        BattleManager.Instance.PlayerAttack(PlayerManager.SkillSlot.Four);
+    }
+
+
+    /* PRIVATE FUNCTIONS */
+
+
+    private IEnumerator CriticalHitCoroutine()
+    {
+        criticalHitTMP.gameObject.SetActive(true);
+        yield return new WaitForSeconds(5.0f);
+        criticalHitTMP.gameObject.SetActive(false);
     }
 
 
@@ -177,16 +155,14 @@ public class BattleUI : MonoBehaviour
 
     private void UpdatePlayerHealthBar()
     {
-        // Set the player health bar slider to their health percentage from 0.0f to 1.0f.
-        //playerHealthSlider.value = PlayerManager.Instance.CalculateHealthPercent();
+        // Set the player health bar slider to their health percentage from 1.0f to 0.0f.
+        playerHealthSlider.value = PlayerManager.Instance.CalculateHealthPercent();
     }
 
 
     private void UpdateEnemyHealthBar()
     {
-        // Get the EnemyAI the player is engaged in battle with.
-        EnemyAI enemyAI = BattleManager.Instance.GetEnemyAI();
         // Set the enemy health bar slider to their health percentage from 0.0f to 1.0f.
-        //enemyHealthSlider.value = enemyAI.CalculateHealthPercentage();
+        enemyHealthSlider.value = Mathf.Abs(BattleManager.Instance.GetEnemyHealthPercentage() - 1.0f);
     }
 }
