@@ -22,12 +22,17 @@ public class InventoryManager : MonoBehaviour
         Items.Add(item);
     }
 
-    public void Remove(Item item)
+   public void Remove(Item item)
     {
+        if (item == null)
+        {
+            Debug.LogError("Cannot remove item: item reference is null!");
+            return;
+        }
+
         if (Items.Contains(item))
         {
             Items.Remove(item);
-            Debug.Log($"Removed item: {item.itemName}");
             ListItems();
         }
         else
@@ -38,76 +43,72 @@ public class InventoryManager : MonoBehaviour
 
     public void ListItems()
     {
-        foreach (Transform child in ItemContent)
+        foreach (Transform item in ItemContent)
         {
-            Destroy(child.gameObject);
+            Destroy(item.gameObject);
         }
 
-        if (Items.Count == 0)
-        {
-            Debug.Log("Inventory is empty. No items to list.");
-            return;
-        }
+        InventoryItems = new InventoryItemController[0];
 
         foreach (var item in Items)
         {
             GameObject obj = Instantiate(InventoryItem, ItemContent);
 
-            var itemName = obj.transform.Find("ItemName")?.GetComponent<TextMeshProUGUI>();
-            var itemIcon = obj.transform.Find("ItemIcon")?.GetComponent<Image>();
-            var removeItemButton = obj.transform.Find("RemoveItemButton")?.GetComponent<Button>();
+            var controller = obj.GetComponent<InventoryItemController>();
+            if (controller != null)
+            {
+                controller.AddItem(item);
+            }
 
+            var itemName = obj.transform.Find("ItemName")?.GetComponent<TextMeshProUGUI>();
             if (itemName != null)
             {
                 itemName.text = item.itemName;
             }
 
+            var itemIcon = obj.transform.Find("ItemIcon")?.GetComponent<Image>();
             if (itemIcon != null)
             {
                 itemIcon.sprite = item.icon;
             }
 
+            var removeItemButton = obj.transform.Find("RemoveItemButton")?.GetComponent<Button>();
             if (removeItemButton != null)
             {
+                removeItemButton.onClick.RemoveAllListeners();
                 removeItemButton.onClick.AddListener(() => Remove(item));
                 removeItemButton.gameObject.SetActive(EnableRemove.isOn);
             }
         }
-
-        SetInventoryItems();
     }
 
     public void EnableItemsRemove()
     {
-        if (EnableRemove.isOn)
+        foreach (Transform item in ItemContent)
         {
-            foreach (Transform item in ItemContent)
+            var removeButton = item.Find("RemoveItemButton")?.gameObject;
+            if (removeButton != null)
             {
-                item.Find("RemoveItemButton").gameObject.SetActive(true);
-            }
-        }
-        else
-        {
-            foreach (Transform item in ItemContent)
-            {
-                item.Find("RemoveItemButton").gameObject.SetActive(false);
+                removeButton.SetActive(EnableRemove.isOn);
             }
         }
     }
+
 
     public void SetInventoryItems()
     {
         InventoryItems = ItemContent.GetComponentsInChildren<InventoryItemController>();
 
-        if (Items.Count == 0 || InventoryItems.Length == 0)
+        if (Items.Count != InventoryItems.Length)
         {
-            Debug.Log("No items left in the inventory. Skipping SetInventoryItems.");
+            Debug.LogError("Mismatch between Items count and InventoryItems array length. Refreshing Inventory UI.");
+            ListItems();
             return;
         }
 
         for (int i = 0; i < Items.Count; i++)
         {
-            if (i < InventoryItems.Length && InventoryItems[i] != null)
+            if (InventoryItems[i] != null && Items[i] != null)
             {
                 InventoryItems[i].AddItem(Items[i]);
             }

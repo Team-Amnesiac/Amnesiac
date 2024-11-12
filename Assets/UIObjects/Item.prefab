@@ -120,7 +120,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4062934784788270024}
+      - m_Target: {fileID: 7141777103935378897}
         m_TargetAssemblyTypeName: InventoryItemController, Assembly-CSharp
         m_MethodName: RemoveItem
         m_Mode: 1
@@ -352,8 +352,8 @@ GameObject:
   - component: {fileID: 3581748096356727219}
   - component: {fileID: 5532327299471231937}
   - component: {fileID: 2047068352060103757}
+  - component: {fileID: 7141777103935378897}
   - component: {fileID: 8787189495375454582}
-  - component: {fileID: 4062934784788270024}
   m_Layer: 5
   m_Name: Item
   m_TagString: Untagged
@@ -421,6 +421,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7141777103935378897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6730595202842548654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25a7f3608ab9f0d45b9fb0b0a8eb6314, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RemoveItemButton: {fileID: 3917935609018000937}
 --- !u!114 &8787189495375454582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -464,18 +477,16 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2047068352060103757}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
---- !u!114 &4062934784788270024
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6730595202842548654}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25a7f3608ab9f0d45b9fb0b0a8eb6314, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  item: {fileID: 0}
-  RemoveItemButton: {fileID: 3917935609018000937}
+      m_Calls:
+      - m_Target: {fileID: 7141777103935378897}
+        m_TargetAssemblyTypeName: InventoryItemController, Assembly-CSharp
+        m_MethodName: UseItem
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
