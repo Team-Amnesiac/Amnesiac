@@ -1,9 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 [CreateAssetMenu(fileName = "New Item", menuName = "Item/Create New Item")]
 public class Item : ScriptableObject
 {
+    public enum CollectibleSet
+    {
+        Usable,
+        Trophy,
+        Armor,
+    }
+
+    public enum CollectibleSetSize
+    {
+        Trophy = 3,
+        Armor = 4,
+    }
+
     public int id;
     public string itemName;
     public int value;
@@ -16,5 +30,11 @@ public class Item : ScriptableObject
         SkillCard,
         Potion,
         Equipment
+
+    [SerializeField] private CollectibleSet collectibleSet;
+
+    public CollectibleSet GetCollectibleSet()
+    {
+        return collectibleSet;
     }
 }

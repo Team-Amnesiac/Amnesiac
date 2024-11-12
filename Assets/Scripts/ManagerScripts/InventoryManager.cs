@@ -12,6 +12,10 @@ public class InventoryManager : MonoBehaviour
     public List<Item> Items = new List<Item>();
     public InventoryItemController[] InventoryItems;
 
+    // The amount of set pieces collected in each collectible set.
+    private int trophyCount = 0;
+    private int armorCount  = 0;
+
     private void Awake()
     {
         Instance = this;
@@ -20,6 +24,30 @@ public class InventoryManager : MonoBehaviour
     public void Add(Item item)
     {
         Items.Add(item);
+        // Increment the collectible set count, if item is a collectible..
+        switch (item.GetCollectibleSet())
+        {
+            case Item.CollectibleSet.Usable:
+                break;  // Item is not part of a collectible set.
+            
+            case Item.CollectibleSet.Trophy:
+                trophyCount++;
+                if (trophyCount == (int)Item.CollectibleSetSize.Trophy)  // Trophy set complete.
+                {
+                    Debug.Log("Trophy set complete!");
+                }
+
+                break;
+            
+            case Item.CollectibleSet.Armor:
+                armorCount++;
+                if (armorCount == (int)Item.CollectibleSetSize.Armor) // Armor set complete.
+                {
+                    Debug.Log("Armor set complete!");
+                }
+
+                break;
+        }
     }
 
    public void Remove(Item item)
