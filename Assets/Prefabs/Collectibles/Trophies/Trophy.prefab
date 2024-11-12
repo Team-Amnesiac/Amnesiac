@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 464021219022642269}
   - component: {fileID: 7416703427268381376}
   m_Layer: 0
-  m_Name: TrophyGold
+  m_Name: Trophy
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6442987078c639d40a9806c3a59ece0d, type: 2}
+  - {fileID: 2100000, guid: acef9f2f8ae9f7c4cb1b9fc456dff183, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2a154e96ab3eb44390d7b542fe6b635, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Item: {fileID: 11400000, guid: a3da9939040312d4db72eeabe00b3062, type: 2}
+  Item: {fileID: 11400000, guid: 53cdd720c49b15e4d89ea42958d7dc23, type: 2}
 --- !u!114 &464021219022642269
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b44c2b3593b0e11439f324c1a24a6432, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Item: {fileID: 11400000, guid: a3da9939040312d4db72eeabe00b3062, type: 2}
+  Item: {fileID: 11400000, guid: 53cdd720c49b15e4d89ea42958d7dc23, type: 2}
 --- !u!64 &7416703427268381376
 MeshCollider:
   m_ObjectHideFlags: 0
