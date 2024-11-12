@@ -24,29 +24,23 @@ public class InventoryManager : MonoBehaviour
     public void Add(Item item)
     {
         Items.Add(item);
-        // Increment the collectible set count, if item is a collectible..
-        switch (item.GetCollectibleSet())
+        // Increment the collectible set count, if item is a collectible.
+        if (item.GetItemType() == Item.ItemType.Collectible)
         {
-            case Item.CollectibleSet.Usable:
-                break;  // Item is not part of a collectible set.
-            
-            case Item.CollectibleSet.Trophy:
-                trophyCount++;
-                if (trophyCount == (int)Item.CollectibleSetSize.Trophy)  // Trophy set complete.
-                {
-                    Debug.Log("Trophy set complete!");
-                }
+            Collectible collectible = (Collectible)item;
 
-                break;
-            
-            case Item.CollectibleSet.Armor:
-                armorCount++;
-                if (armorCount == (int)Item.CollectibleSetSize.Armor) // Armor set complete.
-                {
-                    Debug.Log("Armor set complete!");
-                }
+            // Identify which set this collectible belongs to.
+            switch (collectible.GetSet())
+            {
+                case Collectible.Set.Trophy:
+                    trophyCount++;
+                    if (trophyCount == (int)Collectible.SetSize.Trophy)  // Trophy set complete.
+                    {
+                        Debug.Log("Trophy set complete!");
+                    }
 
-                break;
+                    break;
+            }
         }
     }
 
