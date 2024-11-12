@@ -51,10 +51,17 @@ public class PlayerMovement : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        // Skip triggers with "Item" tag
+        if (other.CompareTag("Item"))
+        {
+            Debug.Log($"Skipping item trigger: {other.name}");
+            return;
+        }
+
+        // Process "Enemy" triggers
         if (other.CompareTag("Enemy"))
         {
             Debug.Log("Player engaged an enemy, transitioning to battle scene...");
-            // Set the game state to Battle.
             GameManager.Instance.SetGameState(GameManager.GameState.Battle);
         }
     }
