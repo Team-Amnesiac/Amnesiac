@@ -12,9 +12,13 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 5bc4b0e46e24dd64e8a08f0b46d66163, type: 2}
+    - target: {fileID: 5352338964890890521, guid: 43de86b409eaf4441925be4e7c924eb8, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5bc4b0e46e24dd64e8a08f0b46d66163, type: 2}
     - target: {fileID: 6258239384717567240, guid: 43de86b409eaf4441925be4e7c924eb8, type: 3}
       propertyPath: m_Name
-      value: CollectibleGoldTrophy
+      value: TrophyGold
       objectReference: {fileID: 0}
     - target: {fileID: 6729878196898166729, guid: 43de86b409eaf4441925be4e7c924eb8, type: 3}
       propertyPath: m_LocalPosition.x
