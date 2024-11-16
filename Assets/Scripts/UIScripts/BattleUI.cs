@@ -13,6 +13,10 @@ public class BattleUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI playerTurnTMP;
     [SerializeField] private TextMeshProUGUI enemyTurnTMP;
     [SerializeField] private TextMeshProUGUI criticalHitTMP;
+    [SerializeField] private TextMeshProUGUI skillCard1TMP;
+    [SerializeField] private TextMeshProUGUI skillCard2TMP;
+    [SerializeField] private TextMeshProUGUI skillCard3TMP;
+    [SerializeField] private TextMeshProUGUI skillCard4TMP;
 
     [SerializeField] private Button meleeAttackButton;
     [SerializeField] private Button skillCardButton1;
@@ -27,8 +31,49 @@ public class BattleUI : MonoBehaviour
 
     void Start()
     {
-        turnIndicatorTMP.gameObject.SetActive(false);
+        turnIndicatorTMP.gameObject.SetActive(true);
         criticalHitTMP.gameObject.SetActive(false);
+        
+        if (PlayerManager.Instance.GetSkillCard(PlayerManager.SkillSlot.One) == null)
+        {
+            skillCard1TMP.text = "EMPTY";
+            skillCardButton1.interactable = false;
+        }
+        else
+        {
+            SkillCard skillCard1 = PlayerManager.Instance.GetSkillCard(PlayerManager.SkillSlot.One);
+            skillCard1TMP.text = $"{skillCard1.itemName}";
+        }
+        if (PlayerManager.Instance.GetSkillCard(PlayerManager.SkillSlot.Two) == null)
+        {
+            skillCard2TMP.text = "EMPTY";
+            skillCardButton2.interactable = false;
+        }
+        else
+        {
+            SkillCard skillCard2 = PlayerManager.Instance.GetSkillCard(PlayerManager.SkillSlot.Two);
+            skillCard2TMP.text = $"{skillCard2.itemName}";
+        }
+        if (PlayerManager.Instance.GetSkillCard(PlayerManager.SkillSlot.Three) == null)
+        {
+            skillCard3TMP.text = "EMPTY";
+            skillCardButton3.interactable = false;
+        }
+        else
+        {
+            SkillCard skillCard3 = PlayerManager.Instance.GetSkillCard(PlayerManager.SkillSlot.Three);
+            skillCard3TMP.text = $"{skillCard3.itemName}";
+        }
+        if (PlayerManager.Instance.GetSkillCard(PlayerManager.SkillSlot.Four) == null)
+        {
+            skillCard4TMP.text = "EMPTY";
+            skillCardButton4.interactable = false;
+        }
+        else
+        {
+            SkillCard skillCard4 = PlayerManager.Instance.GetSkillCard(PlayerManager.SkillSlot.Four);
+            skillCard4TMP.text = $"{skillCard4.itemName}";
+        }
 
         meleeAttackButton.onClick.AddListener(OnMeleeAttackButtonClicked);
         skillCardButton1.onClick.AddListener(OnSkillCardButton1Clicked);
@@ -74,10 +119,22 @@ public class BattleUI : MonoBehaviour
     public void SetButtonInteractability(bool interactable)
     {
         meleeAttackButton.interactable = interactable;
-        skillCardButton1.interactable  = interactable;
-        skillCardButton2.interactable  = interactable;
-        skillCardButton3.interactable  = interactable;
-        skillCardButton4.interactable  = interactable;
+        if (PlayerManager.Instance.GetSkillCard(PlayerManager.SkillSlot.One) != null)
+        {
+            skillCardButton1.interactable = interactable;
+        }
+        if (PlayerManager.Instance.GetSkillCard(PlayerManager.SkillSlot.Two) != null)
+        {
+            skillCardButton2.interactable = interactable;
+        }
+        if (PlayerManager.Instance.GetSkillCard(PlayerManager.SkillSlot.Three) != null)
+        {
+            skillCardButton3.interactable = interactable;
+        }
+        if (PlayerManager.Instance.GetSkillCard(PlayerManager.SkillSlot.Four) != null)
+        {
+            skillCardButton4.interactable = interactable;
+        }
     }
 
 

@@ -42,6 +42,13 @@ public class InventoryManager : MonoBehaviour
                     break;
             }
         }
+        else if (item.GetItemType() == Item.ItemType.SkillCard)
+        {
+            if (PlayerManager.Instance.HasAvailableSkillCardSlot())  // There is an empty slot available.
+            {
+                PlayerManager.Instance.Equip((SkillCard)item);
+            }
+        }
     }
 
    public void Remove(Item item)

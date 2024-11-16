@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
+    private const int MAX_EQUIPPED_SKILL_CARDS = 4;
+
     public enum SkillSlot
     {
         One,
@@ -21,7 +23,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private float playerHealth;
     [SerializeField] private float meleeDamage     = 25.0f;
 
-    [SerializeField] private SkillCard[] EquippedSkillCardArray;
+    [SerializeField] private SkillCard[] equippedSkillCardArray;
     
 
     void Awake()
@@ -32,12 +34,7 @@ public class PlayerManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
 
-            EquippedSkillCardArray = new SkillCard[4];
-            // TESTING CODE ARRAY
-            EquippedSkillCardArray[0] = new SkillCard(35.0f, SkillCard.AttackType.Earth);
-            EquippedSkillCardArray[1] = new SkillCard(35.0f, SkillCard.AttackType.Fire);
-            EquippedSkillCardArray[2] = new SkillCard(35.0f, SkillCard.AttackType.Water);
-            EquippedSkillCardArray[3] = new SkillCard(35.0f, SkillCard.AttackType.Wind); 
+            equippedSkillCardArray = new SkillCard[MAX_EQUIPPED_SKILL_CARDS];
         }
         else
         {
@@ -63,6 +60,20 @@ public class PlayerManager : MonoBehaviour
         playerHealth = Mathf.Clamp(playerHealth - damage, 0, maxPlayerHealth);
     }
 
+    public void Equip(SkillCard skillCard)
+    {
+        for (int i = 0; i < MAX_EQUIPPED_SKILL_CARDS; i++)
+        {
+            if (equippedSkillCardArray[i] == null)
+            {
+                equippedSkillCardArray[i] = skillCard;
+                Debug.Log($"SkillCard {skillCard.itemName} equipped!");
+                
+                return;
+            }
+        }
+    }
+
     public SkillCard GetSkillCard(SkillSlot slot)
     {
         if (slot == SkillSlot.Melee)  
@@ -70,7 +81,7 @@ public class PlayerManager : MonoBehaviour
             return null;  // Melee has no skill card.
         }
 
-        return EquippedSkillCardArray[(int)slot];
+        return equippedSkillCardArray[(int)slot];
     }
 
     public float GetMeleeDamage()
@@ -81,5 +92,18 @@ public class PlayerManager : MonoBehaviour
     public float GetHealth()
     {
         return playerHealth;
+    }
+
+    public bool HasAvailableSkillCardSlot()
+    {
+        for (int i = 0; i < MAX_EQUIPPED_SKILL_CARDS; i++)
+        {
+            if (equippedSkillCardArray[i] == null)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

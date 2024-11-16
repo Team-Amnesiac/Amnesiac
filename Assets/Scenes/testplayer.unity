@@ -5022,7 +5022,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 157404, guid: f22a943ec068ae74dab9ae5db8bdc06b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 157404, guid: f22a943ec068ae74dab9ae5db8bdc06b, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 413948, guid: f22a943ec068ae74dab9ae5db8bdc06b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -6118,7 +6122,7 @@ MonoBehaviour:
   maxPlayerHealth: 100
   playerHealth: 100
   meleeDamage: 25
-  EquippedSkillCardArray: []
+  equippedSkillCardArray: []
 --- !u!114 &1299347926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9047,7 +9051,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3581748096356727219, guid: ec4447029c39a684fbef09dc95828056, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3581748096356727219, guid: ec4447029c39a684fbef09dc95828056, type: 3}
       propertyPath: m_AnchorMin.x
@@ -9055,15 +9059,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3581748096356727219, guid: ec4447029c39a684fbef09dc95828056, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3581748096356727219, guid: ec4447029c39a684fbef09dc95828056, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 120
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3581748096356727219, guid: ec4447029c39a684fbef09dc95828056, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 130
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3581748096356727219, guid: ec4447029c39a684fbef09dc95828056, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9095,11 +9099,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3581748096356727219, guid: ec4447029c39a684fbef09dc95828056, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 100
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3581748096356727219, guid: ec4447029c39a684fbef09dc95828056, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -145
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3581748096356727219, guid: ec4447029c39a684fbef09dc95828056, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

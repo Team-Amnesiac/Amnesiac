@@ -572,7 +572,7 @@ GameObject:
   - component: {fileID: 189726274}
   - component: {fileID: 189726273}
   m_Layer: 0
-  m_Name: Text (TMP)
+  m_Name: SkillCard3TMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2097,6 +2097,10 @@ MonoBehaviour:
   playerTurnTMP: {fileID: 738554081}
   enemyTurnTMP: {fileID: 339354770}
   criticalHitTMP: {fileID: 1172386917}
+  skillCard1TMP: {fileID: 1284412079}
+  skillCard2TMP: {fileID: 1499155368}
+  skillCard3TMP: {fileID: 189726273}
+  skillCard4TMP: {fileID: 1544173178}
   meleeAttackButton: {fileID: 699554545}
   skillCardButton1: {fileID: 949068762}
   skillCardButton2: {fileID: 489812156}
@@ -2617,6 +2621,7 @@ MonoBehaviour:
   maxPlayerHealth: 100
   playerHealth: 100
   meleeDamage: 25
+  equippedSkillCardArray: []
 --- !u!114 &877147047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3759,7 +3764,7 @@ GameObject:
   - component: {fileID: 1284412080}
   - component: {fileID: 1284412079}
   m_Layer: 0
-  m_Name: Text (TMP)
+  m_Name: SkillCard1TMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4264,7 +4269,7 @@ GameObject:
   - component: {fileID: 1499155369}
   - component: {fileID: 1499155368}
   m_Layer: 0
-  m_Name: Text (TMP)
+  m_Name: SkillCard2TMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4398,7 +4403,7 @@ GameObject:
   - component: {fileID: 1544173179}
   - component: {fileID: 1544173178}
   m_Layer: 0
-  m_Name: Text (TMP)
+  m_Name: SkillCard4TMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
