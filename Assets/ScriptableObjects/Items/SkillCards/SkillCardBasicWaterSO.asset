@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 960f1606eed737240a8f9f47804616e1, type: 3}
-  m_Name: SkillCardBasicFireSO
+  m_Name: SkillCardBasicWaterSO
   m_EditorClassIdentifier: 
   id: 0
-  itemName: Basic Fire
+  itemName: Basic Wind
   value: 0
-  icon: {fileID: 21300000, guid: ed33874ebf226354686d65960f3490bb, type: 3}
+  icon: {fileID: 21300000, guid: 1c42f53aede782443815db696299d2ad, type: 3}
   itemType: 3
   damage: 25
-  attackType: 0
+  attackType: 2

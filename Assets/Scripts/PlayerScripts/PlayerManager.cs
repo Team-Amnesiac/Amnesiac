@@ -34,10 +34,10 @@ public class PlayerManager : MonoBehaviour
 
             EquippedSkillCardArray = new SkillCard[4];
             // TESTING CODE ARRAY
-            EquippedSkillCardArray[0] = new SkillCard(35.0f, SkillCard.AttackType.Fire);
-            EquippedSkillCardArray[1] = new SkillCard(35.0f, SkillCard.AttackType.Water);
-            EquippedSkillCardArray[2] = new SkillCard(35.0f, SkillCard.AttackType.Electric); 
-            EquippedSkillCardArray[3] = new SkillCard(35.0f, SkillCard.AttackType.Ground);
+            EquippedSkillCardArray[0] = new SkillCard(35.0f, SkillCard.AttackType.Earth);
+            EquippedSkillCardArray[1] = new SkillCard(35.0f, SkillCard.AttackType.Fire);
+            EquippedSkillCardArray[2] = new SkillCard(35.0f, SkillCard.AttackType.Water);
+            EquippedSkillCardArray[3] = new SkillCard(35.0f, SkillCard.AttackType.Wind); 
         }
         else
         {

@@ -7,16 +7,16 @@ public class SkillCard : Item
 {
     public enum AttackType
     {
+        Earth,
         Fire,
         Water,
-        Electric,
-        Ground,
-        None
+        Wind,
+        None,
     }
 
 
-    private float damage;
-    private AttackType attackType;
+    [SerializeField] private float damage;
+    [SerializeField] private AttackType attackType;
 
 
     public SkillCard(float damage, AttackType attackType)
