@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkillCard
+[CreateAssetMenu(fileName = "New SkillCard", menuName = "SkillCard/Create New SkillCard")]
+public class SkillCard : Item
 {
-    public enum SkillCardType
+    public enum AttackType
     {
         Fire,
         Water,
@@ -15,13 +16,13 @@ public class SkillCard
 
 
     private float damage;
-    private SkillCardType type;
+    private AttackType attackType;
 
 
-    public SkillCard(float damage, SkillCardType type)
+    public SkillCard(float damage, AttackType attackType)
     {
-        this.damage = damage;
-        this.type = type;
+        this.damage     = damage;
+        this.attackType = attackType;
     }
 
 
@@ -31,8 +32,8 @@ public class SkillCard
     }
 
 
-    public SkillCardType GetType()
+    public AttackType GetAttackType()
     {
-        return type;
+        return attackType;
     }
 }

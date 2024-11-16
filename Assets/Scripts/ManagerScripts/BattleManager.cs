@@ -93,12 +93,12 @@ public class BattleManager : MonoBehaviour
         if (skillCard == null)  // Melee attack.
         {
             // Deal the player's melee damage to the enemy.
-            DealDamageToEnemy(PlayerManager.Instance.GetMeleeDamage(), SkillCard.SkillCardType.None);
+            DealDamageToEnemy(PlayerManager.Instance.GetMeleeDamage(), SkillCard.AttackType.None);
         }
         else                    // SkillCard attack.
         {
             // Deal the selected skill card's type of damage to the enemy.
-            DealDamageToEnemy(skillCard.GetDamage(), skillCard.GetType());
+            DealDamageToEnemy(skillCard.GetDamage(), skillCard.GetAttackType());
         }
 
         // Update the health bars on the screen.
@@ -204,7 +204,7 @@ public class BattleManager : MonoBehaviour
     }
 
 
-    private void DealDamageToEnemy(float damage, SkillCard.SkillCardType type)
+    private void DealDamageToEnemy(float damage, SkillCard.AttackType type)
     {
         if (type == enemyAI.GetWeakness()) // Critical hit.
         {

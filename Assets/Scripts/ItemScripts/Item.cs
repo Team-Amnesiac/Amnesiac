@@ -14,9 +14,9 @@ public class Item : ScriptableObject
     public enum ItemType
     {
         Gem,
-        SkillCard,
         Potion,
         Equipment,
+        SkillCard,
         Collectible,
     }
 
