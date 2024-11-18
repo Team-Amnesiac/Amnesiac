@@ -173,6 +173,11 @@ public class BattleManager : MonoBehaviour
         // Player did not critical hit the enemy, swap to enemy turn.
         SwapTurns();
     }
+    
+    public void RunAway()
+    {
+        EndBattle();
+    }
 
 
     /* PRIVATE FUNCTIONS */

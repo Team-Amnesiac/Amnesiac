@@ -23,10 +23,13 @@ public class BattleUI : MonoBehaviour
     [SerializeField] private Button skillCardButton2;
     [SerializeField] private Button skillCardButton3;
     [SerializeField] private Button skillCardButton4;
+    [SerializeField] private Button inventoryButton;
+    [SerializeField] private Button runAwayButton;
     [SerializeField] private Slider playerHealthSlider;
     [SerializeField] private Slider enemyHealthSlider;
     [SerializeField] private GameObject combatLogContent;
     [SerializeField] private GameObject messagePrefab;
+
 
     /* UNITY FUNCTIONS */
 
@@ -81,6 +84,8 @@ public class BattleUI : MonoBehaviour
         skillCardButton2.onClick.AddListener(OnSkillCardButton2Clicked);
         skillCardButton3.onClick.AddListener(OnSkillCardButton3Clicked);
         skillCardButton4.onClick.AddListener(OnSkillCardButton4Clicked);
+        inventoryButton.onClick.AddListener(OnInventoryButtonClicked);
+        runAwayButton.onClick.AddListener(OnRunAwayButtonClicked);
 
         // Start the battle and pass this object to the BattleManager.
         BattleManager.Instance.StartBattle(this);
@@ -94,6 +99,8 @@ public class BattleUI : MonoBehaviour
         skillCardButton2.onClick.RemoveListener(OnSkillCardButton2Clicked);
         skillCardButton3.onClick.RemoveListener(OnSkillCardButton3Clicked);
         skillCardButton4.onClick.RemoveListener(OnSkillCardButton4Clicked);
+        inventoryButton.onClick.RemoveListener(OnInventoryButtonClicked);
+        runAwayButton.onClick.RemoveListener(OnRunAwayButtonClicked);
     }
 
 
@@ -211,6 +218,19 @@ public class BattleUI : MonoBehaviour
     {
         Debug.Log("Player uses Skill Card 4.");
         BattleManager.Instance.PlayerAttack(PlayerManager.SkillSlot.Four);
+    }
+
+    private void OnInventoryButtonClicked()
+    {
+        Debug.Log("Inventory button clicked!");
+        // TODO: implement inventory visuals and functionality.
+    }
+
+
+    private void OnRunAwayButtonClicked()
+    {
+        Debug.Log("Run away button clicked!");
+        BattleManager.Instance.RunAway();
     }
 
 

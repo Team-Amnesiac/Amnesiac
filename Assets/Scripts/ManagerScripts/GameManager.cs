@@ -52,6 +52,8 @@ public class GameManager : MonoBehaviour
         switch (state)
         {
             case GameState.Title:
+                previousScene = currentScene;
+                currentScene = SceneLoader.Scene.Title;
                 // Load the title scene.
                 SceneLoader.Instance.LoadScene(SceneLoader.Scene.Title);
 
@@ -60,12 +62,15 @@ public class GameManager : MonoBehaviour
             case GameState.Play:
                 if (gameState == GameState.Title)  // Play button pressed.
                 {
+                    currentScene = SceneLoader.Scene.Hub;
                     // Load the Hub scene.
                     SceneLoader.Instance.LoadScene(SceneLoader.Scene.Hub);
                 }
                 else if (gameState == GameState.Battle)
                 {
                     SceneLoader.Instance.LoadScene(previousScene);
+                    // Swap values of previous scene and current scene.
+                    (previousScene, currentScene) = (currentScene, previousScene);
                 }
 
                 break;
