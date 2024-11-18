@@ -103,16 +103,21 @@ public class BattleUI : MonoBehaviour
         StartCoroutine(CriticalHitCoroutine());
     }
 
-    public void UpdateHealthBars()
+
+    public void UpdateHealthBar()
     {
-        UpdatePlayerHealthBar();
-        UpdateEnemyHealthBar();
+        // Set the player health bar slider to their health percentage from 1.0f to 0.0f (1.0f is full).
+        playerHealthSlider.value = PlayerManager.Instance.CalculateHealthPercent();
+
+        // Set the enemy health bar slider to their health percentage from 0.0f to 1.0f (0.0f is full).
+        enemyHealthSlider.value = Mathf.Abs(BattleManager.Instance.GetEnemyHealthPercentage() - 1.0f);
+
     }
 
 
-    public void UpdateRoundCounter()
+    public void UpdateRoundCounter(int round)
     {
-        roundTMP.text = "Round: " + BattleManager.Instance.GetRound() / 2;
+        roundTMP.text = "Round: " + round;
     }
 
 
@@ -147,6 +152,19 @@ public class BattleUI : MonoBehaviour
         else                                            // Enemy's turn.
         {
             turnIndicatorTMP.text = "Enemy's Turn";
+        }
+    }
+
+
+    public void UpdateIndividualTurnCounters(BattleManager.Attacker attacker, int count)
+    {
+        if (attacker == BattleManager.Attacker.Player)  // Player's turn.
+        {
+            playerTurnTMP.text = "Turn: " + count;
+        }
+        else                                            // Enemy's turn.
+        {
+            enemyTurnTMP.text = "Turn: " + count;
         }
     }
 
@@ -195,31 +213,5 @@ public class BattleUI : MonoBehaviour
         criticalHitTMP.gameObject.SetActive(true);
         yield return new WaitForSeconds(5.0f);
         criticalHitTMP.gameObject.SetActive(false);
-    }
-
-
-    private void UpdatePlayerTurnText()
-    {
-        playerTurnTMP.text = "Turn: " + BattleManager.Instance.GetPlayerTurnCount();
-    }
-
-
-    private void UpdateEnemyTurnText()
-    {
-        enemyTurnTMP.text = "Turn: " + BattleManager.Instance.GetEnemyTurnCount();
-    }
-
-
-    private void UpdatePlayerHealthBar()
-    {
-        // Set the player health bar slider to their health percentage from 1.0f to 0.0f.
-        playerHealthSlider.value = PlayerManager.Instance.CalculateHealthPercent();
-    }
-
-
-    private void UpdateEnemyHealthBar()
-    {
-        // Set the enemy health bar slider to their health percentage from 0.0f to 1.0f.
-        enemyHealthSlider.value = Mathf.Abs(BattleManager.Instance.GetEnemyHealthPercentage() - 1.0f);
     }
 }

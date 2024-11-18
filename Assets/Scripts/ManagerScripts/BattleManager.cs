@@ -23,8 +23,8 @@ public class BattleManager : MonoBehaviour
     // A reference to the BattleUI class to update the battle visuals.
     private BattleUI battleUI;
 
-    // Round number = roundNumber / 2 --- calculation done in BattleUI.cs
-    private int   roundNumber     = 2;
+    // The current round number.
+    private int   roundNumber     = 0;
     // The amount of times the player has taken a turn (including extra turns earned from critical hits).
     private int   playerTurnCount = 0;
     // The amount of times the enemy has taken a turn.
@@ -35,7 +35,9 @@ public class BattleManager : MonoBehaviour
     private bool  criticalHit     = false;
 
     // Represents the current attacker in the battle.
-    private Attacker attacker = Attacker.None;
+    private Attacker attacker         = Attacker.None;
+    private Attacker previousAttacker = Attacker.None;
+    private Attacker firstAttacker    = Attacker.None;
 
 
     void Awake()
@@ -60,6 +62,7 @@ public class BattleManager : MonoBehaviour
         GameManager.Instance.SetGameState(GameManager.GameState.Battle);
         // Set the attacker to whoever attacked first.
         this.attacker = attacker;
+        this.firstAttacker = attacker;
         // Set the EnemyAI of the current battle.
         this.enemyAI = enemyAI;
     }
@@ -71,6 +74,9 @@ public class BattleManager : MonoBehaviour
         this.battleUI = battleUI;
         // Update the turn text on the screen with the current attacker.
         battleUI.UpdateTurnText(attacker);
+
+        roundNumber++;
+        battleUI.UpdateRoundCounter(roundNumber);
 
         if (attacker == Attacker.Enemy)  // Enemy's turn.
         {
@@ -102,7 +108,7 @@ public class BattleManager : MonoBehaviour
         }
 
         // Update the health bars on the screen.
-        battleUI.UpdateHealthBars();
+        battleUI.UpdateHealthBar();
 
         if (enemyAI.GetHealth() <= 0)   // Enemy has been defeated.
         {
@@ -117,10 +123,10 @@ public class BattleManager : MonoBehaviour
         {
             // Display the critical hit on screen.
             battleUI.ShowCriticalHit();
-            // Reset for the next attack by the player.
-            criticalHit = false;
             // Player has earned their extra turn.
             playerExtraTurn = true;
+            // Reset for the next attack by the player.
+            criticalHit = false;
             // Player's extra turn, earned from critical hit.
             PlayerTurn();
 
@@ -141,6 +147,8 @@ public class BattleManager : MonoBehaviour
     {
         // Activate the functionality of the player's action buttons.
         battleUI.SetButtonInteractability(true);
+        playerTurnCount++;
+        battleUI.UpdateIndividualTurnCounters(attacker, playerTurnCount);
     }
 
 
@@ -148,6 +156,9 @@ public class BattleManager : MonoBehaviour
     {
         // Disable functionality of the player's action buttons.
         battleUI.SetButtonInteractability(false);
+
+        enemyTurnCount++;
+        battleUI.UpdateIndividualTurnCounters(attacker, enemyTurnCount);
 
         yield return new WaitForSeconds(5.0f);
 
@@ -174,13 +185,16 @@ public class BattleManager : MonoBehaviour
             attacker = Attacker.Enemy;
         }
 
-        // Increment the round number.
-        roundNumber++;
+        if (attacker == firstAttacker)
+        {
+            // A new round has begun.
+            roundNumber++;
+            // Update the round counter visuals.
+            battleUI.UpdateRoundCounter(roundNumber);
+        }
 
         // Update the turn text
         battleUI.UpdateTurnText(attacker);
-        // Update the round counter.
-        battleUI.UpdateRoundCounter();
 
         if (attacker == Attacker.Enemy)
         {
@@ -198,7 +212,7 @@ public class BattleManager : MonoBehaviour
         // Deal damage to the player.
         PlayerManager.Instance.TakeDamage(damage);
         // Update the BattleUI health bars.
-        battleUI.UpdateHealthBars();
+        battleUI.UpdateHealthBar();
 
         Debug.Log("Player took " + damage + " damage.");
     }
@@ -226,22 +240,6 @@ public class BattleManager : MonoBehaviour
 
 
     /* GET FUNCTIONS */
-
-    public int GetPlayerTurnCount()
-    {
-        return playerTurnCount;
-    }
-
-
-    public int GetEnemyTurnCount()
-    {
-        return enemyTurnCount;
-    }
-
-    public int GetRound()
-    {
-        return roundNumber;
-    }
 
     public float GetEnemyHealthPercentage()
     {
