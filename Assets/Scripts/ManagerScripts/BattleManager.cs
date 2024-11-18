@@ -93,19 +93,53 @@ public class BattleManager : MonoBehaviour
     
     public void PlayerAttack(PlayerManager.SkillSlot slot)
     {
+        string combatLogMessage;
         // Get the SkillCard the Player attacked with, if they used one.
         SkillCard skillCard = PlayerManager.Instance.GetSkillCard(slot);
 
         if (skillCard == null)  // Melee attack.
         {
+            float damage = PlayerManager.Instance.GetMeleeDamage();
             // Deal the player's melee damage to the enemy.
-            DealDamageToEnemy(PlayerManager.Instance.GetMeleeDamage(), SkillCard.AttackType.None);
+            DealDamageToEnemy(damage, SkillCard.AttackType.None);
+            combatLogMessage = $"Player meleed the enemy for {damage} damage!";
         }
         else                    // SkillCard attack.
         {
+            float damage = skillCard.GetDamage();
+            SkillCard.AttackType skillType = skillCard.GetAttackType();
+            
             // Deal the selected skill card's type of damage to the enemy.
-            DealDamageToEnemy(skillCard.GetDamage(), skillCard.GetAttackType());
+            DealDamageToEnemy(damage, skillType);
+            string adjective;
+            switch (skillType)
+            {
+                case SkillCard.AttackType.Earth:
+                    adjective = "quaked";
+                    break;
+                case SkillCard.AttackType.Fire:
+                    adjective = "burned";
+                    break;
+                case SkillCard.AttackType.Water:
+                    adjective = "splashed";
+                    break;
+                case SkillCard.AttackType.Wind:
+                    adjective = "gusted";
+                    break;
+                default:
+                    adjective = "ERROR: INVALID SKILL TYPE";
+                    break;
+            }
+
+            combatLogMessage = $"Player {adjective} the enemy for {damage} damage !";
         }
+
+        if (criticalHit)
+        {
+            combatLogMessage += " A critical hit !";
+        }
+
+        battleUI.AddCombatLogMessage(combatLogMessage);
 
         // Update the health bars on the screen.
         battleUI.UpdateHealthBar();
@@ -163,6 +197,8 @@ public class BattleManager : MonoBehaviour
         yield return new WaitForSeconds(5.0f);
 
         DealDamageToPlayer(enemyAI.GetStrength());
+
+        battleUI.AddCombatLogMessage($"Enemy attacked the Player for {enemyAI.GetStrength()} damage !");
 
         if (PlayerManager.Instance.GetHealth() <= 0)  // Player defeated.
         {

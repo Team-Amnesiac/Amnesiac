@@ -25,7 +25,8 @@ public class BattleUI : MonoBehaviour
     [SerializeField] private Button skillCardButton4;
     [SerializeField] private Slider playerHealthSlider;
     [SerializeField] private Slider enemyHealthSlider;
-
+    [SerializeField] private GameObject combatLogContent;
+    [SerializeField] private GameObject messagePrefab;
 
     /* UNITY FUNCTIONS */
 
@@ -168,6 +169,14 @@ public class BattleUI : MonoBehaviour
         }
     }
 
+
+    public void AddCombatLogMessage(string message)
+    {
+        GameObject newMessage = Instantiate(messagePrefab, combatLogContent.transform);
+
+        TextMeshProUGUI messageTMP = newMessage.GetComponent<TextMeshProUGUI>();
+        messageTMP.text = message;
+    }
 
     /* BUTTON ON CLICK LISTENERS */
 
