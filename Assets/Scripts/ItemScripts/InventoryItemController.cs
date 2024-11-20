@@ -1,39 +1,62 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Button = UnityEngine.UI.Button;
+
 
 public class InventoryItemController : MonoBehaviour
 {
-    Item item;
-    public Button RemoveItemButton;
+    private Item item;
+    [SerializeField] private TextMeshProUGUI itemNameTMP;
+    [SerializeField] private Image           itemImage;
+    [SerializeField] private Button          removeItemButton;
 
-    public void RemoveItem()
+
+    void Start()
     {
-        Debug.Log($"Removing item: {item.itemName}");
+        removeItemButton.onClick.AddListener(removeItem);
+    }
+
+    private void removeItem()
+    {
         InventoryManager.Instance.Remove(item);
         Destroy(gameObject);
     }
 
-    public void AddItem(Item newItem)
+
+    public void useItem()
     {
-        item = newItem;
+        item.Use();
+        InventoryManager.Instance.Remove(item);
     }
 
-    public void UseItem()
+
+    public Item getItem()
     {
-        switch (item.itemType)
-        {
-            case Item.ItemType.Potion:
-                break;
-            case Item.ItemType.Gem:
-                Player.Instance.IncreaseHealth(item.value);
-                break;
-            case Item.ItemType.SkillCard:
-                break;
-            case Item.ItemType.Equipment:
-                break;
-        }
-        RemoveItem();
+        return item;
+    }
+
+
+    public void setItem(Item item)
+    {
+        this.item = item;
+    }
+
+
+    public void setSprite(Sprite sprite)
+    {
+        itemImage.sprite = sprite;
+    }
+
+
+    public void setItemName(string itemName)
+    {
+        itemNameTMP.text = itemName;
+    }
+
+
+    public void setRemovable(bool removable)
+    {
+        removeItemButton.gameObject.SetActive(removable);
     }
 }

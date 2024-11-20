@@ -163,7 +163,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6729878196898166729}
   - component: {fileID: 4717518759653071495}
-  - component: {fileID: 464021219022642269}
   m_Layer: 0
   m_Name: Trophy
   m_TagString: Item
@@ -197,19 +196,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d2a154e96ab3eb44390d7b542fe6b635, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Item: {fileID: 11400000, guid: 53cdd720c49b15e4d89ea42958d7dc23, type: 2}
---- !u!114 &464021219022642269
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6258239384717567240}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b44c2b3593b0e11439f324c1a24a6432, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Item: {fileID: 11400000, guid: 53cdd720c49b15e4d89ea42958d7dc23, type: 2}

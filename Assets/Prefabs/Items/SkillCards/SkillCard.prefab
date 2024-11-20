@@ -181,7 +181,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1138039829565505139}
   - component: {fileID: 841069365227464408}
-  - component: {fileID: 9172918059617137948}
   m_Layer: 0
   m_Name: SkillCard
   m_TagString: Untagged
@@ -215,19 +214,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d2a154e96ab3eb44390d7b542fe6b635, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Item: {fileID: 0}
---- !u!114 &9172918059617137948
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1541189618190073209}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b44c2b3593b0e11439f324c1a24a6432, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Item: {fileID: 0}

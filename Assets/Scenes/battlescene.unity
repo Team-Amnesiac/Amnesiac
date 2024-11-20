@@ -182,7 +182,7 @@ MonoBehaviour:
   m_text: Somebody's Turn
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6333fa80bc62d4e42913a18d2ff3f921, type: 2}
-  m_sharedMaterial: {fileID: 3485061023712775855, guid: 6333fa80bc62d4e42913a18d2ff3f921, type: 2}
+  m_sharedMaterial: {fileID: 7756507733590413285, guid: 6333fa80bc62d4e42913a18d2ff3f921, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -481,7 +481,7 @@ MonoBehaviour:
   m_text: SkillCard3
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6333fa80bc62d4e42913a18d2ff3f921, type: 2}
-  m_sharedMaterial: {fileID: 3485061023712775855, guid: 6333fa80bc62d4e42913a18d2ff3f921, type: 2}
+  m_sharedMaterial: {fileID: 7756507733590413285, guid: 6333fa80bc62d4e42913a18d2ff3f921, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -615,7 +615,7 @@ MonoBehaviour:
   m_text: 'Combat Log:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6333fa80bc62d4e42913a18d2ff3f921, type: 2}
-  m_sharedMaterial: {fileID: 3485061023712775855, guid: 6333fa80bc62d4e42913a18d2ff3f921, type: 2}
+  m_sharedMaterial: {fileID: 7756507733590413285, guid: 6333fa80bc62d4e42913a18d2ff3f921, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -781,7 +781,7 @@ MonoBehaviour:
   m_text: 'Player:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6333fa80bc62d4e42913a18d2ff3f921, type: 2}
-  m_sharedMaterial: {fileID: 3485061023712775855, guid: 6333fa80bc62d4e42913a18d2ff3f921, type: 2}
+  m_sharedMaterial: {fileID: 7756507733590413285, guid: 6333fa80bc62d4e42913a18d2ff3f921, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -915,7 +915,7 @@ MonoBehaviour:
   m_text: 'Turn: 0'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6333fa80bc62d4e42913a18d2ff3f921, type: 2}
-  m_sharedMaterial: {fileID: 3485061023712775855, guid: 6333fa80bc62d4e42913a18d2ff3f921, type: 2}
+  m_sharedMaterial: {fileID: 7756507733590413285, guid: 6333fa80bc62d4e42913a18d2ff3f921, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1170,7 +1170,7 @@ MonoBehaviour:
   m_text: Run Away...
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6333fa80bc62d4e42913a18d2ff3f921, type: 2}
-  m_sharedMaterial: {fileID: 3485061023712775855, guid: 6333fa80bc62d4e42913a18d2ff3f921, type: 2}
+  m_sharedMaterial: {fileID: 7756507733590413285, guid: 6333fa80bc62d4e42913a18d2ff3f921, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1877,6 +1877,8 @@ MonoBehaviour:
   skillCardButton2: {fileID: 489812156}
   skillCardButton3: {fileID: 1726293289}
   skillCardButton4: {fileID: 763861854}
+  inventoryButton: {fileID: 955764739}
+  runAwayButton: {fileID: 542121254}
   playerHealthSlider: {fileID: 610034812}
   enemyHealthSlider: {fileID: 90276134}
   combatLogContent: {fileID: 1915434681}
@@ -1994,7 +1996,7 @@ MonoBehaviour:
   m_text: 'Turn: 0'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6333fa80bc62d4e42913a18d2ff3f921, type: 2}
-  m_sharedMaterial: {fileID: 3485061023712775855, guid: 6333fa80bc62d4e42913a18d2ff3f921, type: 2}
+  m_sharedMaterial: {fileID: 7756507733590413285, guid: 6333fa80bc62d4e42913a18d2ff3f921, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3065,7 +3067,7 @@ MonoBehaviour:
   m_text: Melee
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6333fa80bc62d4e42913a18d2ff3f921, type: 2}
-  m_sharedMaterial: {fileID: 3485061023712775855, guid: 6333fa80bc62d4e42913a18d2ff3f921, type: 2}
+  m_sharedMaterial: {fileID: 7756507733590413285, guid: 6333fa80bc62d4e42913a18d2ff3f921, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3199,7 +3201,7 @@ MonoBehaviour:
   m_text: 'Round: 0'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6333fa80bc62d4e42913a18d2ff3f921, type: 2}
-  m_sharedMaterial: {fileID: 3485061023712775855, guid: 6333fa80bc62d4e42913a18d2ff3f921, type: 2}
+  m_sharedMaterial: {fileID: 7756507733590413285, guid: 6333fa80bc62d4e42913a18d2ff3f921, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3408,7 +3410,7 @@ MonoBehaviour:
   m_text: "Critical Hit! \nOne more turn!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6333fa80bc62d4e42913a18d2ff3f921, type: 2}
-  m_sharedMaterial: {fileID: 3485061023712775855, guid: 6333fa80bc62d4e42913a18d2ff3f921, type: 2}
+  m_sharedMaterial: {fileID: 7756507733590413285, guid: 6333fa80bc62d4e42913a18d2ff3f921, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3570,7 +3572,7 @@ GameObject:
   - component: {fileID: 1238101174}
   - component: {fileID: 1238101173}
   m_Layer: 0
-  m_Name: InventroyTMP
+  m_Name: InventoryTMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3618,7 +3620,7 @@ MonoBehaviour:
   m_text: Inventory
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6333fa80bc62d4e42913a18d2ff3f921, type: 2}
-  m_sharedMaterial: {fileID: 3485061023712775855, guid: 6333fa80bc62d4e42913a18d2ff3f921, type: 2}
+  m_sharedMaterial: {fileID: 7756507733590413285, guid: 6333fa80bc62d4e42913a18d2ff3f921, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3794,7 +3796,7 @@ MonoBehaviour:
   m_text: SkillCard1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6333fa80bc62d4e42913a18d2ff3f921, type: 2}
-  m_sharedMaterial: {fileID: 3485061023712775855, guid: 6333fa80bc62d4e42913a18d2ff3f921, type: 2}
+  m_sharedMaterial: {fileID: 7756507733590413285, guid: 6333fa80bc62d4e42913a18d2ff3f921, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4165,7 +4167,7 @@ MonoBehaviour:
   m_text: SkillCard2
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6333fa80bc62d4e42913a18d2ff3f921, type: 2}
-  m_sharedMaterial: {fileID: 3485061023712775855, guid: 6333fa80bc62d4e42913a18d2ff3f921, type: 2}
+  m_sharedMaterial: {fileID: 7756507733590413285, guid: 6333fa80bc62d4e42913a18d2ff3f921, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4299,7 +4301,7 @@ MonoBehaviour:
   m_text: SkillCard4
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6333fa80bc62d4e42913a18d2ff3f921, type: 2}
-  m_sharedMaterial: {fileID: 3485061023712775855, guid: 6333fa80bc62d4e42913a18d2ff3f921, type: 2}
+  m_sharedMaterial: {fileID: 7756507733590413285, guid: 6333fa80bc62d4e42913a18d2ff3f921, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4508,7 +4510,7 @@ MonoBehaviour:
   m_text: 'Player Health: '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6333fa80bc62d4e42913a18d2ff3f921, type: 2}
-  m_sharedMaterial: {fileID: 3485061023712775855, guid: 6333fa80bc62d4e42913a18d2ff3f921, type: 2}
+  m_sharedMaterial: {fileID: 7756507733590413285, guid: 6333fa80bc62d4e42913a18d2ff3f921, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4800,7 +4802,7 @@ MonoBehaviour:
   m_text: 'Enemy Health: '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6333fa80bc62d4e42913a18d2ff3f921, type: 2}
-  m_sharedMaterial: {fileID: 3485061023712775855, guid: 6333fa80bc62d4e42913a18d2ff3f921, type: 2}
+  m_sharedMaterial: {fileID: 7756507733590413285, guid: 6333fa80bc62d4e42913a18d2ff3f921, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5466,7 +5468,7 @@ MonoBehaviour:
   m_text: 'Enemy:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6333fa80bc62d4e42913a18d2ff3f921, type: 2}
-  m_sharedMaterial: {fileID: 3485061023712775855, guid: 6333fa80bc62d4e42913a18d2ff3f921, type: 2}
+  m_sharedMaterial: {fileID: 7756507733590413285, guid: 6333fa80bc62d4e42913a18d2ff3f921, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

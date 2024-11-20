@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2178694900321801456}
   - component: {fileID: 3345350857607670322}
-  - component: {fileID: 966285799648630782}
   m_Layer: 0
   m_Name: HealthGemScorpion
   m_TagString: Item
@@ -46,20 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2a154e96ab3eb44390d7b542fe6b635, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Item: {fileID: 11400000, guid: b97f8545f97ed8b4591609560b9a96c2, type: 2}
---- !u!114 &966285799648630782
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2352541825544413250}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b44c2b3593b0e11439f324c1a24a6432, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Item: {fileID: 11400000, guid: b97f8545f97ed8b4591609560b9a96c2, type: 2}
+  Item: {fileID: 11400000, guid: 2c114dfe3bf43e94889557ffca6d5f04, type: 2}
 --- !u!1 &4145587137470301547
 GameObject:
   m_ObjectHideFlags: 0

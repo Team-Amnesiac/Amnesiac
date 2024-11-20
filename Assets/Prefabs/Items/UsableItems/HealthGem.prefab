@@ -131,7 +131,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1423448296038593859}
   - component: {fileID: 6713780783899363801}
-  - component: {fileID: 4500284140608318760}
   m_Layer: 0
   m_Name: HealthGem
   m_TagString: Item
@@ -167,17 +166,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2a154e96ab3eb44390d7b542fe6b635, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Item: {fileID: 11400000, guid: 17836c5ae8ad0af40be190a05123d1a0, type: 2}
---- !u!114 &4500284140608318760
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4449267086436950201}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b44c2b3593b0e11439f324c1a24a6432, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Item: {fileID: 11400000, guid: 17836c5ae8ad0af40be190a05123d1a0, type: 2}
+  Item: {fileID: 11400000, guid: 3cc84e45b62ac2d47824fb724892c976, type: 2}

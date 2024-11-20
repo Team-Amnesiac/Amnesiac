@@ -15,7 +15,7 @@ MonoBehaviour:
   id: 0
   itemName: Basic Wind
   value: 0
-  icon: {fileID: 21300000, guid: 1c42f53aede782443815db696299d2ad, type: 3}
+  sprite: {fileID: 21300000, guid: 1c42f53aede782443815db696299d2ad, type: 3}
   itemType: 3
   damage: 25
   attackType: 2

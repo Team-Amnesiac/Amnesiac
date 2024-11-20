@@ -2,28 +2,33 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Image = UnityEngine.UIElements.Image;
+using static UnityEditor.Progress;
 
 public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager Instance;
-    public Transform ItemContent;
-    public GameObject InventoryItem;
-    public Toggle EnableRemove;
-    public List<Item> Items = new List<Item>();
-    public InventoryItemController[] InventoryItems;
 
+
+    [SerializeField] private GameObject inventoryItemPrefab;
+
+    private InventoryUI inventoryUI;
+    public List<Item>   inventoryItems = new List<Item>();
+    private bool        canRemove      = true;
+    
     // The amount of set pieces collected in each collectible set.
     private int trophyCount = 0;
-    private int armorCount  = 0;
+
 
     private void Awake()
     {
         Instance = this;
     }
 
+
     public void Add(Item item)
     {
-        Items.Add(item);
+        inventoryItems.Add(item);
         // Increment the collectible set count, if item is a collectible.
         if (item.GetItemType() == Item.ItemType.Collectible)
         {
@@ -39,6 +44,10 @@ public class InventoryManager : MonoBehaviour
                         Debug.Log("Trophy set complete!");
                     }
 
+                    break;
+                
+                default:
+                    Debug.Log("Trophy set complete!");
                     break;
             }
         }
@@ -59,10 +68,9 @@ public class InventoryManager : MonoBehaviour
             return;
         }
 
-        if (Items.Contains(item))
+        if (inventoryItems.Contains(item))
         {
-            Items.Remove(item);
-            ListItems();
+            inventoryItems.Remove(item);
         }
         else
         {
@@ -70,77 +78,38 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+
     public void ListItems()
     {
-        foreach (Transform item in ItemContent)
+        foreach (Item item in inventoryItems)
         {
-            Destroy(item.gameObject);
-        }
+            GameObject obj = Instantiate(inventoryItemPrefab, inventoryUI.GetInventoryContent().transform);
 
-        InventoryItems = new InventoryItemController[0];
-
-        foreach (var item in Items)
-        {
-            GameObject obj = Instantiate(InventoryItem, ItemContent);
-
-            var controller = obj.GetComponent<InventoryItemController>();
-            if (controller != null)
+            InventoryItemController controller = obj.GetComponent<InventoryItemController>();
+            controller.setItem(item);
+            controller.setItemName(item.itemName);
+            controller.setSprite(item.sprite);
+            if (item.itemType == Item.ItemType.Collectible || item.itemType == Item.ItemType.SkillCard || !canRemove)
             {
-                controller.AddItem(item);
+                controller.setRemovable(false);
+            }
+            else
+            {
+                controller.setRemovable(true);
             }
 
-            var itemName = obj.transform.Find("ItemName")?.GetComponent<TextMeshProUGUI>();
-            if (itemName != null)
-            {
-                itemName.text = item.itemName;
-            }
-
-            var itemIcon = obj.transform.Find("ItemIcon")?.GetComponent<Image>();
-            if (itemIcon != null)
-            {
-                itemIcon.sprite = item.icon;
-            }
-
-            var removeItemButton = obj.transform.Find("RemoveItemButton")?.GetComponent<Button>();
-            if (removeItemButton != null)
-            {
-                removeItemButton.onClick.RemoveAllListeners();
-                removeItemButton.onClick.AddListener(() => Remove(item));
-                removeItemButton.gameObject.SetActive(EnableRemove.isOn);
-            }
-        }
-    }
-
-    public void EnableItemsRemove()
-    {
-        foreach (Transform item in ItemContent)
-        {
-            var removeButton = item.Find("RemoveItemButton")?.gameObject;
-            if (removeButton != null)
-            {
-                removeButton.SetActive(EnableRemove.isOn);
-            }
         }
     }
 
 
-    public void SetInventoryItems()
+    public void SetInventoryUI(InventoryUI inventoryUI)
     {
-        InventoryItems = ItemContent.GetComponentsInChildren<InventoryItemController>();
+        this.inventoryUI = inventoryUI;
+    }
 
-        if (Items.Count != InventoryItems.Length)
-        {
-            Debug.LogError("Mismatch between Items count and InventoryItems array length. Refreshing Inventory UI.");
-            ListItems();
-            return;
-        }
 
-        for (int i = 0; i < Items.Count; i++)
-        {
-            if (InventoryItems[i] != null && Items[i] != null)
-            {
-                InventoryItems[i].AddItem(Items[i]);
-            }
-        }
+    public void toggleCanRemove(bool canRemove)
+    {
+        this.canRemove = canRemove;
     }
 }
