@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Materials.meta
 guid: d24c8c3ca22fed048b8b4241a2b4d283
+========
+guid: 0b45efbabfddc124db4f9c16abc6cf12
+>>>>>>>> a555907866d3682c4e04c7fd374386a69035f91b:Assets/Materials/Trophies.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
