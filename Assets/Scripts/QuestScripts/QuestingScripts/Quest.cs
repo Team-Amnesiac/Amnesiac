@@ -3,18 +3,21 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Quest", menuName = "Quest System/Quest")]
 public class Quest : ScriptableObject
 {
+    [Header("Basic Info")]
     public string questName;
     public string description;
-    public bool isMainQuest;
     public bool isCompleted;
 
+    [Header("Quest Type")]
     public QuestType questType;
-    public int requiredAmount; // For kill quests (e.g- killing certain amount of certain enemies)
-    public string targetItem;  // For collection quests (e.g- collectibles, main quest involving collecting relics)
+
+    [Header("Quest Requirements")]
+    public string targetItem;  // For collection quests (e.g., collecting relics)
+    public int requiredAmount;
 
     public enum QuestType
     {
-        Collect,
-        Kill
+        Main,
+        Side
     }
 }

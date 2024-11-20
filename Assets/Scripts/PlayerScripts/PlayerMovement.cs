@@ -52,7 +52,7 @@ public class PlayerMovement : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         // Skip triggers with "Item" tag
-        if (other.CompareTag("Item"))
+        if (other.CompareTag("Item") || other.CompareTag("Relic"))
         {
             Debug.Log($"Skipping item trigger: {other.name}");
             return;
