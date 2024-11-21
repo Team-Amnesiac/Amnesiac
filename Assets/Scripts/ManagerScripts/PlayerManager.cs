@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    private const int MAX_EQUIPPED_SKILL_CARDS = 4;
+    public static PlayerManager Instance;
 
     public enum SkillSlot
     {
@@ -15,13 +15,13 @@ public class PlayerManager : MonoBehaviour
         Melee
     }
 
-
-    public static PlayerManager Instance;
-
+    private const int MAX_EQUIPPED_SKILL_CARDS = 4;
 
     [SerializeField] private float maxPlayerHealth = 100.0f;
     [SerializeField] private float playerHealth;
     [SerializeField] private float meleeDamage     = 25.0f;
+
+    private float playerExperience = 0.0f;
 
     [SerializeField] private SkillCardSO[] equippedSkillCardArray;
     
@@ -43,6 +43,7 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -50,28 +51,45 @@ public class PlayerManager : MonoBehaviour
         playerHealth = maxPlayerHealth;
     }
 
-    public float CalculateHealthPercent()
+
+    public float calculateHealthPercent()
     {
         return playerHealth / maxPlayerHealth;
     }
 
-    public void TakeDamage(float damage)
+
+    public void takeDamage(float damage)
     {
         playerHealth = Mathf.Clamp(playerHealth - damage, 0, maxPlayerHealth);
     }
 
-    public void Equip(SkillCardSO skillCardSo)
+
+    public void equipSkillCard(SkillCardSO skillCardSo)
     {
         for (int i = 0; i < MAX_EQUIPPED_SKILL_CARDS; i++)
         {
             if (equippedSkillCardArray[i] == null)
             {
                 equippedSkillCardArray[i] = skillCardSo;
-                Debug.Log($"SkillCard {skillCardSo.itemName} equipped!");
+                Debug.Log($"SkillCard {skillCardSo.getItemName()} equipped!");
                 
                 return;
             }
         }
+    }
+
+
+    public void increaseHealth(int value)
+    {
+        playerHealth += value;
+        UIManager.Instance.updateUI(UIManager.UI.PlayerHud);
+    }
+
+
+    public void increaseExperience(int value)
+    {
+        playerExperience += value;
+        UIManager.Instance.updateUI(UIManager.UI.PlayerHud);
     }
 
 
@@ -86,7 +104,8 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    public SkillCardSO GetSkillCard(SkillSlot slot)
+
+    public SkillCardSO getSkillCard(SkillSlot slot)
     {
         if (slot == SkillSlot.Melee)  
         {
@@ -96,17 +115,26 @@ public class PlayerManager : MonoBehaviour
         return equippedSkillCardArray[(int)slot];
     }
 
-    public float GetMeleeDamage()
+
+    public float getMeleeDamage()
     {
         return meleeDamage;
     }
 
-    public float GetHealth()
+
+    public float getHealth()
     {
         return playerHealth;
     }
 
-    public bool HasAvailableSkillCardSlot()
+
+    public float getExperience()
+    {
+        return playerExperience;
+    }
+
+
+    public bool hasAvailableSkillCardSlot()
     {
         for (int i = 0; i < MAX_EQUIPPED_SKILL_CARDS; i++)
         {

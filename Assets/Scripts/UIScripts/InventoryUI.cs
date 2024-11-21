@@ -28,9 +28,9 @@ public class InventoryUI : MonoBehaviour
 
             InventoryItemController controller = obj.GetComponent<InventoryItemController>();
             controller.setItem(item);
-            controller.setItemName(item.itemName);
-            controller.setSprite(item.sprite);
-            if (item.itemType == ItemSO.ItemType.SkillCard || !enableRemoveToggle.isOn)  // Item is a SkillCard or all items cannot be removed.
+            controller.setItemName(item.getItemName());
+            controller.setSprite(item.getItemSprite());
+            if (item.getItemType() == ItemSO.ItemType.SkillCard || !enableRemoveToggle.isOn)  // Item is a SkillCard or all items cannot be removed.
             {
                 controller.setRemovable(false);
             }
@@ -56,7 +56,7 @@ public class InventoryUI : MonoBehaviour
         foreach (InventoryItemController controller in
                  inventoryContent.GetComponentsInChildren<InventoryItemController>())
         {
-            if (controller.getItem().itemType == ItemSO.ItemType.SkillCard)  // Item is a skill card or a collectible.
+            if (controller.getItem().getItemType() == ItemSO.ItemType.SkillCard)  // Item is a skill card or a collectible.
             {
                 continue;  // Do nothing.
             }

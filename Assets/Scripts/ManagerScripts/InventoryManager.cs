@@ -9,10 +9,9 @@ public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager Instance;
 
-
     [SerializeField] private GameObject inventoryItemPrefab;
 
-    public List<ItemSO>   inventoryItems = new List<ItemSO>();
+    private List<ItemSO> inventoryItems = new List<ItemSO>();
     
     // The amount of set pieces collected in each collectible set.
     private int trophyCount = 0;
@@ -24,41 +23,20 @@ public class InventoryManager : MonoBehaviour
     }
 
 
-    public void Add(ItemSO itemSo)
+    public void addItem(ItemSO itemSo)
     {
         inventoryItems.Add(itemSo);
-        // Increment the collectible set count, if item is a collectible.
-        if (itemSo.GetItemType() == ItemSO.ItemType.Collectible)
+        if (itemSo.getItemType() == ItemSO.ItemType.SkillCard)  // Item is a skillcard.
         {
-            CollectibleSO collectibleSo = (CollectibleSO)itemSo;
-
-            // Identify which set this collectible belongs to.
-            switch (collectibleSo.GetSet())
+            if (PlayerManager.Instance.hasAvailableSkillCardSlot())  // There is an empty slot available.
             {
-                case CollectibleSO.Set.Trophy:
-                    trophyCount++;
-                    if (trophyCount == (int)CollectibleSO.SetSize.Trophy)  // Trophy set complete.
-                    {
-                        Debug.Log("Trophy set complete!");
-                    }
-
-                    break;
-                
-                default:
-                    Debug.Log("Trophy set complete!");
-                    break;
-            }
-        }
-        else if (itemSo.GetItemType() == ItemSO.ItemType.SkillCard)
-        {
-            if (PlayerManager.Instance.HasAvailableSkillCardSlot())  // There is an empty slot available.
-            {
-                PlayerManager.Instance.Equip((SkillCardSO)itemSo);
+                PlayerManager.Instance.equipSkillCard((SkillCardSO)itemSo);
             }
         }
     }
 
-   public void Remove(ItemSO itemSo)
+
+   public void removeItem(ItemSO itemSo)
     {
         if (itemSo == null)
         {
@@ -72,7 +50,7 @@ public class InventoryManager : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning($"Item not found in inventory: {itemSo.itemName}");
+            Debug.LogWarning($"Item not found in inventory: {itemSo.getItemName()}");
         }
     }
 

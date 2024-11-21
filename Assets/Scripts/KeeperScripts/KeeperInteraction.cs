@@ -34,9 +34,9 @@ public class KeeperInteraction : MonoBehaviour
     }
 
 
-     public void TalkToKeeper()
+     public void talkTo()
     {
-        QuestManager.Instance.TalkToKeeper();
+        QuestManager.Instance.talkToKeeper();
         Debug.Log("Player interacted with Keeper and received a quest.");
     }
 }

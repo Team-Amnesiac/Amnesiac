@@ -11,10 +11,4 @@ public class RelicSO : ItemSO
     {
         return relatedQuest;
     }
-
-
-    public void SetRelatedQuest(QuestSO relatedQuest)
-    {
-        this.relatedQuest = relatedQuest;
-    }
 }

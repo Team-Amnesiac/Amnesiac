@@ -17,11 +17,18 @@ public class CollectibleSO : ItemSO
     }
 
 
+    [SerializeField] private QuestSO relatedQuest;
     [SerializeField] private Set collectibleSet;
 
 
-    public Set GetSet()
+    public Set getSet()
     {
         return collectibleSet;
+    }
+
+
+    public QuestSO getRelatedQuest()
+    {
+        return relatedQuest;
     }
 }

@@ -17,32 +17,7 @@ public class ItemVisuals : MonoBehaviour
         initialY = transform.position.y;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log($"OnTriggerEnter called by: {other.name}");
 
-        if (other.CompareTag("Player"))
-        {
-            itemPickup.SetPlayerNearby(true);
-            itemPickup.SetPlayerAnimator(other.GetComponent<Animator>());
-            Debug.Log("Player is near the item.");
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        Debug.Log($"OnTriggerExit called by: {other.name}");
-
-        if (other.CompareTag("Player"))
-        {
-            itemPickup.SetPlayerNearby(false);
-            itemPickup.SetPlayerAnimator(null);
-            Debug.Log("Player left the item.");
-        }
-    }
-
-
-    // Update is called once per frame
     void Update()
     {
         Vector3 newPosition = transform.position;
@@ -54,7 +29,34 @@ public class ItemVisuals : MonoBehaviour
         transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime, Space.Self);
     }
 
-    public void SetItemPickup(ItemPickup itemPickup)
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log($"OnTriggerEnter called by: {other.name}");
+
+        if (other.CompareTag("Player"))
+        {
+            itemPickup.setPlayerNearby(true);
+            itemPickup.setPlayerAnimator(other.GetComponent<Animator>());
+            Debug.Log("Player is near the item.");
+        }
+    }
+
+
+    private void OnTriggerExit(Collider other)
+    {
+        Debug.Log($"OnTriggerExit called by: {other.name}");
+
+        if (other.CompareTag("Player"))
+        {
+            itemPickup.setPlayerNearby(false);
+            itemPickup.setPlayerAnimator(null);
+            Debug.Log("Player left the item.");
+        }
+    }
+
+
+    public void setItemPickup(ItemPickup itemPickup)
     {
         this.itemPickup = itemPickup;
     }

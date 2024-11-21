@@ -4,11 +4,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New ItemSO", menuName = "Item/Create New ItemSO")]
 public class ItemSO : ScriptableObject
 {
-    public int      id;
-    public string   itemName;
-    public int      value;
-    public Sprite   sprite;
-    public ItemType itemType;
+    [SerializeField] private int      id;
+    [SerializeField] private string   itemName;
+    [SerializeField] private int      value;
+    [SerializeField] private Sprite   sprite;
+    [SerializeField] private ItemType itemType;
 
     public enum ItemType
     {
@@ -21,7 +21,7 @@ public class ItemSO : ScriptableObject
     }
 
 
-    public void Use()
+    public void use()
     {
         switch (itemType)
         {
@@ -29,7 +29,7 @@ public class ItemSO : ScriptableObject
                 break;
             
             case ItemType.Gem:
-                Player.Instance.IncreaseHealth(value);
+                PlayerManager.Instance.increaseHealth(value);
                 break;
 
             case ItemType.SkillCard:
@@ -39,14 +39,20 @@ public class ItemSO : ScriptableObject
     }
 
 
-    public ItemType GetItemType()
+    public string getItemName()
     {
-        return itemType;
+        return itemName;
     }
 
 
-    public Sprite GetSprite()
+    public Sprite getItemSprite()
     {
         return sprite;
+    }
+
+
+    public ItemType getItemType()
+    {
+        return itemType;
     }
 }

@@ -28,13 +28,13 @@ public class SkillCardSO : ItemSO
     }
 
 
-    public float GetDamage()
+    public float getDamage()
     {
         return damage;
     }
 
 
-    public AttackType GetAttackType()
+    public AttackType getAttackType()
     {
         return attackType;
     }
@@ -48,7 +48,7 @@ public class SkillCardSO : ItemSO
         }
         else
         {
-            PlayerManager.Instance.Equip(this);
+            PlayerManager.Instance.equipSkillCard(this);
         }
         isEquiped = !isEquiped;
     }

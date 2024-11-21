@@ -32,7 +32,7 @@ public class SceneLoader : MonoBehaviour
     }
 
 
-    public void LoadScene(Scene scene)
+    public void loadScene(Scene scene)
     {
         if (scene == Scene.Title)
         {

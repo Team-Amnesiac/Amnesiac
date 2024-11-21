@@ -6,11 +6,12 @@ using Button = UnityEngine.UI.Button;
 
 public class InventoryItemController : MonoBehaviour
 {
-    private ItemSO _itemSo;
     [SerializeField] private TextMeshProUGUI itemNameTMP;
     [SerializeField] private Image           itemImage;
     [SerializeField] private Button          itemButton;
     [SerializeField] private Button          removeItemButton;
+
+    private ItemSO item;
 
 
     void Start()
@@ -20,27 +21,27 @@ public class InventoryItemController : MonoBehaviour
 
     private void removeItem()
     {
-        InventoryManager.Instance.Remove(_itemSo);
+        InventoryManager.Instance.removeItem(item);
         Destroy(gameObject);
     }
 
 
     public void useItem()
     {
-        _itemSo.Use();
-        InventoryManager.Instance.Remove(_itemSo);
+        item.use();
+        InventoryManager.Instance.removeItem(item);
     }
 
 
     public ItemSO getItem()
     {
-        return _itemSo;
+        return item;
     }
 
 
     public void setItem(ItemSO itemSo)
     {
-        this._itemSo = itemSo;
+        this.item = itemSo;
     }
 
 

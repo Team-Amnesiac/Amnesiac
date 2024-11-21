@@ -5,18 +5,18 @@ using UnityEngine;
 
 public class QuestEntryController : MonoBehaviour
 {
-    [SerializeField] private QuestSO _questSo;
+    [SerializeField] private QuestSO quest;
     [SerializeField] private TextMeshProUGUI questTMP;
 
 
-    public void setQuest(QuestSO questSo)
+    public void setQuest(QuestSO quest)
     {
-        this._questSo = questSo;
+        this.quest = quest;
         updateQuestText();
     }
 
     private void updateQuestText()
     {
-        questTMP.text = $"{_questSo.questType.ToString()}: {_questSo.questName}";
+        questTMP.text = $"{quest.questType.ToString()}: {quest.questName}";
     }
 }

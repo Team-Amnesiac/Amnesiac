@@ -44,45 +44,45 @@ public class BattleUI : MonoBehaviour
         turnIndicatorTMP.gameObject.SetActive(true);
         criticalHitTMP.gameObject.SetActive(false);
         
-        if (PlayerManager.Instance.GetSkillCard(PlayerManager.SkillSlot.One) == null)
+        if (PlayerManager.Instance.getSkillCard(PlayerManager.SkillSlot.One) == null)
         {
             skillCard1TMP.text = "EMPTY";
             skillCardButton1.interactable = false;
         }
         else
         {
-            SkillCardSO skillCard1 = PlayerManager.Instance.GetSkillCard(PlayerManager.SkillSlot.One);
-            skillCard1TMP.text = $"{skillCard1.itemName}";
+            SkillCardSO skillCard1 = PlayerManager.Instance.getSkillCard(PlayerManager.SkillSlot.One);
+            skillCard1TMP.text = $"{skillCard1.getItemName()}";
         }
-        if (PlayerManager.Instance.GetSkillCard(PlayerManager.SkillSlot.Two) == null)
+        if (PlayerManager.Instance.getSkillCard(PlayerManager.SkillSlot.Two) == null)
         {
             skillCard2TMP.text = "EMPTY";
             skillCardButton2.interactable = false;
         }
         else
         {
-            SkillCardSO skillCard2 = PlayerManager.Instance.GetSkillCard(PlayerManager.SkillSlot.Two);
-            skillCard2TMP.text = $"{skillCard2.itemName}";
+            SkillCardSO skillCard2 = PlayerManager.Instance.getSkillCard(PlayerManager.SkillSlot.Two);
+            skillCard2TMP.text = $"{skillCard2.getItemName()}";
         }
-        if (PlayerManager.Instance.GetSkillCard(PlayerManager.SkillSlot.Three) == null)
+        if (PlayerManager.Instance.getSkillCard(PlayerManager.SkillSlot.Three) == null)
         {
             skillCard3TMP.text = "EMPTY";
             skillCardButton3.interactable = false;
         }
         else
         {
-            SkillCardSO skillCard3 = PlayerManager.Instance.GetSkillCard(PlayerManager.SkillSlot.Three);
-            skillCard3TMP.text = $"{skillCard3.itemName}";
+            SkillCardSO skillCard3 = PlayerManager.Instance.getSkillCard(PlayerManager.SkillSlot.Three);
+            skillCard3TMP.text = $"{skillCard3.getItemName()}";
         }
-        if (PlayerManager.Instance.GetSkillCard(PlayerManager.SkillSlot.Four) == null)
+        if (PlayerManager.Instance.getSkillCard(PlayerManager.SkillSlot.Four) == null)
         {
             skillCard4TMP.text = "EMPTY";
             skillCardButton4.interactable = false;
         }
         else
         {
-            SkillCardSO skillCard4 = PlayerManager.Instance.GetSkillCard(PlayerManager.SkillSlot.Four);
-            skillCard4TMP.text = $"{skillCard4.itemName}";
+            SkillCardSO skillCard4 = PlayerManager.Instance.getSkillCard(PlayerManager.SkillSlot.Four);
+            skillCard4TMP.text = $"{skillCard4.getItemName()}";
         }
 
         meleeAttackButton.onClick.AddListener(OnMeleeAttackButtonClicked);
@@ -94,7 +94,7 @@ public class BattleUI : MonoBehaviour
         runAwayButton.onClick.AddListener(OnRunAwayButtonClicked);
 
         // Start the battle and pass this object to the BattleManager.
-        BattleManager.Instance.StartBattle(this);
+        BattleManager.Instance.startBattle(this);
     }
     
 
@@ -122,10 +122,10 @@ public class BattleUI : MonoBehaviour
     public void UpdateHealthBar()
     {
         // Set the player health bar slider to their health percentage from 1.0f to 0.0f (1.0f is full).
-        playerHealthSlider.value = PlayerManager.Instance.CalculateHealthPercent();
+        playerHealthSlider.value = PlayerManager.Instance.calculateHealthPercent();
 
         // Set the enemy health bar slider to their health percentage from 0.0f to 1.0f (0.0f is full).
-        enemyHealthSlider.value = Mathf.Abs(BattleManager.Instance.GetEnemyHealthPercentage() - 1.0f);
+        enemyHealthSlider.value = Mathf.Abs(BattleManager.Instance.getEnemyHealthPercentage() - 1.0f);
 
     }
 
@@ -139,19 +139,19 @@ public class BattleUI : MonoBehaviour
     public void SetButtonInteractability(bool interactable)
     {
         meleeAttackButton.interactable = interactable;
-        if (PlayerManager.Instance.GetSkillCard(PlayerManager.SkillSlot.One) != null)
+        if (PlayerManager.Instance.getSkillCard(PlayerManager.SkillSlot.One) != null)
         {
             skillCardButton1.interactable = interactable;
         }
-        if (PlayerManager.Instance.GetSkillCard(PlayerManager.SkillSlot.Two) != null)
+        if (PlayerManager.Instance.getSkillCard(PlayerManager.SkillSlot.Two) != null)
         {
             skillCardButton2.interactable = interactable;
         }
-        if (PlayerManager.Instance.GetSkillCard(PlayerManager.SkillSlot.Three) != null)
+        if (PlayerManager.Instance.getSkillCard(PlayerManager.SkillSlot.Three) != null)
         {
             skillCardButton3.interactable = interactable;
         }
-        if (PlayerManager.Instance.GetSkillCard(PlayerManager.SkillSlot.Four) != null)
+        if (PlayerManager.Instance.getSkillCard(PlayerManager.SkillSlot.Four) != null)
         {
             skillCardButton4.interactable = interactable;
         }
@@ -197,34 +197,34 @@ public class BattleUI : MonoBehaviour
     private void OnMeleeAttackButtonClicked()
     {
         Debug.Log("Player uses Melee attack.");
-        BattleManager.Instance.PlayerAttack(PlayerManager.SkillSlot.Melee);
+        BattleManager.Instance.playerAttack(PlayerManager.SkillSlot.Melee);
     }
 
 
     private void OnSkillCardButton1Clicked()
     {
         Debug.Log("Player uses Skill Card 1.");
-        BattleManager.Instance.PlayerAttack(PlayerManager.SkillSlot.One);
+        BattleManager.Instance.playerAttack(PlayerManager.SkillSlot.One);
     }
 
     private void OnSkillCardButton2Clicked()
     {
         Debug.Log("Player uses Skill Card 2.");
-        BattleManager.Instance.PlayerAttack(PlayerManager.SkillSlot.Two);
+        BattleManager.Instance.playerAttack(PlayerManager.SkillSlot.Two);
     }
 
 
     private void OnSkillCardButton3Clicked()
     {
         Debug.Log("Player uses Skill Card 3.");
-        BattleManager.Instance.PlayerAttack(PlayerManager.SkillSlot.Three);
+        BattleManager.Instance.playerAttack(PlayerManager.SkillSlot.Three);
     }
 
 
     private void OnSkillCardButton4Clicked()
     {
         Debug.Log("Player uses Skill Card 4.");
-        BattleManager.Instance.PlayerAttack(PlayerManager.SkillSlot.Four);
+        BattleManager.Instance.playerAttack(PlayerManager.SkillSlot.Four);
     }
 
     private void OnInventoryButtonClicked()
@@ -237,7 +237,7 @@ public class BattleUI : MonoBehaviour
     private void OnRunAwayButtonClicked()
     {
         Debug.Log("Run away button clicked!");
-        BattleManager.Instance.RunAway();
+        BattleManager.Instance.runAway();
     }
 
 

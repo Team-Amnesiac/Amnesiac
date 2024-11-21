@@ -147,6 +147,21 @@ public class UIManager : MonoBehaviour
     }
 
 
+    public void updateUI(UI ui)
+    {
+        switch (ui)
+        {
+            case UI.PlayerHud:
+                playerHudUI.updateValues();
+                break;
+
+            default:
+                Debug.Log("ATTEMPT TO SHOW INVALID UI");
+                break;
+        }
+    }
+
+
     public void showUI(UI ui)
     {
         switch (ui)

@@ -10,9 +10,9 @@ public class QuestManager : MonoBehaviour
     [SerializeField] List<QuestSO> completedQuests;
 
     [Header("Quest Assets")]
-    public QuestSO FirstQuestSo;
-    public QuestSO SecondQuestSo;
-    public QuestSO ThirdQuestSo;
+    [SerializeField] private QuestSO firstQuest;
+    [SerializeField] private QuestSO secondQuest;
+    [SerializeField] private QuestSO thirdQuest;
 
 
     private void Awake()
@@ -29,31 +29,51 @@ public class QuestManager : MonoBehaviour
     }
 
 
-    public void TalkToKeeper()
+    public void talkToKeeper()
     {
-        if (!activeQuests.Contains(FirstQuestSo) && !completedQuests.Contains(FirstQuestSo))
+        if (!activeQuests.Contains(firstQuest) && !completedQuests.Contains(firstQuest))
         {
-            AddQuest(FirstQuestSo);
+            addQuest(firstQuest);
         }
-        else if (completedQuests.Contains(FirstQuestSo) && !activeQuests.Contains(SecondQuestSo))
+        else if (completedQuests.Contains(firstQuest) && !activeQuests.Contains(secondQuest))
         {
-            AddQuest(SecondQuestSo);
+            addQuest(secondQuest);
         }
-        else if (completedQuests.Contains(SecondQuestSo) && !activeQuests.Contains(ThirdQuestSo))
+        else if (completedQuests.Contains(secondQuest) && !activeQuests.Contains(thirdQuest))
         {
-            AddQuest(ThirdQuestSo);
+            addQuest(thirdQuest);
         }
     }
 
 
-    private void AddQuest(QuestSO newQuestSo)
+    public void addRelic(RelicSO relic)
+    {
+        QuestSO relicQuest = relic.getRelatedQuest();
+        if (activeQuests.Contains(relicQuest) && !relicQuest.isCompleted)
+        {
+            updateQuestProgress(relicQuest);
+        }
+    }
+
+
+    public void addCollectible(CollectibleSO collectible)
+    {
+        QuestSO collectibleQuest = collectible.getRelatedQuest();
+        if (activeQuests.Contains(collectibleQuest) && !collectibleQuest.isCompleted)
+        {
+            updateQuestProgress(collectibleQuest);
+        }
+    }
+
+
+    private void addQuest(QuestSO newQuestSo)
     {
         activeQuests.Add(newQuestSo);
         UIManager.Instance.newNotification($"New Quest(s) in quest log!");
     }
 
 
-    private void UpdateQuestProgress(QuestSO questSo)
+    private void updateQuestProgress(QuestSO questSo)
     {
         if (activeQuests.Contains(questSo) && !questSo.isCompleted)
         {
@@ -72,16 +92,6 @@ public class QuestManager : MonoBehaviour
         else
         {
             Debug.Log($"[QuestManager] Quest progress update skipped. Quest not active or already completed: {questSo.questName}");
-        }
-    }
-
-
-    public void addRelic(RelicSO relic)
-    {
-        QuestSO relicQuest = relic.getRelatedQuest();
-        if (activeQuests.Contains(relicQuest) && !relicQuest.isCompleted)
-        {
-            UpdateQuestProgress(relicQuest);
         }
     }
 

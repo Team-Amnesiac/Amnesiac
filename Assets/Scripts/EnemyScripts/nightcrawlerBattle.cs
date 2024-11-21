@@ -11,7 +11,7 @@ public class NightcrawlerBattle : MonoBehaviour
 
     }
 
-    public void ExecuteAttack()
+    public void executeAttack()
     {
         float damage = 15f;
         if (!specialAttackUsed && Random.value > 0.9f)
@@ -28,7 +28,7 @@ public class NightcrawlerBattle : MonoBehaviour
         //BattleManager.Instance.DealDamageToPlayer(damage);
     }
 
-    public void ResetSpecialAttack()
+    public void resetSpecialAttack()
     {
         specialAttackUsed = false;
     }

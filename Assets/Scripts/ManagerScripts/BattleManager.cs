@@ -56,10 +56,10 @@ public class BattleManager : MonoBehaviour
 
     /* PUBLIC FUNCTIONS */
 
-    public void InitializeBattle(Attacker attacker, EnemyAI enemyAI)
+    public void initializeBattle(Attacker attacker, EnemyAI enemyAI)
     {
         // Set the GameState to Battle.
-        GameManager.Instance.SetGameState(GameManager.GameState.Battle);
+        GameManager.Instance.setGameState(GameManager.GameState.Battle);
         // Set the attacker to whoever attacked first.
         this.attacker = attacker;
         this.firstAttacker = attacker;
@@ -68,7 +68,7 @@ public class BattleManager : MonoBehaviour
     }
 
 
-    public void StartBattle(BattleUI battleUI)
+    public void startBattle(BattleUI battleUI)
     {
         // Retrieve the BattleUI script.
         this.battleUI = battleUI;
@@ -81,36 +81,36 @@ public class BattleManager : MonoBehaviour
         if (attacker == Attacker.Enemy)  // Enemy's turn.
         {
             // Play the enemy's turn.
-            StartCoroutine(EnemyTurn());
+            StartCoroutine(enemyTurn());
         }
         else
         {
             // Play the player's turn.
-            PlayerTurn();
+            playerTurn();
         }
     }
 
     
-    public void PlayerAttack(PlayerManager.SkillSlot slot)
+    public void playerAttack(PlayerManager.SkillSlot slot)
     {
         string combatLogMessage;
         // Get the SkillCard the Player attacked with, if they used one.
-        SkillCardSO skillCardSo = PlayerManager.Instance.GetSkillCard(slot);
+        SkillCardSO skillCardSo = PlayerManager.Instance.getSkillCard(slot);
 
         if (skillCardSo == null)  // Melee attack.
         {
-            float damage = PlayerManager.Instance.GetMeleeDamage();
+            float damage = PlayerManager.Instance.getMeleeDamage();
             // Deal the player's melee damage to the enemy.
-            DealDamageToEnemy(damage, SkillCardSO.AttackType.None);
+            dealDamageToEnemy(damage, SkillCardSO.AttackType.None);
             combatLogMessage = $"Player meleed the enemy for {damage} damage!";
         }
         else                    // SkillCard attack.
         {
-            float damage = skillCardSo.GetDamage();
-            SkillCardSO.AttackType skillType = skillCardSo.GetAttackType();
+            float damage = skillCardSo.getDamage();
+            SkillCardSO.AttackType skillType = skillCardSo.getAttackType();
             
             // Deal the selected skill card's type of damage to the enemy.
-            DealDamageToEnemy(damage, skillType);
+            dealDamageToEnemy(damage, skillType);
             string adjective;
             switch (skillType)
             {
@@ -144,11 +144,11 @@ public class BattleManager : MonoBehaviour
         // Update the health bars on the screen.
         battleUI.UpdateHealthBar();
 
-        if (enemyAI.GetHealth() <= 0)   // Enemy has been defeated.
+        if (enemyAI.getHealth() <= 0)   // Enemy has been defeated.
         {
             Debug.Log("Enemy defeated!");
             // End the battle, as the enemy has been defeated.
-            EndBattle();
+            endBattle();
 
             return;
         }
@@ -162,7 +162,7 @@ public class BattleManager : MonoBehaviour
             // Reset for the next attack by the player.
             criticalHit = false;
             // Player's extra turn, earned from critical hit.
-            PlayerTurn();
+            playerTurn();
 
             // Exit the function.
             return;
@@ -171,18 +171,18 @@ public class BattleManager : MonoBehaviour
         // Reset player's extra turn for next round.
         playerExtraTurn = false;
         // Player did not critical hit the enemy, swap to enemy turn.
-        SwapTurns();
+        swapTurns();
     }
     
-    public void RunAway()
+    public void runAway()
     {
-        EndBattle();
+        endBattle();
     }
 
 
     /* PRIVATE FUNCTIONS */
 
-    private void PlayerTurn()
+    private void playerTurn()
     {
         // Activate the functionality of the player's action buttons.
         battleUI.SetButtonInteractability(true);
@@ -191,7 +191,7 @@ public class BattleManager : MonoBehaviour
     }
 
 
-    private IEnumerator EnemyTurn()
+    private IEnumerator enemyTurn()
     {
         // Disable functionality of the player's action buttons.
         battleUI.SetButtonInteractability(false);
@@ -201,21 +201,21 @@ public class BattleManager : MonoBehaviour
 
         yield return new WaitForSeconds(5.0f);
 
-        DealDamageToPlayer(enemyAI.GetStrength());
+        dealDamageToPlayer(enemyAI.getStrength());
 
-        battleUI.AddCombatLogMessage($"Enemy attacked the Player for {enemyAI.GetStrength()} damage !");
+        battleUI.AddCombatLogMessage($"Enemy attacked the Player for {enemyAI.getStrength()} damage !");
 
-        if (PlayerManager.Instance.GetHealth() <= 0)  // Player defeated.
+        if (PlayerManager.Instance.getHealth() <= 0)  // Player defeated.
         {
             Debug.Log("Player defeated!");
-            EndBattle();
+            endBattle();
         }
 
-        SwapTurns();
+        swapTurns();
     }
 
 
-    private void SwapTurns()
+    private void swapTurns()
     {
         if (attacker == Attacker.Enemy)
         {
@@ -239,19 +239,19 @@ public class BattleManager : MonoBehaviour
 
         if (attacker == Attacker.Enemy)
         {
-            StartCoroutine(EnemyTurn());
+            StartCoroutine(enemyTurn());
         }
         else
         {
-            PlayerTurn();
+            playerTurn();
         }
     }
 
 
-    private void DealDamageToPlayer(float damage)
+    private void dealDamageToPlayer(float damage)
     {
         // Deal damage to the player.
-        PlayerManager.Instance.TakeDamage(damage);
+        PlayerManager.Instance.takeDamage(damage);
         // Update the BattleUI health bars.
         battleUI.UpdateHealthBar();
 
@@ -259,22 +259,22 @@ public class BattleManager : MonoBehaviour
     }
 
 
-    private void DealDamageToEnemy(float damage, SkillCardSO.AttackType type)
+    private void dealDamageToEnemy(float damage, SkillCardSO.AttackType type)
     {
-        if (type == enemyAI.GetWeakness()) // Critical hit.
+        if (type == enemyAI.getWeakness()) // Critical hit.
         {
             // Enemy weakness hit. Multiply the damage.
             damage *= 1.5f;
             // The current hit is a critical hit.
             criticalHit = true;
         }
-        enemyAI.TakeDamage(damage);
+        enemyAI.takeDamage(damage);
     }
 
 
-    private void EndBattle()
+    private void endBattle()
     {
-        GameManager.Instance.SetGameState(GameManager.GameState.Play);
+        GameManager.Instance.setGameState(GameManager.GameState.Play);
 
         Debug.Log("Battle has ended for now.");
     }
@@ -282,8 +282,8 @@ public class BattleManager : MonoBehaviour
 
     /* GET FUNCTIONS */
 
-    public float GetEnemyHealthPercentage()
+    public float getEnemyHealthPercentage()
     {
-        return enemyAI.CalculateHealthPercentage();
+        return enemyAI.calculateHealthPercentage();
     }
 }
