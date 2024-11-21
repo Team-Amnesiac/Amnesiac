@@ -9,17 +9,17 @@ public class MainMenuUI : MonoBehaviour
     [SerializeField] private Button controlsButton;
     [SerializeField] private Button exitButton;
 
-    [SerializeField] private GameObject controlsUI;
-
 
     private void Awake()
     {
+        GameManager.Instance.SetGameState(GameManager.GameState.Title);
+
         // Initialize the playButton onClick listener.
         playButton.onClick.AddListener(playClick);
         // Initialize the controlsButton onClick listener.
-        controlsButton.onClick.AddListener(controlsClick);
+        controlsButton.onClick.AddListener(controlsButtonOnClick);
         // Initialize the exitButton onClick listener.
-        exitButton.onClick.AddListener(exitClick);
+        exitButton.onClick.AddListener(exitButtonOnClick);
     }
 
 
@@ -39,32 +39,32 @@ public class MainMenuUI : MonoBehaviour
 
     /***************************************************************************
     
-        Function:       controlsClick
+        Function:       controlsButtonOnClick
 
         Description:    The onClick listener for the controlsButton.
                         Enables the controlsUI GameObject and disables 
                         all child GameObjects of the MainMenuUI.
 
     ***************************************************************************/
-    private void controlsClick()
+    private void controlsButtonOnClick()
     {
         // Enable the controlsUI GameObject.
-        controlsUI.SetActive(true);
+        UIManager.Instance.showUI(UIManager.UI.Controls);
 
         // Disable the MainMenuUI GameObject.
-        gameObject.SetActive(false);
+        UIManager.Instance.hideUI(UIManager.UI.MainMenu);
     }
 
 
     /***************************************************************************
 
-        Function:       exitClick
+        Function:       exitButtonOnClick
 
         Description:    The onClick listener for the exitButton.
                         Closes the application.
 
     ***************************************************************************/
-    private void exitClick()
+    private void exitButtonOnClick()
     {
         Application.Quit();
     }

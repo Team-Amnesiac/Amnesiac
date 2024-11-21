@@ -4,35 +4,41 @@ using UnityEngine.UI;
 
 public class ControlsUI : MonoBehaviour
 {
-    [SerializeField] private Button backButton;
-
-    [SerializeField] private GameObject previousUI;
+    [SerializeField] private Button     backButton;
 
 
-    private void Awake()
+    void Start()
     {
         // Initialize the backButton onClick listener 
-        backButton.onClick.AddListener(backClick);
+        backButton.onClick.AddListener(backButtonOnClick);
 
+        UIManager.Instance.setUI(UIManager.UI.Controls, this);
         // Hide the ControlsUI GameObject.
-        gameObject.SetActive(false);
+        UIManager.Instance.hideUI(UIManager.UI.Controls);
     }
 
 
     /***************************************************************************
 
-        Function:       backClick
+        Function:       backButtonOnClick
 
         Description:    The onClick listener for the controlsButton.
                         Enables the controlsUI GameObject and disables
                         all child GameObjects of the MainMenuUI.
 
     ***************************************************************************/
-    private void backClick()
+    private void backButtonOnClick()
     {
         // Hide the ControlsUI GameObject.
-        gameObject.SetActive(false);
-        // Show the previous UI GameObject.
-        previousUI.SetActive(true);
+        UIManager.Instance.hideUI(UIManager.UI.Controls);
+
+        if (GameManager.Instance.getGameState() == GameManager.GameState.Title)
+        {
+            UIManager.Instance.showUI(UIManager.UI.MainMenu);
+        }
+        else
+        {
+            //UIManager.Instance.showUI(UIManager.UI.PauseMenu);
+        }
     }
 }

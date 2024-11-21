@@ -11,16 +11,4 @@ public class KeeperUI : MonoBehaviour
         UIManager.Instance.setUI(UIManager.UI.Keeper, this);
         UIManager.Instance.hideUI(UIManager.UI.Keeper);
     }
-
-
-    public void show()
-    {
-        gameObject.SetActive(true);
-    }
-
-
-    public void hide()
-    {
-        gameObject.SetActive(false);
-    }
 }

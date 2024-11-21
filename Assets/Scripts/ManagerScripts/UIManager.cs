@@ -6,17 +6,17 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
 
-    [SerializeField] private BattleUI battleUI;
-    [SerializeField] private CollectiblesUI collectiblesUI;
-    //[SerializeField] private ControlsUI controlsUI;
-    //[SerializeField] private DialogueUI dialogueUI;
-    [SerializeField] private InventoryUI inventoryUI;
-    [SerializeField] private KeeperUI keeperUI;
-    //[SerializeField] private MainMenuUI mainMenuUI;
-    //[SerializeField] private PauseMenuUI pauseMenuUI;
-    [SerializeField] private PlayerHudUI playerHudUI;
-    [SerializeField] private QuestLogUI questLogUI;
-    [SerializeField] private ShopUI shopUI;
+    private BattleUI       battleUI;
+    private CollectiblesUI collectiblesUI;
+    private ControlsUI     controlsUI;
+    //private DialogueUI dialogueUI;
+    private InventoryUI    inventoryUI;
+    private KeeperUI       keeperUI;
+    private MainMenuUI     mainMenuUI;
+    //private PauseMenuUI pauseMenuUI;
+    private PlayerHudUI    playerHudUI;
+    private QuestLogUI     questLogUI;
+    private ShopUI         shopUI;
     
 
     public enum UI
@@ -91,9 +91,9 @@ public class UIManager : MonoBehaviour
                 collectiblesUI = (CollectiblesUI)uiScript;
                 break;
 
-            //case UI.Controls:
-            //    controlsUI.show();
-            //    break;
+            case UI.Controls:
+                controlsUI = (ControlsUI)uiScript;
+                break;
 
             //case UI.Dialogue:
             //    dialogueUI.show();
@@ -107,9 +107,9 @@ public class UIManager : MonoBehaviour
                 keeperUI = (KeeperUI)uiScript;
                 break;
 
-            //case UI.MainMenu:
-            //    mainMenuUI.show();
-            //    break;
+            case UI.MainMenu:
+                mainMenuUI = (MainMenuUI)uiScript;
+                break;
 
             //case UI.PauseMenu:
             //    pauseMenuUI.show();
@@ -139,47 +139,48 @@ public class UIManager : MonoBehaviour
         switch (ui)
         {
             case UI.Battle:
-                battleUI.show();
+                battleUI.gameObject.SetActive(true);
                 break;
 
             case UI.Collectibles:
-                collectiblesUI.show();
+                collectiblesUI.gameObject.SetActive(true);
                 break;
 
-            //case UI.Controls:
-            //    controlsUI.show();
-            //    break;
+            case UI.Controls:
+                controlsUI.gameObject.SetActive(true);
+                break;
 
             //case UI.Dialogue:
             //    dialogueUI.show();
             //    break;
 
             case UI.Inventory:
-                inventoryUI.show();
+                inventoryUI.prepareInventoryShow();
+                inventoryUI.gameObject.SetActive(true);
                 break;
 
             case UI.Keeper:
-                keeperUI.show();
+                keeperUI.gameObject.SetActive(true);
                 break;
 
-            //case UI.MainMenu:
-            //    mainMenuUI.show();
-            //    break;
+            case UI.MainMenu:
+                mainMenuUI.gameObject.SetActive(true);
+                break;
 
             //case UI.PauseMenu:
             //    pauseMenuUI.show();
             //    break;
 
             case UI.PlayerHud:
-                playerHudUI.show();
+                playerHudUI.gameObject.SetActive(true);
                 break;
 
             case UI.QuestLog:
-                questLogUI.show();
+                questLogUI.gameObject.SetActive(true);
                 break;
 
             case UI.Shop:
-                shopUI.show();
+                shopUI.gameObject.SetActive(true);
                 break;
 
             default:
@@ -194,47 +195,48 @@ public class UIManager : MonoBehaviour
         switch (ui)
         {
             case UI.Battle:
-                battleUI.hide();
+                battleUI.gameObject.SetActive(false);
                 break;
 
             case UI.Collectibles:
-                collectiblesUI.hide();
+                collectiblesUI.gameObject.SetActive(false);
                 break;
 
-            //case UI.Controls:
-            //    controlsUI.hide();
-            //    break;
+            case UI.Controls:
+                controlsUI.gameObject.SetActive(false);
+                break;
 
             //case UI.Dialogue:
             //    dialogueUI.hide();
             //    break;
 
             case UI.Inventory:
-                inventoryUI.hide();
+                inventoryUI.prepareInventoryHide();
+                inventoryUI.gameObject.SetActive(false);
                 break;
 
             case UI.Keeper:
-                keeperUI.hide();
+                keeperUI.gameObject.SetActive(false);
                 break;
 
-            //case UI.MainMenu:
-            //    mainMenuUI.hide();
-            //    break;
+            case UI.MainMenu:
+                mainMenuUI.gameObject.SetActive(false);
+                break;
 
             //case UI.PauseMenu:
             //    pauseMenuUI.hide();
             //    break;
 
             case UI.PlayerHud:
-                playerHudUI.hide();
+                playerHudUI.gameObject.SetActive(false);
                 break;
 
             case UI.QuestLog:
-                questLogUI.hide();
+                questLogUI.gameObject.SetActive(false);
                 break;
 
             case UI.Shop:
-                shopUI.hide();
+                shopUI.gameObject.SetActive(false);
                 break;
 
             default:

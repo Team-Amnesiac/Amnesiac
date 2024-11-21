@@ -16,18 +16,6 @@ public class QuestLogUI : MonoBehaviour
     }
 
 
-    public void show()
-    {
-        gameObject.SetActive(true);
-    }
-
-
-    public void hide()
-    {
-        gameObject.SetActive(false);
-    }
-
-
     public void UpdateQuestsUI()
     {
         ClearQuestEntries(activeQuestParent);

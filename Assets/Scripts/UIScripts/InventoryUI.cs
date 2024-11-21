@@ -21,21 +21,18 @@ public class InventoryUI : MonoBehaviour
     }
 
 
-    public void show()
+    public void prepareInventoryShow()
     {
         InventoryManager.Instance.ListItems();
-        gameObject.SetActive(true);
     }
 
 
-    public void hide()
+    public void prepareInventoryHide()
     {
         foreach (Transform child in inventoryContent.transform)
         {
             Destroy(child.gameObject);
         }
-
-        gameObject.SetActive(false);
     }
 
 

@@ -9,16 +9,4 @@ public class CollectiblesUI : MonoBehaviour
         UIManager.Instance.setUI(UIManager.UI.Collectibles, this);
         UIManager.Instance.hideUI(UIManager.UI.Collectibles);
     }
-
-
-    public void show()
-    {
-        gameObject.SetActive(true);
-    }
-
-
-    public void hide()
-    {
-        gameObject.SetActive(false);
-    }
 }
