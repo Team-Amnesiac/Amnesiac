@@ -20,7 +20,7 @@ public class EnemyAI : MonoBehaviour
     private Transform    playerTransform;
     private NavMeshAgent navMeshAgent;
 
-    private SkillCard.AttackType weakness;
+    private SkillCardSO.AttackType weakness;
 
     void Start()
     {
@@ -114,7 +114,7 @@ public class EnemyAI : MonoBehaviour
         return health;
     }
 
-    public SkillCard.AttackType GetWeakness()
+    public SkillCardSO.AttackType GetWeakness()
     {
         return weakness;
     }

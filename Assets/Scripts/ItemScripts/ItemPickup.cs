@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ItemPickup : MonoBehaviour
 {
-    public Item      Item;
+    public ItemSO    item;
     private bool     playerNearby = false;
     private Animator playerAnimator;
 
@@ -33,10 +33,16 @@ public class ItemPickup : MonoBehaviour
             playerAnimator.SetTrigger("Gather");
         }
 
-        Debug.Log($"Picking up item: {Item.name}");
-        if (Item.itemType != Item.ItemType.Collectible)  // Item is not a collectible.
+        Debug.Log($"Picking up item: {item.name}");
+        ItemSO.ItemType itemType = item.GetItemType();
+        if (itemType != ItemSO.ItemType.Collectible &&
+            itemType != ItemSO.ItemType.Relic)  // Item is not a collectible or a relic.
         {
-            InventoryManager.Instance.Add(Item);
+            InventoryManager.Instance.Add(item);
+        }
+        else if (itemType == ItemSO.ItemType.Relic)
+        {
+            QuestManager.Instance.addRelic((RelicSO)item);
         }
         
         Destroy(gameObject);

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[CreateAssetMenu(fileName = "New Collectible", menuName = "Collectible/Create New Collectible")]
-public class Collectible : Item
+[CreateAssetMenu(fileName = "New CollectibleSO", menuName = "Collectible/Create New CollectibleSO")]
+public class CollectibleSO : ItemSO
 {
     public enum Set
     {

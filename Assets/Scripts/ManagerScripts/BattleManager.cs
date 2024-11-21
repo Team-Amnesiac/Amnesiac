@@ -95,35 +95,35 @@ public class BattleManager : MonoBehaviour
     {
         string combatLogMessage;
         // Get the SkillCard the Player attacked with, if they used one.
-        SkillCard skillCard = PlayerManager.Instance.GetSkillCard(slot);
+        SkillCardSO skillCardSo = PlayerManager.Instance.GetSkillCard(slot);
 
-        if (skillCard == null)  // Melee attack.
+        if (skillCardSo == null)  // Melee attack.
         {
             float damage = PlayerManager.Instance.GetMeleeDamage();
             // Deal the player's melee damage to the enemy.
-            DealDamageToEnemy(damage, SkillCard.AttackType.None);
+            DealDamageToEnemy(damage, SkillCardSO.AttackType.None);
             combatLogMessage = $"Player meleed the enemy for {damage} damage!";
         }
         else                    // SkillCard attack.
         {
-            float damage = skillCard.GetDamage();
-            SkillCard.AttackType skillType = skillCard.GetAttackType();
+            float damage = skillCardSo.GetDamage();
+            SkillCardSO.AttackType skillType = skillCardSo.GetAttackType();
             
             // Deal the selected skill card's type of damage to the enemy.
             DealDamageToEnemy(damage, skillType);
             string adjective;
             switch (skillType)
             {
-                case SkillCard.AttackType.Earth:
+                case SkillCardSO.AttackType.Earth:
                     adjective = "quaked";
                     break;
-                case SkillCard.AttackType.Fire:
+                case SkillCardSO.AttackType.Fire:
                     adjective = "burned";
                     break;
-                case SkillCard.AttackType.Water:
+                case SkillCardSO.AttackType.Water:
                     adjective = "splashed";
                     break;
-                case SkillCard.AttackType.Wind:
+                case SkillCardSO.AttackType.Wind:
                     adjective = "gusted";
                     break;
                 default:
@@ -259,7 +259,7 @@ public class BattleManager : MonoBehaviour
     }
 
 
-    private void DealDamageToEnemy(float damage, SkillCard.AttackType type)
+    private void DealDamageToEnemy(float damage, SkillCardSO.AttackType type)
     {
         if (type == enemyAI.GetWeakness()) // Critical hit.
         {

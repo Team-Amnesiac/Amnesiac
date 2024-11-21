@@ -23,7 +23,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private float playerHealth;
     [SerializeField] private float meleeDamage     = 25.0f;
 
-    [SerializeField] private SkillCard[] equippedSkillCardArray;
+    [SerializeField] private SkillCardSO[] equippedSkillCardArray;
     
 
     void Awake()
@@ -34,7 +34,7 @@ public class PlayerManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
 
-            equippedSkillCardArray = new SkillCard[MAX_EQUIPPED_SKILL_CARDS];
+            equippedSkillCardArray = new SkillCardSO[MAX_EQUIPPED_SKILL_CARDS];
         }
         else
         {
@@ -60,21 +60,33 @@ public class PlayerManager : MonoBehaviour
         playerHealth = Mathf.Clamp(playerHealth - damage, 0, maxPlayerHealth);
     }
 
-    public void Equip(SkillCard skillCard)
+    public void Equip(SkillCardSO skillCardSo)
     {
         for (int i = 0; i < MAX_EQUIPPED_SKILL_CARDS; i++)
         {
             if (equippedSkillCardArray[i] == null)
             {
-                equippedSkillCardArray[i] = skillCard;
-                Debug.Log($"SkillCard {skillCard.itemName} equipped!");
+                equippedSkillCardArray[i] = skillCardSo;
+                Debug.Log($"SkillCard {skillCardSo.itemName} equipped!");
                 
                 return;
             }
         }
     }
 
-    public SkillCard GetSkillCard(SkillSlot slot)
+
+    public void unequip(SkillCardSO skillCardSo)
+    {
+        for (int i = 0; i < MAX_EQUIPPED_SKILL_CARDS; i++)
+        {
+            if (equippedSkillCardArray[i] == skillCardSo)
+            {
+                equippedSkillCardArray[i] = null;
+            }
+        }
+    }
+
+    public SkillCardSO GetSkillCard(SkillSlot slot)
     {
         if (slot == SkillSlot.Melee)  
         {

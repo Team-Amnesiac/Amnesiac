@@ -1,8 +1,8 @@
 using UnityEngine;
 
 
-[CreateAssetMenu(fileName = "New Item", menuName = "Item/Create New Item")]
-public class Item : ScriptableObject
+[CreateAssetMenu(fileName = "New ItemSO", menuName = "Item/Create New ItemSO")]
+public class ItemSO : ScriptableObject
 {
     public int      id;
     public string   itemName;
@@ -17,6 +17,7 @@ public class Item : ScriptableObject
         Equipment,
         SkillCard,
         Collectible,
+        Relic,
     }
 
 
@@ -26,12 +27,13 @@ public class Item : ScriptableObject
         {
             case ItemType.Potion:
                 break;
+            
             case ItemType.Gem:
                 Player.Instance.IncreaseHealth(value);
                 break;
+
             case ItemType.SkillCard:
-                break;
-            case ItemType.Equipment:
+                ((SkillCardSO)this).toggleEquip();
                 break;
         }
     }

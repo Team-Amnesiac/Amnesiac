@@ -12,7 +12,7 @@ public class InventoryManager : MonoBehaviour
 
     [SerializeField] private GameObject inventoryItemPrefab;
 
-    public List<Item>   inventoryItems = new List<Item>();
+    public List<ItemSO>   inventoryItems = new List<ItemSO>();
     
     // The amount of set pieces collected in each collectible set.
     private int trophyCount = 0;
@@ -24,20 +24,20 @@ public class InventoryManager : MonoBehaviour
     }
 
 
-    public void Add(Item item)
+    public void Add(ItemSO itemSo)
     {
-        inventoryItems.Add(item);
+        inventoryItems.Add(itemSo);
         // Increment the collectible set count, if item is a collectible.
-        if (item.GetItemType() == Item.ItemType.Collectible)
+        if (itemSo.GetItemType() == ItemSO.ItemType.Collectible)
         {
-            Collectible collectible = (Collectible)item;
+            CollectibleSO collectibleSo = (CollectibleSO)itemSo;
 
             // Identify which set this collectible belongs to.
-            switch (collectible.GetSet())
+            switch (collectibleSo.GetSet())
             {
-                case Collectible.Set.Trophy:
+                case CollectibleSO.Set.Trophy:
                     trophyCount++;
-                    if (trophyCount == (int)Collectible.SetSize.Trophy)  // Trophy set complete.
+                    if (trophyCount == (int)CollectibleSO.SetSize.Trophy)  // Trophy set complete.
                     {
                         Debug.Log("Trophy set complete!");
                     }
@@ -49,35 +49,35 @@ public class InventoryManager : MonoBehaviour
                     break;
             }
         }
-        else if (item.GetItemType() == Item.ItemType.SkillCard)
+        else if (itemSo.GetItemType() == ItemSO.ItemType.SkillCard)
         {
             if (PlayerManager.Instance.HasAvailableSkillCardSlot())  // There is an empty slot available.
             {
-                PlayerManager.Instance.Equip((SkillCard)item);
+                PlayerManager.Instance.Equip((SkillCardSO)itemSo);
             }
         }
     }
 
-   public void Remove(Item item)
+   public void Remove(ItemSO itemSo)
     {
-        if (item == null)
+        if (itemSo == null)
         {
             Debug.LogError("Cannot remove item: item reference is null!");
             return;
         }
 
-        if (inventoryItems.Contains(item))
+        if (inventoryItems.Contains(itemSo))
         {
-            inventoryItems.Remove(item);
+            inventoryItems.Remove(itemSo);
         }
         else
         {
-            Debug.LogWarning($"Item not found in inventory: {item.itemName}");
+            Debug.LogWarning($"Item not found in inventory: {itemSo.itemName}");
         }
     }
 
 
-    public List<Item> getInventoryItems()
+    public List<ItemSO> getInventoryItems()
     {
         return inventoryItems;
     }

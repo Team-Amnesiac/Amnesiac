@@ -41,7 +41,7 @@ public class QuestLogUI : MonoBehaviour
 
     private void prepareActiveQuestLogShow()
     {
-        foreach (Quest activeQuest in QuestManager.Instance.getActiveQuests())
+        foreach (QuestSO activeQuest in QuestManager.Instance.getActiveQuests())
         {
             GameObject obj = Instantiate(questEntryPrefab, activeQuestContent.transform);
             QuestEntryController controller = obj.GetComponent<QuestEntryController>();
@@ -53,7 +53,7 @@ public class QuestLogUI : MonoBehaviour
 
     private void prepareCompletedQuestLogShow()
     {
-        foreach (Quest completedQuest in QuestManager.Instance.getCompletedQuests())
+        foreach (QuestSO completedQuest in QuestManager.Instance.getCompletedQuests())
         {
             GameObject obj = Instantiate(questEntryPrefab, completedQuestContent.transform);
             QuestEntryController controller = obj.GetComponent<QuestEntryController>();

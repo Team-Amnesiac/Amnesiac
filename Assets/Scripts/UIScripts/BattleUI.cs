@@ -51,7 +51,7 @@ public class BattleUI : MonoBehaviour
         }
         else
         {
-            SkillCard skillCard1 = PlayerManager.Instance.GetSkillCard(PlayerManager.SkillSlot.One);
+            SkillCardSO skillCard1 = PlayerManager.Instance.GetSkillCard(PlayerManager.SkillSlot.One);
             skillCard1TMP.text = $"{skillCard1.itemName}";
         }
         if (PlayerManager.Instance.GetSkillCard(PlayerManager.SkillSlot.Two) == null)
@@ -61,7 +61,7 @@ public class BattleUI : MonoBehaviour
         }
         else
         {
-            SkillCard skillCard2 = PlayerManager.Instance.GetSkillCard(PlayerManager.SkillSlot.Two);
+            SkillCardSO skillCard2 = PlayerManager.Instance.GetSkillCard(PlayerManager.SkillSlot.Two);
             skillCard2TMP.text = $"{skillCard2.itemName}";
         }
         if (PlayerManager.Instance.GetSkillCard(PlayerManager.SkillSlot.Three) == null)
@@ -71,7 +71,7 @@ public class BattleUI : MonoBehaviour
         }
         else
         {
-            SkillCard skillCard3 = PlayerManager.Instance.GetSkillCard(PlayerManager.SkillSlot.Three);
+            SkillCardSO skillCard3 = PlayerManager.Instance.GetSkillCard(PlayerManager.SkillSlot.Three);
             skillCard3TMP.text = $"{skillCard3.itemName}";
         }
         if (PlayerManager.Instance.GetSkillCard(PlayerManager.SkillSlot.Four) == null)
@@ -81,7 +81,7 @@ public class BattleUI : MonoBehaviour
         }
         else
         {
-            SkillCard skillCard4 = PlayerManager.Instance.GetSkillCard(PlayerManager.SkillSlot.Four);
+            SkillCardSO skillCard4 = PlayerManager.Instance.GetSkillCard(PlayerManager.SkillSlot.Four);
             skillCard4TMP.text = $"{skillCard4.itemName}";
         }
 
