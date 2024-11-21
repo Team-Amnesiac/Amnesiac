@@ -67,8 +67,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Combat log message!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 6333fa80bc62d4e42913a18d2ff3f921, type: 2}
-  m_sharedMaterial: {fileID: 7756507733590413285, guid: 6333fa80bc62d4e42913a18d2ff3f921, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: bbe0ef5a2c8e5204a840f9240fafa6ec, type: 2}
+  m_sharedMaterial: {fileID: 6700565993059595268, guid: bbe0ef5a2c8e5204a840f9240fafa6ec, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

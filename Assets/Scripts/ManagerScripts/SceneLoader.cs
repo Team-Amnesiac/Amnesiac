@@ -1,10 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 public class SceneLoader : MonoBehaviour
 {
+    // Singleton instance of the SceneLoader class.
+    public static SceneLoader Instance;
+
+
     public enum Scene
     {
         Title,
@@ -13,9 +16,6 @@ public class SceneLoader : MonoBehaviour
         World2,
         Battle
     }
-
-    // Singleton instance of the SceneLoader class.
-    public static SceneLoader Instance;
     
 
     void Awake()
@@ -34,7 +34,11 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadScene(Scene scene)
     {
-        if (scene == Scene.Battle)
+        if (scene == Scene.Title)
+        {
+            SceneManager.LoadScene("TitleScene");
+        }
+        else if (scene == Scene.Battle)
         {
             SceneManager.LoadScene("BattleScene");
         }
