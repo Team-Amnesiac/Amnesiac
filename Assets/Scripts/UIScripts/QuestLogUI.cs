@@ -1,49 +1,82 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 
 public class QuestLogUI : MonoBehaviour
 {
-    public GameObject activeQuestParent;
-    public GameObject completedQuestParent;
-    public GameObject questEntryPrefab;
+    [SerializeField] private GameObject questEntryPrefab;
+    [SerializeField] private GameObject activeQuestContent;
+    [SerializeField] private GameObject completedQuestContent;
+    [SerializeField] private Button closeQuestLogButton;
 
 
     void Start()
     {
+        closeQuestLogButton.onClick.AddListener(closeQuestLogButtonOnClick);
         UIManager.Instance.setUI(UIManager.UI.QuestLog, this);
         UIManager.Instance.hideUI(UIManager.UI.QuestLog);
     }
 
 
-    public void UpdateQuestsUI()
+    public void prepareQuestLogShow()
     {
-        ClearQuestEntries(activeQuestParent);
-        ClearQuestEntries(completedQuestParent);
+        prepareActiveQuestLogShow();
+        prepareCompletedQuestLogShow();
+    }
 
-        foreach (Quest quest in QuestManager.Instance.activeQuests)
-        {
-            AddQuestToUI(activeQuestParent, quest.questName, "Active Quest");
-        }
 
-        foreach (Quest quest in QuestManager.Instance.completedQuests)
+    public void prepareQuestLogHide()
+    {
+        prepareActiveQuestLogHide();
+        prepareCompletedQuestLogHide();
+    }
+
+
+    private void closeQuestLogButtonOnClick()
+    {
+        UIManager.Instance.hideUI(UIManager.UI.QuestLog);
+    }
+
+
+    private void prepareActiveQuestLogShow()
+    {
+        foreach (Quest activeQuest in QuestManager.Instance.getActiveQuests())
         {
-            AddQuestToUI(completedQuestParent, quest.questName, "Completed Quest");
+            GameObject obj = Instantiate(questEntryPrefab, activeQuestContent.transform);
+            QuestEntryController controller = obj.GetComponent<QuestEntryController>();
+
+            controller.setQuest(activeQuest);
         }
     }
 
-    private void ClearQuestEntries(GameObject parent)
+
+    private void prepareCompletedQuestLogShow()
     {
-        foreach (Transform child in parent.transform)
+        foreach (Quest completedQuest in QuestManager.Instance.getCompletedQuests())
+        {
+            GameObject obj = Instantiate(questEntryPrefab, completedQuestContent.transform);
+            QuestEntryController controller = obj.GetComponent<QuestEntryController>();
+
+            controller.setQuest(completedQuest);
+        }
+    }
+
+
+    private void prepareActiveQuestLogHide()
+    {
+        foreach (Transform child in activeQuestContent.transform)
         {
             Destroy(child.gameObject);
         }
     }
 
-    private void AddQuestToUI(GameObject parent, string questName, string status)
+
+    private void prepareCompletedQuestLogHide()
     {
-        GameObject questEntry = Instantiate(questEntryPrefab, parent.transform);
-        TextMeshProUGUI questText = questEntry.GetComponentInChildren<TextMeshProUGUI>();
-        questText.text = $"{status}: {questName}";
+        foreach (Transform child in completedQuestContent.transform)
+        {
+            Destroy(child.gameObject);
+        }
     }
 }

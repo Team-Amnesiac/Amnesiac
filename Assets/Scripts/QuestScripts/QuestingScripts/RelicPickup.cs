@@ -46,7 +46,7 @@ public class RelicPickup : MonoBehaviour
         {
             Debug.Log($"[RelicPickup] Attempting to collect relic for quest: {associatedQuest.questName}");
 
-            if (QuestManager.Instance.activeQuests.Contains(associatedQuest) && !associatedQuest.isCompleted)
+            if (QuestManager.Instance.getActiveQuests().Contains(associatedQuest) && !associatedQuest.isCompleted)
             {
                 Debug.Log($"[RelicPickup] Relic's collected for active quest: {associatedQuest.questName}");
                 QuestManager.Instance.UpdateQuestProgress(associatedQuest);

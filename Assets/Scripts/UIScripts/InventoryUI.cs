@@ -12,8 +12,6 @@ public class InventoryUI : MonoBehaviour
 
     void Start()
     {
-        // Pass this InventoryUI to the InventoryManager for communication.
-        InventoryManager.Instance.SetInventoryUI(this);
         enableRemoveToggle.onValueChanged.AddListener(enableRemoveToggleOnValueChanged);
         closeInventoryButton.onClick.AddListener(closeInventoryButtonOnClick);
         UIManager.Instance.setUI(UIManager.UI.Inventory, this);
@@ -23,7 +21,24 @@ public class InventoryUI : MonoBehaviour
 
     public void prepareInventoryShow()
     {
-        InventoryManager.Instance.ListItems();
+        foreach (Item item in InventoryManager.Instance.getInventoryItems())
+        {
+
+            GameObject obj = Instantiate(inventoryItemPrefab, inventoryContent.transform);
+
+            InventoryItemController controller = obj.GetComponent<InventoryItemController>();
+            controller.setItem(item);
+            controller.setItemName(item.itemName);
+            controller.setSprite(item.sprite);
+            if (item.itemType == Item.ItemType.SkillCard || !enableRemoveToggle.isOn)  // Item is a SkillCard or all items cannot be removed.
+            {
+                controller.setRemovable(false);
+            }
+            else
+            {
+                controller.setRemovable(true);
+            }
+        }
     }
 
 
@@ -54,11 +69,5 @@ public class InventoryUI : MonoBehaviour
     private void closeInventoryButtonOnClick()
     {
         UIManager.Instance.hideUI(UIManager.UI.Inventory);
-    }
-
-
-    public GameObject GetInventoryContent()
-    {
-        return inventoryContent;
     }
 }

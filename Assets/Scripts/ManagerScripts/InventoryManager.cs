@@ -12,9 +12,7 @@ public class InventoryManager : MonoBehaviour
 
     [SerializeField] private GameObject inventoryItemPrefab;
 
-    private InventoryUI inventoryUI;
     public List<Item>   inventoryItems = new List<Item>();
-    private bool        canRemove      = true;
     
     // The amount of set pieces collected in each collectible set.
     private int trophyCount = 0;
@@ -79,37 +77,8 @@ public class InventoryManager : MonoBehaviour
     }
 
 
-    public void ListItems()
+    public List<Item> getInventoryItems()
     {
-        foreach (Item item in inventoryItems)
-        {
-            GameObject obj = Instantiate(inventoryItemPrefab, inventoryUI.GetInventoryContent().transform);
-
-            InventoryItemController controller = obj.GetComponent<InventoryItemController>();
-            controller.setItem(item);
-            controller.setItemName(item.itemName);
-            controller.setSprite(item.sprite);
-            if (item.itemType == Item.ItemType.SkillCard || !canRemove)  // Item is a SkillCard or all items cannot be removed.
-            {
-                controller.setRemovable(false);
-            }
-            else
-            {
-                controller.setRemovable(true);
-            }
-
-        }
-    }
-
-
-    public void SetInventoryUI(InventoryUI inventoryUI)
-    {
-        this.inventoryUI = inventoryUI;
-    }
-
-
-    public void toggleCanRemove(bool canRemove)
-    {
-        this.canRemove = canRemove;
+        return inventoryItems;
     }
 }

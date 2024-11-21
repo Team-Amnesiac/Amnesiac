@@ -9,6 +9,7 @@ public class InventoryItemController : MonoBehaviour
     private Item item;
     [SerializeField] private TextMeshProUGUI itemNameTMP;
     [SerializeField] private Image           itemImage;
+    [SerializeField] private Button          itemButton;
     [SerializeField] private Button          removeItemButton;
 
 

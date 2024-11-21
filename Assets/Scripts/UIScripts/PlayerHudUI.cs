@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,15 +16,17 @@ public class PlayerHudUI : MonoBehaviour
     }
 
 
-    public void show()
+    public void addNotification(string message)
     {
-        gameObject.SetActive(true);
+        notificationImage.GetComponent<TextMeshProUGUI>().text = message;
+        showNotification();
     }
 
 
-    public void hide()
+    private void showNotification()
     {
-        gameObject.SetActive(false);
+        notificationImage.gameObject.SetActive(true);
+        Invoke(nameof(hideNotification), 3f);
     }
 
 

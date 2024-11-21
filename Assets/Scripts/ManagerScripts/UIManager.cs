@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class UIManager : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class UIManager : MonoBehaviour
     private InventoryUI    inventoryUI;
     private KeeperUI       keeperUI;
     private MainMenuUI     mainMenuUI;
+    private NotificationUI notificationUI;
     //private PauseMenuUI pauseMenuUI;
     private PlayerHudUI    playerHudUI;
     private QuestLogUI     questLogUI;
@@ -28,6 +30,7 @@ public class UIManager : MonoBehaviour
         Inventory,
         Keeper,
         MainMenu,
+        Notification,
         PauseMenu,
         PlayerHud,
         QuestLog,
@@ -79,6 +82,12 @@ public class UIManager : MonoBehaviour
     }
 
 
+    public void newNotification(string message)
+    {
+        notificationUI.showNotification(message);
+    }
+
+
     public void setUI(UI ui, MonoBehaviour uiScript)
     {
         switch (ui)
@@ -109,6 +118,10 @@ public class UIManager : MonoBehaviour
 
             case UI.MainMenu:
                 mainMenuUI = (MainMenuUI)uiScript;
+                break;
+
+            case UI.Notification:
+                notificationUI = (NotificationUI)uiScript;
                 break;
 
             //case UI.PauseMenu:
@@ -221,6 +234,10 @@ public class UIManager : MonoBehaviour
 
             case UI.MainMenu:
                 mainMenuUI.gameObject.SetActive(false);
+                break;
+
+            case UI.Notification:
+                notificationUI.gameObject.SetActive(false);
                 break;
 
             //case UI.PauseMenu:
