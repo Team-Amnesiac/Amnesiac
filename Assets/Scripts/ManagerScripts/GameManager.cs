@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     // The current state of the game.
-    private GameState         gameState;
+    [SerializeField] private GameState         gameState;
     // The currently loaded scene of the game.
     private SceneLoader.Scene currentScene;
     // The previously loaded scene of the game.
@@ -33,9 +33,6 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             Instance     = this;
-            gameState    = GameState.Title;
-            currentScene = SceneLoader.Scene.Title;
-            
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -93,6 +90,14 @@ public class GameManager : MonoBehaviour
 
                 break;
         }
+    }
+
+
+    /* GET FUNCTIONS */
+
+    public GameState getGameState()
+    {
+        return gameState;
     }
 
 

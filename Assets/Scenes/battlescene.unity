@@ -2473,6 +2473,7 @@ GameObject:
   - component: {fileID: 877147047}
   - component: {fileID: 877147046}
   - component: {fileID: 877147045}
+  - component: {fileID: 877147049}
   m_Layer: 0
   m_Name: Abstract
   m_TagString: Untagged
@@ -2547,6 +2548,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e249ea08b5ecd84297b70ef5932ec1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &877147049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 877147043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b1ce8094fb6dd4479b95647d4e4551e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  battleUIGameObject: {fileID: 717830593}
+  collectiblesUIGameObject: {fileID: 0}
+  controlsUIGameObject: {fileID: 0}
+  dialogueUIGameObject: {fileID: 0}
+  inventoryUIGameObject: {fileID: 0}
+  keeperUIGameObject: {fileID: 0}
+  mainMenuUIGameObject: {fileID: 0}
+  pauseMenuUIGameObject: {fileID: 0}
+  playerUIGameObject: {fileID: 0}
+  questUIGameObject: {fileID: 0}
+  shopUIGameObject: {fileID: 0}
 --- !u!1 &901935283
 GameObject:
   m_ObjectHideFlags: 0

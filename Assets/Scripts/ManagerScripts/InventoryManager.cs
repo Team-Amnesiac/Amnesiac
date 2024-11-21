@@ -89,7 +89,7 @@ public class InventoryManager : MonoBehaviour
             controller.setItem(item);
             controller.setItemName(item.itemName);
             controller.setSprite(item.sprite);
-            if (item.itemType == Item.ItemType.Collectible || item.itemType == Item.ItemType.SkillCard || !canRemove)
+            if (item.itemType == Item.ItemType.SkillCard || !canRemove)  // Item is a SkillCard or all items cannot be removed.
             {
                 controller.setRemovable(false);
             }

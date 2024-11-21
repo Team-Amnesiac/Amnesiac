@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,14 +9,6 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private GameObject inventoryContent;
     [SerializeField] private Button     closeInventoryButton;
 
-    private bool showInventory = false;
-
-
-    void Awake()
-    {
-        Debug.Log("InventoryUI is awake!");
-    }
-
 
     void Start()
     {
@@ -25,16 +16,26 @@ public class InventoryUI : MonoBehaviour
         InventoryManager.Instance.SetInventoryUI(this);
         enableRemoveToggle.onValueChanged.AddListener(enableRemoveToggleOnValueChanged);
         closeInventoryButton.onClick.AddListener(closeInventoryButtonOnClick);
-        CloseInventory();
+        UIManager.Instance.setUI(UIManager.UI.Inventory, this);
+        UIManager.Instance.hideUI(UIManager.UI.Inventory);
     }
 
 
-    void Update()
+    public void show()
     {
-        if (Input.GetKeyDown(KeyCode.I))
+        InventoryManager.Instance.ListItems();
+        gameObject.SetActive(true);
+    }
+
+
+    public void hide()
+    {
+        foreach (Transform child in inventoryContent.transform)
         {
-            ToggleInventory();
+            Destroy(child.gameObject);
         }
+
+        gameObject.SetActive(false);
     }
 
 
@@ -43,8 +44,7 @@ public class InventoryUI : MonoBehaviour
         foreach (InventoryItemController controller in
                  inventoryContent.GetComponentsInChildren<InventoryItemController>())
         {
-            if (controller.getItem().itemType == Item.ItemType.SkillCard ||
-                controller.getItem().itemType == Item.ItemType.Collectible)  // Item is a skill card or a collectible.
+            if (controller.getItem().itemType == Item.ItemType.SkillCard)  // Item is a skill card or a collectible.
             {
                 continue;  // Do nothing.
             }
@@ -56,48 +56,7 @@ public class InventoryUI : MonoBehaviour
 
     private void closeInventoryButtonOnClick()
     {
-        CloseInventory();
-        showInventory = false;
-    }
-
-
-    private void ToggleInventory()
-    {
-        if (showInventory)
-        {
-            CloseInventory();
-        }
-        else
-        {
-            OpenInventory();
-        }
-
-        // Toggle boolean representing whether inventory should be shown or not.
-        showInventory = !showInventory;
-    }
-
-
-    private void OpenInventory()
-    {
-        InventoryManager.Instance.ListItems();
-        foreach (Transform child in transform)
-        {
-            child.gameObject.SetActive(true);
-        }
-    }
-
-
-    private void CloseInventory()
-    {
-        foreach (Transform child in inventoryContent.transform)
-        {
-            Destroy(child.gameObject);
-        }
-
-        foreach (Transform child in transform)
-        {
-            child.gameObject.SetActive(false);
-        }
+        UIManager.Instance.hideUI(UIManager.UI.Inventory);
     }
 
 

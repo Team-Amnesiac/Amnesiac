@@ -22,6 +22,7 @@ public class QuestManager : MonoBehaviour
     public Quest secondQuest;
     public Quest thirdQuest;
 
+
     private void Awake()
     {
         if (Instance == null)
@@ -35,27 +36,6 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        if (notificationBar != null)
-        {
-            notificationText = notificationBar.GetComponentInChildren<TextMeshProUGUI>();
-            notificationBar.SetActive(false);
-        }
-
-        if (questLogUI != null)
-        {
-            questLogUI.SetActive(false);
-        }
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            ToggleQuestLog();
-        }
-    }
 
    public void TalkToKeeper()
     {
@@ -73,6 +53,7 @@ public class QuestManager : MonoBehaviour
         }
     }
 
+
     private void AddQuest(Quest newQuest)
     {
         activeQuests.Add(newQuest);
@@ -81,7 +62,8 @@ public class QuestManager : MonoBehaviour
         Debug.Log($"New quest added: {newQuest.questName}");
     }
 
-public void UpdateQuestProgress(Quest quest)
+
+    public void UpdateQuestProgress(Quest quest)
     {
         if (activeQuests.Contains(quest) && !quest.isCompleted)
         {
@@ -105,6 +87,7 @@ public void UpdateQuestProgress(Quest quest)
         }
     }
 
+
     private void UpdateQuestLog()
     {
         Debug.Log("[QuestManager] Updating Quest Log UI...");
@@ -125,6 +108,7 @@ public void UpdateQuestProgress(Quest quest)
         }
     }
 
+
     private void ClearQuestEntries(GameObject parent)
     {
         foreach (Transform child in parent.transform)
@@ -133,12 +117,14 @@ public void UpdateQuestProgress(Quest quest)
         }
     }
 
+
     private void AddQuestToUI(GameObject parent, string questName, string status)
     {
         GameObject questEntry = Instantiate(questEntryPrefab, parent.transform);
         TextMeshProUGUI questText = questEntry.GetComponentInChildren<TextMeshProUGUI>();
         questText.text = $"{status}: {questName}";
     }
+
 
     private void ShowNotification(string message)
     {
@@ -149,33 +135,12 @@ public void UpdateQuestProgress(Quest quest)
         Invoke(nameof(HideNotification), 3f);
     }
 
+
     private void HideNotification()
     {
         if (notificationBar != null)
         {
             notificationBar.SetActive(false);
         }
-    }
-
-    private void ToggleQuestLog()
-    {
-        bool isActive = questLogUI.activeSelf;
-        questLogUI.SetActive(!isActive);
-
-        if (isActive)
-        {
-            Time.timeScale = 1;
-        }
-        else
-        {
-            Time.timeScale = 0;
-            UpdateQuestLog();
-        }
-    }
-
-    public void ExitQuestLog()
-    {
-        questLogUI.SetActive(false);
-        Time.timeScale = 1;
     }
 }

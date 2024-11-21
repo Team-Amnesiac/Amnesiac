@@ -31,6 +31,12 @@ public class BattleUI : MonoBehaviour
     [SerializeField] private GameObject messagePrefab;
 
 
+    void Awake()
+    {
+        UIManager.Instance.setUI(UIManager.UI.Battle, this);
+    }
+
+
     /* UNITY FUNCTIONS */
 
     void Start()
@@ -105,6 +111,17 @@ public class BattleUI : MonoBehaviour
 
 
     /* PUBLIC FUNCTIONS */
+
+    public void show()
+    {
+        gameObject.SetActive(true);
+    }
+
+    public void hide()
+    {
+        gameObject.SetActive(false);
+    }
+
 
     public void ShowCriticalHit()
     {

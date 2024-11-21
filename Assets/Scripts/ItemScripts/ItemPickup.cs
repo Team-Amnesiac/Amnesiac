@@ -34,7 +34,11 @@ public class ItemPickup : MonoBehaviour
         }
 
         Debug.Log($"Picking up item: {Item.name}");
-        InventoryManager.Instance.Add(Item);
+        if (Item.itemType != Item.ItemType.Collectible)  // Item is not a collectible.
+        {
+            InventoryManager.Instance.Add(Item);
+        }
+        
         Destroy(gameObject);
     }
 

@@ -1,35 +1,44 @@
-/* using UnityEngine;
+using UnityEngine;
 using TMPro;
 
-public class QuestUI : MonoBehaviour
+
+public class QuestLogUI : MonoBehaviour
 {
     public GameObject activeQuestParent;
     public GameObject completedQuestParent;
     public GameObject questEntryPrefab;
 
-    private QuestManager questManager;
 
-    private void OnEnable()
+    void Start()
     {
-        questManager = QuestManager.Instance;
-
-        if (questManager != null)
-        {
-            UpdateQuestsUI();
-        }
+        UIManager.Instance.setUI(UIManager.UI.QuestLog, this);
+        UIManager.Instance.hideUI(UIManager.UI.QuestLog);
     }
+
+
+    public void show()
+    {
+        gameObject.SetActive(true);
+    }
+
+
+    public void hide()
+    {
+        gameObject.SetActive(false);
+    }
+
 
     public void UpdateQuestsUI()
     {
         ClearQuestEntries(activeQuestParent);
         ClearQuestEntries(completedQuestParent);
 
-        foreach (Quest quest in questManager.activeQuests)
+        foreach (Quest quest in QuestManager.Instance.activeQuests)
         {
             AddQuestToUI(activeQuestParent, quest.questName, "Active Quest");
         }
 
-        foreach (Quest quest in questManager.completedQuests)
+        foreach (Quest quest in QuestManager.Instance.completedQuests)
         {
             AddQuestToUI(completedQuestParent, quest.questName, "Completed Quest");
         }
@@ -50,4 +59,3 @@ public class QuestUI : MonoBehaviour
         questText.text = $"{status}: {questName}";
     }
 }
- */
