@@ -44,6 +44,179 @@ public class BattleUI : MonoBehaviour
         turnIndicatorTMP.gameObject.SetActive(true);
         criticalHitTMP.gameObject.SetActive(false);
         
+        updateSkillCardButtonText();
+
+        addOnClickListeners();
+
+        // Start the battle and pass this object to the BattleManager.
+        BattleManager.Instance.startBattle(this);
+    }
+
+
+    void OnDestroy()
+    {
+        meleeAttackButton.onClick.RemoveListener(onMeleeAttackButtonClicked);
+        skillCardButton1.onClick.RemoveListener(onSkillCardButton1Clicked);
+        skillCardButton2.onClick.RemoveListener(onSkillCardButton2Clicked);
+        skillCardButton3.onClick.RemoveListener(onSkillCardButton3Clicked);
+        skillCardButton4.onClick.RemoveListener(onSkillCardButton4Clicked);
+        inventoryButton.onClick.RemoveListener(onInventoryButtonClicked);
+        runAwayButton.onClick.RemoveListener(onRunAwayButtonClicked);
+    }
+
+
+    /* PUBLIC FUNCTIONS */
+
+
+    public void updateVisuals()
+    {
+        updateTurnText(BattleManager.Instance.getAttacker());
+        updateHealthBars();
+        updateRoundCounter(BattleManager.Instance.getRoundNumber());
+        if (BattleManager.Instance.isCriticalHit())
+        {
+            StartCoroutine(criticalHitCoroutine());
+        }
+
+        if (BattleManager.Instance.getAttacker() == BattleManager.Attacker.Enemy)  // Enemies turn.
+        {
+            setButtonInteractability(false);
+        }
+        else
+        {
+            setButtonInteractability(true);
+        }
+    }
+
+
+    public void addCombatLogMessage(string message)
+    {
+        GameObject newMessage = Instantiate(messagePrefab, combatLogContent.transform);
+
+        TextMeshProUGUI messageTMP = newMessage.GetComponent<TextMeshProUGUI>();
+        messageTMP.text = message;
+    }
+
+
+    /* BUTTON ON CLICK LISTENERS */
+
+    private void onMeleeAttackButtonClicked()
+    {
+        Debug.Log("Player uses Melee attack.");
+        BattleManager.Instance.playerAttack(PlayerManager.SkillSlot.Melee);
+    }
+
+
+    private void onSkillCardButton1Clicked()
+    {
+        Debug.Log("Player uses Skill Card 1.");
+        BattleManager.Instance.playerAttack(PlayerManager.SkillSlot.One);
+    }
+
+    private void onSkillCardButton2Clicked()
+    {
+        Debug.Log("Player uses Skill Card 2.");
+        BattleManager.Instance.playerAttack(PlayerManager.SkillSlot.Two);
+    }
+
+
+    private void onSkillCardButton3Clicked()
+    {
+        Debug.Log("Player uses Skill Card 3.");
+        BattleManager.Instance.playerAttack(PlayerManager.SkillSlot.Three);
+    }
+
+
+    private void onSkillCardButton4Clicked()
+    {
+        Debug.Log("Player uses Skill Card 4.");
+        BattleManager.Instance.playerAttack(PlayerManager.SkillSlot.Four);
+    }
+
+    private void onInventoryButtonClicked()
+    {
+        Debug.Log("Inventory button clicked!");
+        // TODO: implement inventory visuals and functionality.
+    }
+
+
+    private void onRunAwayButtonClicked()
+    {
+        Debug.Log("Run away button clicked!");
+        BattleManager.Instance.runAway();
+    }
+
+
+    /* PRIVATE FUNCTIONS */
+
+
+    private void updateHealthBars()
+    {
+        // Set the player health bar slider to their health percentage from 1.0f to 0.0f (1.0f is full).
+        playerHealthSlider.value = PlayerManager.Instance.calculateHealthPercent();
+
+        // Set the enemy health bar slider to their health percentage from 0.0f to 1.0f (0.0f is full).
+        enemyHealthSlider.value = Mathf.Abs(BattleManager.Instance.getEnemyHealthPercentage() - 1.0f);
+
+    }
+
+
+    private void updateRoundCounter(int round)
+    {
+        roundTMP.text = "Round: " + round;
+    }
+
+
+    private void setButtonInteractability(bool interactable)
+    {
+        meleeAttackButton.interactable = interactable;
+        if (PlayerManager.Instance.getSkillCard(PlayerManager.SkillSlot.One) != null)
+        {
+            skillCardButton1.interactable = interactable;
+        }
+        if (PlayerManager.Instance.getSkillCard(PlayerManager.SkillSlot.Two) != null)
+        {
+            skillCardButton2.interactable = interactable;
+        }
+        if (PlayerManager.Instance.getSkillCard(PlayerManager.SkillSlot.Three) != null)
+        {
+            skillCardButton3.interactable = interactable;
+        }
+        if (PlayerManager.Instance.getSkillCard(PlayerManager.SkillSlot.Four) != null)
+        {
+            skillCardButton4.interactable = interactable;
+        }
+    }
+
+
+    private void updateTurnText(BattleManager.Attacker attacker)
+    {
+        if (attacker == BattleManager.Attacker.Player)  // Player's turn.
+        {
+            turnIndicatorTMP.text = "Player's Turn";
+        }
+        else                                            // Enemy's turn.
+        {
+            turnIndicatorTMP.text = "Enemy's Turn";
+        }
+    }
+
+
+    private void updateTurnCounters(BattleManager.Attacker attacker, int count)
+    {
+        if (attacker == BattleManager.Attacker.Player)  // Player's turn.
+        {
+            playerTurnTMP.text = "Turn: " + count;
+        }
+        else                                            // Enemy's turn.
+        {
+            enemyTurnTMP.text = "Turn: " + count;
+        }
+    }
+
+
+    private void updateSkillCardButtonText()
+    {
         if (PlayerManager.Instance.getSkillCard(PlayerManager.SkillSlot.One) == null)
         {
             skillCard1TMP.text = "EMPTY";
@@ -84,167 +257,22 @@ public class BattleUI : MonoBehaviour
             SkillCardSO skillCard4 = PlayerManager.Instance.getSkillCard(PlayerManager.SkillSlot.Four);
             skillCard4TMP.text = $"{skillCard4.getItemName()}";
         }
-
-        meleeAttackButton.onClick.AddListener(OnMeleeAttackButtonClicked);
-        skillCardButton1.onClick.AddListener(OnSkillCardButton1Clicked);
-        skillCardButton2.onClick.AddListener(OnSkillCardButton2Clicked);
-        skillCardButton3.onClick.AddListener(OnSkillCardButton3Clicked);
-        skillCardButton4.onClick.AddListener(OnSkillCardButton4Clicked);
-        inventoryButton.onClick.AddListener(OnInventoryButtonClicked);
-        runAwayButton.onClick.AddListener(OnRunAwayButtonClicked);
-
-        // Start the battle and pass this object to the BattleManager.
-        BattleManager.Instance.startBattle(this);
     }
-    
 
-    void OnDestroy()
+
+    private void addOnClickListeners()
     {
-        meleeAttackButton.onClick.RemoveListener(OnMeleeAttackButtonClicked);
-        skillCardButton1.onClick.RemoveListener(OnSkillCardButton1Clicked);
-        skillCardButton2.onClick.RemoveListener(OnSkillCardButton2Clicked);
-        skillCardButton3.onClick.RemoveListener(OnSkillCardButton3Clicked);
-        skillCardButton4.onClick.RemoveListener(OnSkillCardButton4Clicked);
-        inventoryButton.onClick.RemoveListener(OnInventoryButtonClicked);
-        runAwayButton.onClick.RemoveListener(OnRunAwayButtonClicked);
+        meleeAttackButton.onClick.AddListener(onMeleeAttackButtonClicked);
+        skillCardButton1.onClick.AddListener(onSkillCardButton1Clicked);
+        skillCardButton2.onClick.AddListener(onSkillCardButton2Clicked);
+        skillCardButton3.onClick.AddListener(onSkillCardButton3Clicked);
+        skillCardButton4.onClick.AddListener(onSkillCardButton4Clicked);
+        inventoryButton.onClick.AddListener(onInventoryButtonClicked);
+        runAwayButton.onClick.AddListener(onRunAwayButtonClicked);
     }
 
 
-    /* PUBLIC FUNCTIONS */
-
-
-    public void ShowCriticalHit()
-    {
-        StartCoroutine(CriticalHitCoroutine());
-    }
-
-
-    public void UpdateHealthBar()
-    {
-        // Set the player health bar slider to their health percentage from 1.0f to 0.0f (1.0f is full).
-        playerHealthSlider.value = PlayerManager.Instance.calculateHealthPercent();
-
-        // Set the enemy health bar slider to their health percentage from 0.0f to 1.0f (0.0f is full).
-        enemyHealthSlider.value = Mathf.Abs(BattleManager.Instance.getEnemyHealthPercentage() - 1.0f);
-
-    }
-
-
-    public void UpdateRoundCounter(int round)
-    {
-        roundTMP.text = "Round: " + round;
-    }
-
-
-    public void SetButtonInteractability(bool interactable)
-    {
-        meleeAttackButton.interactable = interactable;
-        if (PlayerManager.Instance.getSkillCard(PlayerManager.SkillSlot.One) != null)
-        {
-            skillCardButton1.interactable = interactable;
-        }
-        if (PlayerManager.Instance.getSkillCard(PlayerManager.SkillSlot.Two) != null)
-        {
-            skillCardButton2.interactable = interactable;
-        }
-        if (PlayerManager.Instance.getSkillCard(PlayerManager.SkillSlot.Three) != null)
-        {
-            skillCardButton3.interactable = interactable;
-        }
-        if (PlayerManager.Instance.getSkillCard(PlayerManager.SkillSlot.Four) != null)
-        {
-            skillCardButton4.interactable = interactable;
-        }
-    }
-
-
-    public void UpdateTurnText(BattleManager.Attacker attacker)
-    {
-        if (attacker == BattleManager.Attacker.Player)  // Player's turn.
-        {
-            turnIndicatorTMP.text = "Player's Turn";
-        }
-        else                                            // Enemy's turn.
-        {
-            turnIndicatorTMP.text = "Enemy's Turn";
-        }
-    }
-
-
-    public void UpdateIndividualTurnCounters(BattleManager.Attacker attacker, int count)
-    {
-        if (attacker == BattleManager.Attacker.Player)  // Player's turn.
-        {
-            playerTurnTMP.text = "Turn: " + count;
-        }
-        else                                            // Enemy's turn.
-        {
-            enemyTurnTMP.text = "Turn: " + count;
-        }
-    }
-
-
-    public void AddCombatLogMessage(string message)
-    {
-        GameObject newMessage = Instantiate(messagePrefab, combatLogContent.transform);
-
-        TextMeshProUGUI messageTMP = newMessage.GetComponent<TextMeshProUGUI>();
-        messageTMP.text = message;
-    }
-
-    /* BUTTON ON CLICK LISTENERS */
-
-    private void OnMeleeAttackButtonClicked()
-    {
-        Debug.Log("Player uses Melee attack.");
-        BattleManager.Instance.playerAttack(PlayerManager.SkillSlot.Melee);
-    }
-
-
-    private void OnSkillCardButton1Clicked()
-    {
-        Debug.Log("Player uses Skill Card 1.");
-        BattleManager.Instance.playerAttack(PlayerManager.SkillSlot.One);
-    }
-
-    private void OnSkillCardButton2Clicked()
-    {
-        Debug.Log("Player uses Skill Card 2.");
-        BattleManager.Instance.playerAttack(PlayerManager.SkillSlot.Two);
-    }
-
-
-    private void OnSkillCardButton3Clicked()
-    {
-        Debug.Log("Player uses Skill Card 3.");
-        BattleManager.Instance.playerAttack(PlayerManager.SkillSlot.Three);
-    }
-
-
-    private void OnSkillCardButton4Clicked()
-    {
-        Debug.Log("Player uses Skill Card 4.");
-        BattleManager.Instance.playerAttack(PlayerManager.SkillSlot.Four);
-    }
-
-    private void OnInventoryButtonClicked()
-    {
-        Debug.Log("Inventory button clicked!");
-        // TODO: implement inventory visuals and functionality.
-    }
-
-
-    private void OnRunAwayButtonClicked()
-    {
-        Debug.Log("Run away button clicked!");
-        BattleManager.Instance.runAway();
-    }
-
-
-    /* PRIVATE FUNCTIONS */
-
-
-    private IEnumerator CriticalHitCoroutine()
+    private IEnumerator criticalHitCoroutine()
     {
         criticalHitTMP.gameObject.SetActive(true);
         yield return new WaitForSeconds(5.0f);

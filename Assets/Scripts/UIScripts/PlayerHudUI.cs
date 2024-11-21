@@ -16,7 +16,7 @@ public class PlayerHudUI : MonoBehaviour
     }
 
 
-    public void updateValues()
+    public void updateVisuals()
     {
         playerHealthTMP.text = $"HP: {PlayerManager.Instance.getHealth()}";
         playerExperienceTMP.text = $"EXP: {PlayerManager.Instance.getExperience()}";

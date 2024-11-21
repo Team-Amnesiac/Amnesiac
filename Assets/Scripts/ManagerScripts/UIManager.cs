@@ -88,6 +88,12 @@ public class UIManager : MonoBehaviour
     }
 
 
+    public void addCombatLogMessage(string message)
+    {
+        battleUI.addCombatLogMessage(message);
+    }
+
+
     public void setUI(UI ui, MonoBehaviour uiScript)
     {
         switch (ui)
@@ -151,8 +157,12 @@ public class UIManager : MonoBehaviour
     {
         switch (ui)
         {
+            case UI.Battle:
+                battleUI.updateVisuals();
+                break;
+
             case UI.PlayerHud:
-                playerHudUI.updateValues();
+                playerHudUI.updateVisuals();
                 break;
 
             default:

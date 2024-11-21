@@ -72,12 +72,8 @@ public class BattleManager : MonoBehaviour
     {
         // Retrieve the BattleUI script.
         this.battleUI = battleUI;
-        // Update the turn text on the screen with the current attacker.
-        battleUI.UpdateTurnText(attacker);
 
-        roundNumber++;
-        battleUI.UpdateRoundCounter(roundNumber);
-
+        UIManager.Instance.updateUI(UIManager.UI.Battle);
         if (attacker == Attacker.Enemy)  // Enemy's turn.
         {
             // Play the enemy's turn.
@@ -93,6 +89,9 @@ public class BattleManager : MonoBehaviour
     
     public void playerAttack(PlayerManager.SkillSlot slot)
     {
+        // Reset for this attack by the player.
+        criticalHit = false;
+
         string combatLogMessage;
         // Get the SkillCard the Player attacked with, if they used one.
         SkillCardSO skillCardSo = PlayerManager.Instance.getSkillCard(slot);
@@ -139,10 +138,7 @@ public class BattleManager : MonoBehaviour
             combatLogMessage += " A critical hit !";
         }
 
-        battleUI.AddCombatLogMessage(combatLogMessage);
-
-        // Update the health bars on the screen.
-        battleUI.UpdateHealthBar();
+        UIManager.Instance.addCombatLogMessage(combatLogMessage);
 
         if (enemyAI.getHealth() <= 0)   // Enemy has been defeated.
         {
@@ -155,12 +151,8 @@ public class BattleManager : MonoBehaviour
 
         if (criticalHit && !playerExtraTurn)  // Player landed a critical hit.
         {
-            // Display the critical hit on screen.
-            battleUI.ShowCriticalHit();
             // Player has earned their extra turn.
             playerExtraTurn = true;
-            // Reset for the next attack by the player.
-            criticalHit = false;
             // Player's extra turn, earned from critical hit.
             playerTurn();
 
@@ -185,25 +177,21 @@ public class BattleManager : MonoBehaviour
     private void playerTurn()
     {
         // Activate the functionality of the player's action buttons.
-        battleUI.SetButtonInteractability(true);
         playerTurnCount++;
-        battleUI.UpdateIndividualTurnCounters(attacker, playerTurnCount);
+        UIManager.Instance.updateUI(UIManager.UI.Battle);
     }
 
 
     private IEnumerator enemyTurn()
     {
-        // Disable functionality of the player's action buttons.
-        battleUI.SetButtonInteractability(false);
-
         enemyTurnCount++;
-        battleUI.UpdateIndividualTurnCounters(attacker, enemyTurnCount);
+        UIManager.Instance.updateUI(UIManager.UI.Battle);
 
         yield return new WaitForSeconds(5.0f);
 
         dealDamageToPlayer(enemyAI.getStrength());
 
-        battleUI.AddCombatLogMessage($"Enemy attacked the Player for {enemyAI.getStrength()} damage !");
+        battleUI.addCombatLogMessage($"Enemy attacked the Player for {enemyAI.getStrength()} damage !");
 
         if (PlayerManager.Instance.getHealth() <= 0)  // Player defeated.
         {
@@ -230,12 +218,7 @@ public class BattleManager : MonoBehaviour
         {
             // A new round has begun.
             roundNumber++;
-            // Update the round counter visuals.
-            battleUI.UpdateRoundCounter(roundNumber);
         }
-
-        // Update the turn text
-        battleUI.UpdateTurnText(attacker);
 
         if (attacker == Attacker.Enemy)
         {
@@ -252,10 +235,6 @@ public class BattleManager : MonoBehaviour
     {
         // Deal damage to the player.
         PlayerManager.Instance.takeDamage(damage);
-        // Update the BattleUI health bars.
-        battleUI.UpdateHealthBar();
-
-        Debug.Log("Player took " + damage + " damage.");
     }
 
 
@@ -275,8 +254,6 @@ public class BattleManager : MonoBehaviour
     private void endBattle()
     {
         GameManager.Instance.setGameState(GameManager.GameState.Play);
-
-        Debug.Log("Battle has ended for now.");
     }
 
 
@@ -285,5 +262,23 @@ public class BattleManager : MonoBehaviour
     public float getEnemyHealthPercentage()
     {
         return enemyAI.calculateHealthPercentage();
+    }
+
+
+    public bool isCriticalHit()
+    {
+        return criticalHit;
+    }
+
+
+    public Attacker getAttacker()
+    {
+        return attacker;
+    }
+
+
+    public int getRoundNumber()
+    {
+        return roundNumber;
     }
 }
