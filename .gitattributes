@@ -1,1 +1,1 @@
-Assets/\#NVJOB[[:space:]]Water[[:space:]]Shaders[[:space:]]V2/*.tif filter=lfs diff=lfs merge=lfs -text
+*.tga filter=lfs diff=lfs merge=lfs -text
