@@ -20,6 +20,7 @@ public class NotificationUI : MonoBehaviour
     public void showNotification(string message)
     {
         notificationTMP.text = message;
+        UIManager.Instance.showUI(UIManager.UI.Notification);
         Invoke(nameof(hideNotification), notificationShowTime);
     }
 

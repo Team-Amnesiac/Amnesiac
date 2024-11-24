@@ -58,7 +58,7 @@ public class ShopUI : MonoBehaviour
     {
         if (PlayerManager.Instance.getCurrency() < ShopManager.Instance.getTotalCost())
         {
-            UIManager.Instance.newNotification("Not enough currency for this purchase!");
+            UIManager.Instance.newNotification("Not enough currency!");
             Debug.Log("Not enough currency!");
         }
         else

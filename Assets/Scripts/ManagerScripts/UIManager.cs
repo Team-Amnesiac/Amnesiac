@@ -209,6 +209,10 @@ public class UIManager : MonoBehaviour
                 mainMenuUI.gameObject.SetActive(true);
                 break;
 
+            case UI.Notification:
+                notificationUI.gameObject.SetActive(true);
+                break;
+
             //case UI.PauseMenu:
             //    pauseMenuUI.show();
             //    break;
