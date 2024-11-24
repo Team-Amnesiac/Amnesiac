@@ -7,18 +7,29 @@ using UnityEngine.UI;
 public class PlayerHudUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI playerHealthTMP;
-    [SerializeField]private TextMeshProUGUI playerExperienceTMP;
+    [SerializeField]private TextMeshProUGUI playerLevelTMP;
     
 
     void Start()
     {
         UIManager.Instance.setUI(UIManager.UI.PlayerHud, this);
+        PlayerManager.Instance.OnLevelUp += UpdateLevelUI;
     }
 
+    void OnDestory()
+    {
+        PlayerManager.Instance.OnLevelUp -= UpdateLevelUI;
+    }
 
     public void updateVisuals()
     {
         playerHealthTMP.text = $"HP: {PlayerManager.Instance.getHealth()}";
-        playerExperienceTMP.text = $"EXP: {PlayerManager.Instance.getExperience()}";
+        playerLevelTMP.text = $"Level: {PlayerManager.Instance.getPlayerLevel()}";
+    }
+
+    private void UpdateLevelUI(int newLevel)
+    {
+        playerLevelTMP.text = $"Level: {newLevel}";
+        updateVisuals();
     }
 }

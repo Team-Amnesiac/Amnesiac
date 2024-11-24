@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,10 +18,16 @@ public class PlayerManager : MonoBehaviour
 
     private const int MAX_EQUIPPED_SKILL_CARDS = 4;
 
-    [SerializeField] private float maxPlayerHealth = 100.0f;
+    // event triggered when the player levels up (via callbacks).
+    public event Action<int> OnLevelUp;
+
+    [SerializeField] private float maxPlayerHealth   = 100.0f;
     [SerializeField] private float playerHealth;
-    [SerializeField] private float meleeDamage     = 25.0f;
-    [SerializeField] private int currency          = 100;
+    [SerializeField] private float meleeDamage       = 25.0f;
+    [SerializeField] private int currency            = 100;
+    [SerializeField] private int playerLevel         = 1;
+    [SerializeField] private int experienceThreshold = 50; // eXP required for the next level
+    [SerializeField] private int staminaMeter        = 100; // stamina used when skillcard used, no stamina means player cannot use skillcards.
 
     private float playerExperience = 0.0f;
 
@@ -86,13 +93,47 @@ public class PlayerManager : MonoBehaviour
         UIManager.Instance.updateUI(UIManager.UI.PlayerHud);
     }
 
-
+    // gain exp upon completing quest, fights, completing collectibles.
     public void increaseExperience(int value)
     {
         playerExperience += value;
         UIManager.Instance.updateUI(UIManager.UI.PlayerHud);
+
+        // level up while loop depending on the amount of exp player currently has, keep incrementing level according to threshold
+        while (playerExperience >= experienceThreshold)
+        {
+            levelUp();
+        }
     }
 
+    private int CalculateThreshold()
+    {
+        // exponential growth for threshold
+        return Mathf.RoundToInt(100 * Mathf.Pow(1.5f, playerLevel - 1));
+    }
+
+    private void levelUp()
+    {
+        playerExperience -= experienceThreshold; // carries over extra experience to the next level
+        playerLevel++;
+        
+        // increase the experience threshold dynamically
+        experienceThreshold = CalculateThreshold();
+
+        // update player stats for each level
+        maxPlayerHealth += 10;       // increase max health by 10 per level.
+        meleeDamage += 5;            // increase melee damage by 5 per level.
+        currency += 50;              // also reward player with bonus currency.
+        staminaMeter += 20;
+
+        // refill health to the new max health.
+        playerHealth = maxPlayerHealth;
+
+        Debug.Log($"Level Up! Level: {playerLevel}, New Threshold: {experienceThreshold}, Max Health: {maxPlayerHealth}, Melee Damage: {meleeDamage}");
+
+        // update the UI to reflect the new stats.
+        UIManager.Instance.updateUI(UIManager.UI.PlayerHud);
+    }
 
     public void unequip(SkillCardSO skillCardSo)
     {
@@ -134,6 +175,10 @@ public class PlayerManager : MonoBehaviour
         return playerExperience;
     }
 
+    public int getPlayerLevel()
+    {
+        return playerLevel;
+    }
 
     public bool hasAvailableSkillCardSlot()
     {
