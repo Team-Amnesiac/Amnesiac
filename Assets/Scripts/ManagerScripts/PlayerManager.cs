@@ -196,19 +196,19 @@ public class PlayerManager : MonoBehaviour
     }
 
     // Following Functions are currency related
-    public int GetCurrency()
+    public int getCurrency()
     {
         return currency;
     }
 
     // adding currency after defeating enemy, completing quest, etc.
-    public void AddCurrency(int amount)
+    public void addCurrency(int amount)
     {
         currency += amount;
     }
 
     // spending currency in shop.
-    public bool SpendCurrency(int amount)
+    public bool spendCurrency(int amount)
     {
         if (currency >= amount)
         {

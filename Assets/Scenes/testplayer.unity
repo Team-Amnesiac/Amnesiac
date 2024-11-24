@@ -2641,8 +2641,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baacb2be77a7d564ba5d3639cee2a9d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHealthTMP: {fileID: 0}
-  playerExperienceTMP: {fileID: 0}
+  playerHealthTMP: {fileID: 206521129}
+  playerLevelTMP: {fileID: 635227199}
 --- !u!1 &635227198
 GameObject:
   m_ObjectHideFlags: 0
@@ -3613,11 +3613,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1587960989}
-  - {fileID: 153228977}
-  - {fileID: 1493629780}
-  - {fileID: 1286137078}
-  - {fileID: 708111550}
   - {fileID: 531848107}
+  - {fileID: 1286137078}
+  - {fileID: 1493629780}
+  - {fileID: 153228977}
+  - {fileID: 708111550}
   - {fileID: 1846465304}
   m_Father: {fileID: 1380709715}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3638,6 +3638,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 955b0fb6b3a7e9949ac551827df82421, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shopItemPrefab: {fileID: 8173329396178521062, guid: 445c9901fd788c74aa835b990d1d99bd, type: 3}
+  shopContent: {fileID: 1176251547}
   totalCostText: {fileID: 708111551}
   playerCurrencyText: {fileID: 1286137079}
   buyButton: {fileID: 1846465305}
@@ -5902,6 +5904,9 @@ MonoBehaviour:
   playerHealth: 100
   meleeDamage: 25
   currency: 100
+  playerLevel: 1
+  experienceThreshold: 50
+  staminaMeter: 100
   equippedSkillCardArray: []
 --- !u!114 &1299347926
 MonoBehaviour:
@@ -5940,7 +5945,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fbe8e8cc2459954799c0c5f70a8df27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryItemPrefab: {fileID: 5887891665186770091, guid: 09619b6dc1487bc41bd66aad512a3048, type: 3}
 --- !u!114 &1299347930
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5985,8 +5989,6 @@ MonoBehaviour:
   shopItems:
   - {fileID: 11400000, guid: 2c114dfe3bf43e94889557ffca6d5f04, type: 2}
   - {fileID: 11400000, guid: 3cc84e45b62ac2d47824fb724892c976, type: 2}
-  shopItemPrefab: {fileID: 8173329396178521062, guid: 445c9901fd788c74aa835b990d1d99bd, type: 3}
-  shopItemContainer: {fileID: 1176251548}
 --- !u!1 &1324086642
 GameObject:
   m_ObjectHideFlags: 0
@@ -6947,7 +6949,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &1559936907
 MonoBehaviour:
@@ -7038,7 +7040,7 @@ GameObject:
   - component: {fileID: 1587960991}
   - component: {fileID: 1587960990}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

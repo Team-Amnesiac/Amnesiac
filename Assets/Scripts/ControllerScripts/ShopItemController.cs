@@ -11,37 +11,37 @@ public class ShopItemController : MonoBehaviour
     [SerializeField] private Button removeButton; // Button to remove the item from the total
 
     private ItemSO item;
-    private ShopManager shopManager;
     private int quantity = 0; // Tracks quantity for this item
 
-    public void SetUp(ItemSO newItem, ShopManager manager)
+    public void initialize(ItemSO newItem)
     {
         item = newItem;
-        shopManager = manager;
 
         // Populate the UI with the item's data
         itemNameText.text = item.getItemName();
-        priceText.text = $"Price: {item.getValue()}";
-        itemImage.sprite = item.getItemSprite();
+        priceText.text    = $"Price: {item.getValue()}";
+        itemImage.sprite  = item.getItemSprite();
 
         // Add listeners to the buttons
-        addButton.onClick.AddListener(() => AddToCart());
-        removeButton.onClick.AddListener(() => RemoveFromCart());
+        addButton.onClick.AddListener(addToCart);
+        removeButton.onClick.AddListener(removeFromCart);
     }
 
-    private void AddToCart()
+
+    private void addToCart()
     {
         quantity++;
-        shopManager.AddToTotalCost(item);
+        ShopManager.Instance.addToCart(item);
         Debug.Log($"Added {item.getItemName()} to cart. Quantity: {quantity}");
     }
 
-    private void RemoveFromCart()
+
+    private void removeFromCart()
     {
         if (quantity > 0)
         {
             quantity--;
-            shopManager.RemoveFromTotalCost(item);
+            ShopManager.Instance.removeFromCart(item);
             Debug.Log($"Removed {item.getItemName()} from cart. Quantity: {quantity}");
         }
     }

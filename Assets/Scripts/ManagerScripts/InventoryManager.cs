@@ -1,15 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
-using Image = UnityEngine.UIElements.Image;
-using static UnityEditor.Progress;
+
 
 public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager Instance;
-
-    [SerializeField] private GameObject inventoryItemPrefab;
 
     private List<ItemSO> inventoryItems = new List<ItemSO>();
     

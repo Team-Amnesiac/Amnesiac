@@ -165,6 +165,10 @@ public class UIManager : MonoBehaviour
                 playerHudUI.updateVisuals();
                 break;
 
+            case UI.Shop:
+                shopUI.updateVisuals();
+                break;
+
             default:
                 Debug.Log("ATTEMPT TO SHOW INVALID UI");
                 break;
@@ -218,6 +222,7 @@ public class UIManager : MonoBehaviour
                 break;
 
             case UI.Shop:
+                shopUI.prepareShopShow();
                 shopUI.gameObject.SetActive(true);
                 break;
 
@@ -249,6 +254,7 @@ public class UIManager : MonoBehaviour
             //    break;
 
             case UI.Inventory:
+                inventoryUI.prepareInventoryHide();
                 inventoryUI.gameObject.SetActive(false);
                 break;
 
@@ -277,6 +283,7 @@ public class UIManager : MonoBehaviour
                 break;
 
             case UI.Shop:
+                shopUI.prepareShopHide();
                 shopUI.gameObject.SetActive(false);
                 break;
 
