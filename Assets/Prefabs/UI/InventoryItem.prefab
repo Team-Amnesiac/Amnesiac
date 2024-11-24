@@ -402,6 +402,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemNameTMP: {fileID: 6694839899400833395}
   itemImage: {fileID: 4536774549827057283}
+  itemButton: {fileID: 2310813836302868423}
   removeItemButton: {fileID: 1859486171992501829}
 --- !u!1 &6582000728026374682
 GameObject:
@@ -471,7 +472,7 @@ MonoBehaviour:
   m_text: Item
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bbe0ef5a2c8e5204a840f9240fafa6ec, type: 2}
-  m_sharedMaterial: {fileID: 348336861779925370, guid: bbe0ef5a2c8e5204a840f9240fafa6ec, type: 2}
+  m_sharedMaterial: {fileID: 6700565993059595268, guid: bbe0ef5a2c8e5204a840f9240fafa6ec, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
