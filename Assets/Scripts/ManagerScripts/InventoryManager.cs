@@ -27,34 +27,55 @@ public class InventoryManager : MonoBehaviour
     public void Add(Item item)
     {
         inventoryItems.Add(item);
-        // Increment the collectible set count, if item is a collectible.
-        if (item.GetItemType() == Item.ItemType.Collectible)
-        {
-            Collectible collectible = (Collectible)item;
 
-            // Identify which set this collectible belongs to.
-            switch (collectible.GetSet())
-            {
-                case Collectible.Set.Trophy:
-                    trophyCount++;
-                    if (trophyCount == (int)Collectible.SetSize.Trophy)  // Trophy set complete.
-                    {
-                        Debug.Log("Trophy set complete!");
-                    }
-
-                    break;
-                
-                default:
-                    Debug.Log("Trophy set complete!");
-                    break;
-            }
-        }
-        else if (item.GetItemType() == Item.ItemType.SkillCard)
+        switch (item.GetItemType())
         {
-            if (PlayerManager.Instance.HasAvailableSkillCardSlot())  // There is an empty slot available.
-            {
-                PlayerManager.Instance.Equip((SkillCard)item);
-            }
+            case Item.ItemType.Collectible:
+                Collectible collectible = (Collectible)item;
+
+                // Identify which set this collectible belongs to
+                switch (collectible.GetSet())
+                {
+                    case Collectible.Set.Trophy:
+                        trophyCount++;
+                        if (trophyCount == (int)Collectible.SetSize.Trophy)  // Trophy set complete
+                        {
+                            Debug.Log("Trophy set complete!");
+                        }
+                        break;
+
+                    default:
+                        Debug.Log("Unknown collectible set complete!");
+                        break;
+                }
+                break;
+
+            case Item.ItemType.SkillCard:
+                if (PlayerManager.Instance.HasAvailableSkillCardSlot())  // There is an empty slot available
+                {
+                    PlayerManager.Instance.Equip((SkillCard)item);
+                }
+                break;
+
+            case Item.ItemType.Potion:
+                Debug.Log($"Potion added to inventory: {item.itemName}");
+                // might not need potions since we have gems, but keeping it as an option if needed later.
+                break;
+
+            case Item.ItemType.Gem:
+                Debug.Log($"Gem added to inventory: {item.itemName}");
+                // Gems could potentially trigger immediate effects, e.g., healing, increase melee attack, etc.
+                Player.Instance.IncreaseHealth(item.value); // Example action
+                break;
+
+            case Item.ItemType.Equipment:
+                Debug.Log($"Equipment added to inventory: {item.itemName}");
+                // optionally, you could equip it directly or add it to the inventory for later equipping.
+                break;
+
+            default:
+                Debug.LogWarning($"Unhandled item type: {item.GetItemType()}");
+                break;
         }
     }
 

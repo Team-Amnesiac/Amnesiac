@@ -22,6 +22,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private float maxPlayerHealth = 100.0f;
     [SerializeField] private float playerHealth;
     [SerializeField] private float meleeDamage     = 25.0f;
+    [SerializeField] private int currency          = 100;
 
     [SerializeField] private SkillCard[] equippedSkillCardArray;
     
@@ -105,5 +106,31 @@ public class PlayerManager : MonoBehaviour
         }
 
         return false;
+    }
+
+    // Following Functions are currency related
+    public int GetCurrency()
+    {
+        return currency;
+    }
+
+    // adding currency after defeating enemy, completing quest, etc.
+    public void AddCurrency(int amount)
+    {
+        currency += amount;
+    }
+
+    // spending currency in shop.
+    public bool SpendCurrency(int amount)
+    {
+        if (currency >= amount)
+        {
+            currency -= amount;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

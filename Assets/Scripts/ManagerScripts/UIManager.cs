@@ -224,7 +224,6 @@ public class UIManager : MonoBehaviour
             //    break;
 
             case UI.Inventory:
-                inventoryUI.prepareInventoryHide();
                 inventoryUI.gameObject.SetActive(false);
                 break;
 
