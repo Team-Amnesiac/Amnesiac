@@ -11,6 +11,7 @@ public class ShopUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI totalCostText;
     [SerializeField] private TextMeshProUGUI playerCurrencyText;
     [SerializeField] private Button buyButton;
+    [SerializeField] private Button exitShopButton;
 
     private void Awake()
     {
@@ -30,11 +31,9 @@ public class ShopUI : MonoBehaviour
         UIManager.Instance.hideUI(UIManager.UI.Shop);
         buyButton.onClick.AddListener(() =>
         {
-            if (ShopManager.Instance != null)
-            {
                 ShopManager.Instance.FinalizePurchase();
-            }
         });
+        exitShopButton.onClick.AddListener(exitShopButtonOnClick);
 
         UpdatePlayerCurrency(PlayerManager.Instance.GetCurrency());
         UpdateTotalCost(0);
@@ -63,5 +62,12 @@ public class ShopUI : MonoBehaviour
     {
         Debug.Log("Not enough currency!"); // Placeholder for an actual UI warning
         // can add a UI popup or highlight the issue visually here if needed, but not necessary.
+    }
+
+
+    private void exitShopButtonOnClick()
+    {
+        UIManager.Instance.hideUI(UIManager.UI.Shop);
+        UIManager.Instance.showUI(UIManager.UI.Keeper);
     }
 }

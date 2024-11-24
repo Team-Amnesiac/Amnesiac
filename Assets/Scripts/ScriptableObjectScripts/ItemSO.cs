@@ -45,6 +45,12 @@ public class ItemSO : ScriptableObject
     }
 
 
+    public int getValue()
+    {
+        return value;
+    }
+
+
     public Sprite getItemSprite()
     {
         return sprite;

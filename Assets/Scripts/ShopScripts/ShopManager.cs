@@ -3,21 +3,39 @@ using System.Collections.Generic;
 
 public class ShopManager : MonoBehaviour
 {
-    [SerializeField] private List<Item> shopItems; // ScriptableObject Items available in the shop
+    // Singleton instance of the ShopManager class.
+    public static ShopManager Instance;
+
+    [SerializeField] private List<ItemSO> shopItems; // ScriptableObject Items available in the shop
     [SerializeField] private GameObject shopItemPrefab; // Prefab for each ShopItemButton
     [SerializeField] private Transform shopItemContainer; // Parent object for dynamically created ShopItemButtons
 
-    private List<Item> selectedItems = new List<Item>(); // Tracks the items the player has selected
+    private List<ItemSO> selectedItems = new List<ItemSO>(); // Tracks the items the player has selected
     private int totalCost = 0;
 
-    private void Start()
+
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+    
+
+    void Start()
     {
         PopulateShop();
     }
 
     private void PopulateShop()
     {
-        foreach (Item item in shopItems)
+        foreach (ItemSO item in shopItems)
         {
             GameObject shopItem = Instantiate(shopItemPrefab, shopItemContainer);
 
@@ -28,16 +46,16 @@ public class ShopManager : MonoBehaviour
         }
     }
 
-    public void AddToTotalCost(Item item)
+    public void AddToTotalCost(ItemSO item)
     {
-        totalCost += item.value;
+        totalCost += item.getValue();
         selectedItems.Add(item);
         ShopUI.Instance.UpdateTotalCost(totalCost);
     }
 
-    public void RemoveFromTotalCost(Item item)
+    public void RemoveFromTotalCost(ItemSO item)
     {
-        totalCost -= item.value;
+        totalCost -= item.getValue();
         selectedItems.Remove(item);
         ShopUI.Instance.UpdateTotalCost(totalCost);
     }
@@ -53,10 +71,10 @@ public class ShopManager : MonoBehaviour
             ShopUI.Instance.UpdatePlayerCurrency(playerCurrency - totalCost);
 
             // Add purchased items to the player's inventory
-            foreach (Item item in selectedItems)
+            foreach (ItemSO item in selectedItems)
             {
-                InventoryManager.Instance.Add(item);
-                Debug.Log($"Purchased: {item.itemName}");
+                InventoryManager.Instance.addItem(item);
+                Debug.Log($"Purchased: {item.getItemName()}");
             }
 
             // Reset the shop selections

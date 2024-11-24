@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class KeeperUI : MonoBehaviour
 {
-
-
     void Start()
     {
         UIManager.Instance.setUI(UIManager.UI.Keeper, this);
