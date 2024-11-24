@@ -131,6 +131,8 @@ public class PlayerManager : MonoBehaviour
 
         Debug.Log($"Level Up! Level: {playerLevel}, New Threshold: {experienceThreshold}, Max Health: {maxPlayerHealth}, Melee Damage: {meleeDamage}");
 
+        UIManager.Instance.newNotification($"You leveled up! New Level: {playerLevel}");
+        
         // update the UI to reflect the new stats.
         UIManager.Instance.updateUI(UIManager.UI.PlayerHud);
     }
