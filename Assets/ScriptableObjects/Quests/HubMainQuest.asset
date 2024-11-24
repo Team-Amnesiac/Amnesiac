@@ -9,11 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 599f60c12953fa7469071343fa63ad56, type: 3}
-  m_Name: buffGemScorpion
+  m_Script: {fileID: 11500000, guid: 215683523f8de5743833c242f4511670, type: 3}
+  m_Name: HubMainQuest
   m_EditorClassIdentifier: 
-  id: 2
-  itemName: Buff Gem Scorpion
-  value: 20
-  sprite: {fileID: 21300106, guid: c5f2dd889be0fcd4eb0f8106b422f642, type: 3}
-  itemType: 0
+  questName: The First Piece
+  description: Search for the First Relic in Hub!
+  isCompleted: 0
+  questType: 0
+  targetItem: Codex-Piece01
+  requiredAmount: 1

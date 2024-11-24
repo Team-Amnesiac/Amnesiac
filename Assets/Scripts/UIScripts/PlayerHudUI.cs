@@ -6,32 +6,19 @@ using UnityEngine.UI;
 
 public class PlayerHudUI : MonoBehaviour
 {
-    [SerializeField] private Image notificationImage;
-
+    [SerializeField] private TextMeshProUGUI playerHealthTMP;
+    [SerializeField]private TextMeshProUGUI playerExperienceTMP;
+    
 
     void Start()
     {
         UIManager.Instance.setUI(UIManager.UI.PlayerHud, this);
-        hideNotification();
     }
 
 
-    public void addNotification(string message)
+    public void updateVisuals()
     {
-        notificationImage.GetComponent<TextMeshProUGUI>().text = message;
-        showNotification();
-    }
-
-
-    private void showNotification()
-    {
-        notificationImage.gameObject.SetActive(true);
-        Invoke(nameof(hideNotification), 3f);
-    }
-
-
-    private void hideNotification()
-    {
-        notificationImage.gameObject.SetActive(false);
+        playerHealthTMP.text = $"HP: {PlayerManager.Instance.getHealth()}";
+        playerExperienceTMP.text = $"EXP: {PlayerManager.Instance.getExperience()}";
     }
 }

@@ -88,6 +88,12 @@ public class UIManager : MonoBehaviour
     }
 
 
+    public void addCombatLogMessage(string message)
+    {
+        battleUI.addCombatLogMessage(message);
+    }
+
+
     public void setUI(UI ui, MonoBehaviour uiScript)
     {
         switch (ui)
@@ -138,6 +144,25 @@ public class UIManager : MonoBehaviour
 
             case UI.Shop:
                 shopUI = (ShopUI)uiScript;
+                break;
+
+            default:
+                Debug.Log("ATTEMPT TO SHOW INVALID UI");
+                break;
+        }
+    }
+
+
+    public void updateUI(UI ui)
+    {
+        switch (ui)
+        {
+            case UI.Battle:
+                battleUI.updateVisuals();
+                break;
+
+            case UI.PlayerHud:
+                playerHudUI.updateVisuals();
                 break;
 
             default:

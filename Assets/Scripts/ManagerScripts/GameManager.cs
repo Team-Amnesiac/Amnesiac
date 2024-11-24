@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     // The current state of the game.
-    [SerializeField] private GameState         gameState;
+    [SerializeField] private GameState gameState;
     // The currently loaded scene of the game.
     private SceneLoader.Scene currentScene;
     // The previously loaded scene of the game.
@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
 
     /* PRIVATE FUNCTIONS */
 
-    private void HandleGameStateChange(GameState state)
+    private void handleGameStateChange(GameState state)
     {
         switch (state)
         {
@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
                 previousScene = currentScene;
                 currentScene = SceneLoader.Scene.Title;
                 // Load the title scene.
-                SceneLoader.Instance.LoadScene(SceneLoader.Scene.Title);
+                SceneLoader.Instance.loadScene(SceneLoader.Scene.Title);
 
                 break;
 
@@ -61,11 +61,11 @@ public class GameManager : MonoBehaviour
                 {
                     currentScene = SceneLoader.Scene.Hub;
                     // Load the Hub scene.
-                    SceneLoader.Instance.LoadScene(SceneLoader.Scene.Hub);
+                    SceneLoader.Instance.loadScene(SceneLoader.Scene.Hub);
                 }
                 else if (gameState == GameState.Battle)
                 {
-                    SceneLoader.Instance.LoadScene(previousScene);
+                    SceneLoader.Instance.loadScene(previousScene);
                     // Swap values of previous scene and current scene.
                     (previousScene, currentScene) = (currentScene, previousScene);
                 }
@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviour
             case GameState.Battle:
                 previousScene = currentScene;
                 // Load the Battle scene.
-                SceneLoader.Instance.LoadScene(SceneLoader.Scene.Battle);
+                SceneLoader.Instance.loadScene(SceneLoader.Scene.Battle);
 
                 break;
 
@@ -103,9 +103,9 @@ public class GameManager : MonoBehaviour
 
     /* SET FUNCTIONS */
 
-    public void SetGameState(GameState state)
+    public void setGameState(GameState state)
     {
-        HandleGameStateChange(state);
+        handleGameStateChange(state);
 
         gameState = state;
     }

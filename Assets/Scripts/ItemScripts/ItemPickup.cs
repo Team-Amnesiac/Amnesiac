@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class ItemPickup : MonoBehaviour
 {
-    public Item      Item;
+    public ItemSO    item;
     private bool     playerNearby = false;
     private Animator playerAnimator;
 
 
     private void Start()
     {
-        GetComponentInChildren<ItemVisuals>().SetItemPickup(this);
+        GetComponentInChildren<ItemVisuals>().setItemPickup(this);
     }
 
 
@@ -20,12 +20,12 @@ public class ItemPickup : MonoBehaviour
         if (playerNearby && Input.GetKeyDown(KeyCode.E))
         {
             Debug.Log("E key pressed, attempting to pick up item.");
-            Pickup();
+            pickup();
         }
     }
 
 
-    void Pickup()
+    void pickup()
     {
         if (playerAnimator != null)
         {
@@ -33,23 +33,33 @@ public class ItemPickup : MonoBehaviour
             playerAnimator.SetTrigger("Gather");
         }
 
-        Debug.Log($"Picking up item: {Item.name}");
-        if (Item.itemType != Item.ItemType.Collectible)  // Item is not a collectible.
+        Debug.Log($"Picking up item: {item.name}");
+        ItemSO.ItemType itemType = item.getItemType();
+        if (itemType == ItemSO.ItemType.Relic)
         {
-            InventoryManager.Instance.Add(Item);
+            QuestManager.Instance.addRelic((RelicSO)item);
         }
+        else if (itemType == ItemSO.ItemType.Collectible)  // Item is not a collectible or a relic.
+        {
+            QuestManager.Instance.addCollectible((CollectibleSO)item);
+        }
+        else
+        {
+            InventoryManager.Instance.addItem(item);
+        }
+        
         
         Destroy(gameObject);
     }
 
 
-    public void SetPlayerNearby(bool playerNearby)
+    public void setPlayerNearby(bool playerNearby)
     {
         this.playerNearby = playerNearby;
     }
 
 
-    public void SetPlayerAnimator(Animator playerAnimator)
+    public void setPlayerAnimator(Animator playerAnimator)
     {
         this.playerAnimator = playerAnimator;
     }

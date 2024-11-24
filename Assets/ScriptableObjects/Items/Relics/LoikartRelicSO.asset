@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 215683523f8de5743833c242f4511670, type: 3}
-  m_Name: Loikart-Relic
+  m_Script: {fileID: 11500000, guid: 85babfb80dd305640a9924b30553c766, type: 3}
+  m_Name: LoikartRelicSO
   m_EditorClassIdentifier: 
-  questName: The Third Piece
-  description: Search for the Third Relic Piece in Loikart!
-  isCompleted: 0
-  questType: 0
-  targetItem: Codex-Piece03
-  requiredAmount: 1
+  id: 0
+  itemName: Hub Relic
+  value: 0
+  sprite: {fileID: 0}
+  itemType: 5
+  relatedQuest: {fileID: 11400000, guid: 2bb0f3e231d00744c8e8831c07fbe2e9, type: 2}

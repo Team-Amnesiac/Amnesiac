@@ -20,7 +20,7 @@ public class EnemyAI : MonoBehaviour
     private Transform    playerTransform;
     private NavMeshAgent navMeshAgent;
 
-    private SkillCard.AttackType weakness;
+    private SkillCardSO.AttackType weakness;
 
     void Start()
     {
@@ -42,34 +42,34 @@ public class EnemyAI : MonoBehaviour
         {
             if (distanceToPlayer > loseAggroRange)
             {
-                LoseAggro();
+                loseAggro();
             }
             else if (distanceToPlayer > attackRange)
             {
-                ChasePlayer();
+                chasePlayer();
             }
             else
             {
-                AttackPlayer();
+                attackPlayer();
             }
         }
         else
         {
             if (distanceToPlayer <= detectionRange)
             {
-                GainAggro();
+                gainAggro();
             }
         }
     }
 
-    void ChasePlayer()
+    public void chasePlayer()
     {
         navMeshAgent.isStopped = false;
         navMeshAgent.SetDestination(playerTransform.position);
         animator.SetFloat("motion", 1);
     }
 
-    void AttackPlayer()
+    public void attackPlayer()
     {
         navMeshAgent.isStopped = true;
         animator.SetTrigger("hit");
@@ -78,18 +78,18 @@ public class EnemyAI : MonoBehaviour
         {
             Debug.Log("Nightcrawler hits the player, initiating battle with enemy turn first.");
             // Start the battle.
-            BattleManager.Instance.InitializeBattle(BattleManager.Attacker.Enemy, this);
+            BattleManager.Instance.initializeBattle(BattleManager.Attacker.Enemy, this);
             
         }
     }
 
 
-    void GainAggro()
+    public void gainAggro()
     {
         isAggroed = true;
     }
 
-    void LoseAggro()
+    public void loseAggro()
     {
         isAggroed = false;
         animator.SetFloat("motion", 0);
@@ -97,29 +97,29 @@ public class EnemyAI : MonoBehaviour
     }
 
 
-    public float CalculateHealthPercentage()
+    public float calculateHealthPercentage()
     {
         return health / maxHealth;
     }
 
 
-    public void TakeDamage(float damage)
+    public void takeDamage(float damage)
     {
         // Take away the damage amount from the enemy's health.
         health = Mathf.Clamp(health - damage, 0, maxHealth);
     }
 
-    public float GetHealth()
+    public float getHealth()
     {
         return health;
     }
 
-    public SkillCard.AttackType GetWeakness()
+    public SkillCardSO.AttackType getWeakness()
     {
         return weakness;
     }
 
-    public float GetStrength()
+    public float getStrength()
     {
         return strength;
     }

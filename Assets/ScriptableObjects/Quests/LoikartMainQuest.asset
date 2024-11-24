@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 215683523f8de5743833c242f4511670, type: 3}
-  m_Name: Noryx-Relic
+  m_Name: LoikartMainQuest
   m_EditorClassIdentifier: 
-  questName: The Second Piece
-  description: Search for the Second Piece in Noryx!
+  questName: The Third Piece
+  description: Search for the Third Relic Piece in Loikart!
   isCompleted: 0
   questType: 0
-  targetItem: Codex-Piece02
+  targetItem: Codex-Piece03
   requiredAmount: 1

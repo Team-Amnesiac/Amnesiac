@@ -12,7 +12,7 @@ public class MainMenuUI : MonoBehaviour
 
     private void Awake()
     {
-        GameManager.Instance.SetGameState(GameManager.GameState.Title);
+        GameManager.Instance.setGameState(GameManager.GameState.Title);
 
         // Initialize the playButton onClick listener.
         playButton.onClick.AddListener(playClick);
