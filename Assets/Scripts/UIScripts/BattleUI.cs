@@ -70,7 +70,8 @@ public class BattleUI : MonoBehaviour
 
     public void updateVisuals()
     {
-        updateTurnText(BattleManager.Instance.getAttacker());
+        updateTurnText();
+        updateTurnCounters();
         updateHealthBars();
         updateRoundCounter(BattleManager.Instance.getRoundNumber());
         if (BattleManager.Instance.isCriticalHit())
@@ -189,9 +190,9 @@ public class BattleUI : MonoBehaviour
     }
 
 
-    private void updateTurnText(BattleManager.Attacker attacker)
+    private void updateTurnText()
     {
-        if (attacker == BattleManager.Attacker.Player)  // Player's turn.
+        if (BattleManager.Instance.getAttacker() == BattleManager.Attacker.Player)  // Player's turn.
         {
             turnIndicatorTMP.text = "Player's Turn";
         }
@@ -202,15 +203,15 @@ public class BattleUI : MonoBehaviour
     }
 
 
-    private void updateTurnCounters(BattleManager.Attacker attacker, int count)
+    private void updateTurnCounters()
     {
-        if (attacker == BattleManager.Attacker.Player)  // Player's turn.
+        if (BattleManager.Instance.getAttacker() == BattleManager.Attacker.Player)  // Player's turn.
         {
-            playerTurnTMP.text = "Turn: " + count;
+            playerTurnTMP.text = "Turn: " + BattleManager.Instance.getPlayerTurnCount();
         }
-        else                                            // Enemy's turn.
+        else                                                                        // Enemy's turn.
         {
-            enemyTurnTMP.text = "Turn: " + count;
+            enemyTurnTMP.text = "Turn: " + BattleManager.Instance.getEnemyTurnCount();
         }
     }
 

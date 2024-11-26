@@ -281,4 +281,16 @@ public class BattleManager : MonoBehaviour
     {
         return roundNumber;
     }
+
+
+    public int getPlayerTurnCount()
+    {
+        return playerTurnCount;
+    }
+
+
+    public int getEnemyTurnCount()
+    {
+        return enemyTurnCount;
+    }
 }
