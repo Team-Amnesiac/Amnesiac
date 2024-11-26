@@ -222,6 +222,7 @@ public class UIManager : MonoBehaviour
                 break;
 
             case UI.QuestLog:
+                questLogUI.prepareQuestLogShow();
                 questLogUI.gameObject.SetActive(true);
                 break;
 
@@ -283,6 +284,7 @@ public class UIManager : MonoBehaviour
                 break;
 
             case UI.QuestLog:
+                questLogUI.prepareQuestLogHide();
                 questLogUI.gameObject.SetActive(false);
                 break;
 
