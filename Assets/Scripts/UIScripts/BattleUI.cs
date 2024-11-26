@@ -135,8 +135,8 @@ public class BattleUI : MonoBehaviour
 
     private void onInventoryButtonClicked()
     {
+        UIManager.Instance.showUI(UIManager.UI.Inventory);
         Debug.Log("Inventory button clicked!");
-        // TODO: implement inventory visuals and functionality.
     }
 
 
