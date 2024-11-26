@@ -26,6 +26,7 @@ public class KeeperUI : MonoBehaviour
 
     private void exitButtonOnClick()
     {
+        GameManager.Instance.setGameState(GameManager.GameState.Play);
         UIManager.Instance.hideUI(UIManager.UI.Keeper);
     }
 

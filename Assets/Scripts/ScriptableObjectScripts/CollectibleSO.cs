@@ -6,22 +6,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New CollectibleSO", menuName = "Collectible/Create New CollectibleSO")]
 public class CollectibleSO : ItemSO
 {
-    public enum Set
-    {
-        Trophy,
-    }
-
-    public enum SetSize
-    {
-        Trophy = 3,
-    }
-
-
     [SerializeField] private QuestSO relatedQuest;
-    [SerializeField] private Set collectibleSet;
+    [SerializeField] private CollectibleManager.Set collectibleSet;
 
 
-    public Set getSet()
+    public CollectibleManager.Set getSetType()
     {
         return collectibleSet;
     }

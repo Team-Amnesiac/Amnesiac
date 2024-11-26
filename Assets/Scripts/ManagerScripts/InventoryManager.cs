@@ -18,14 +18,14 @@ public class InventoryManager : MonoBehaviour
     }
 
 
-    public void addItem(ItemSO itemSo)
+    public void addItem(ItemSO item)
     {
-        inventoryItems.Add(itemSo);
-        if (itemSo.getItemType() == ItemSO.ItemType.SkillCard)  // Item is a skillcard.
+        inventoryItems.Add(item);
+        if (item.getItemType() == ItemSO.ItemType.SkillCard)  // Item is a skillcard.
         {
             if (PlayerManager.Instance.hasAvailableSkillCardSlot())  // There is an empty slot available.
             {
-                PlayerManager.Instance.equipSkillCard((SkillCardSO)itemSo);
+                PlayerManager.Instance.equipSkillCard((SkillCardSO)item);
             }
         }
     }

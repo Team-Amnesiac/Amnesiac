@@ -14,6 +14,7 @@ public class KeeperInteraction : MonoBehaviour
         if (playerInRange && Input.GetKeyDown(KeyCode.E))
         {
             UIManager.Instance.showUI(UIManager.UI.Keeper); // Show Keeper UI
+            GameManager.Instance.setGameState(GameManager.GameState.Pause);
         }
     }
 
@@ -57,6 +58,7 @@ public class KeeperInteraction : MonoBehaviour
             UIManager.Instance.getDialogueUI().onNextDialogue -= dialogueUI_onNextDialogue;
             // Close the dialogue UI.
             UIManager.Instance.hideUI(UIManager.UI.Dialogue);
+            GameManager.Instance.setGameState(GameManager.GameState.Play);
         }
         else                                        // Dialogue continuing.
         {

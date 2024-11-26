@@ -197,6 +197,7 @@ public class UIManager : MonoBehaviour
                 break;
 
             case UI.Collectibles:
+                collectiblesUI.prepareCollectiblesShow();
                 collectiblesUI.gameObject.SetActive(true);
                 break;
 
@@ -205,6 +206,7 @@ public class UIManager : MonoBehaviour
                 break;
 
             case UI.Dialogue:
+                GameManager.Instance.setGameState(GameManager.GameState.Pause);
                 dialogueUI.gameObject.SetActive(true);
                 break;
 
@@ -259,6 +261,7 @@ public class UIManager : MonoBehaviour
                 break;
 
             case UI.Collectibles:
+                collectiblesUI.prepareCollectiblesHide();
                 collectiblesUI.gameObject.SetActive(false);
                 break;
 
