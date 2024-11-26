@@ -13,6 +13,7 @@ public class PlayerHudUI : MonoBehaviour
     void Start()
     {
         UIManager.Instance.setUI(UIManager.UI.PlayerHud, this);
+        updateVisuals();
         PlayerManager.Instance.OnLevelUp += UpdateLevelUI;
     }
 

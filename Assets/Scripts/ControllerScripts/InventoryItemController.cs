@@ -16,6 +16,7 @@ public class InventoryItemController : MonoBehaviour
 
     void Start()
     {
+        itemButton.onClick.AddListener(useItem);
         removeItemButton.onClick.AddListener(removeItem);
     }
 
