@@ -9,6 +9,7 @@ public class KeeperUI : MonoBehaviour
     [SerializeField] private Button talkButton;
     [SerializeField] private Button shopButton;
     [SerializeField] private Button collectiblesButton;
+    [SerializeField] private KeeperInteraction keeperInteraction;
 
     void Start()
     {
@@ -33,7 +34,7 @@ public class KeeperUI : MonoBehaviour
     {
         UIManager.Instance.hideUI(UIManager.UI.Keeper);
         UIManager.Instance.showUI(UIManager.UI.Dialogue);
-        QuestManager.Instance.talkToKeeper();
+        keeperInteraction.talkTo();
     }
 
 

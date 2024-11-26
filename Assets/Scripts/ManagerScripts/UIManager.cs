@@ -10,7 +10,7 @@ public class UIManager : MonoBehaviour
     private BattleUI       battleUI;
     private CollectiblesUI collectiblesUI;
     private ControlsUI     controlsUI;
-    //private DialogueUI dialogueUI;
+    private DialogueUI     dialogueUI;
     private InventoryUI    inventoryUI;
     private KeeperUI       keeperUI;
     private MainMenuUI     mainMenuUI;
@@ -88,9 +88,21 @@ public class UIManager : MonoBehaviour
     }
 
 
+    public void newDialogue(string message)
+    {
+        dialogueUI.newDialogue(message);
+    }
+
+
     public void addCombatLogMessage(string message)
     {
         battleUI.addCombatLogMessage(message);
+    }
+
+
+    public DialogueUI getDialogueUI()
+    {
+        return dialogueUI;
     }
 
 
@@ -110,9 +122,9 @@ public class UIManager : MonoBehaviour
                 controlsUI = (ControlsUI)uiScript;
                 break;
 
-            //case UI.Dialogue:
-            //    dialogueUI.show();
-            //    break;
+            case UI.Dialogue:
+                dialogueUI = (DialogueUI)uiScript;
+                break;
 
             case UI.Inventory:
                 inventoryUI = (InventoryUI)uiScript;
@@ -147,7 +159,7 @@ public class UIManager : MonoBehaviour
                 break;
 
             default:
-                Debug.Log("ATTEMPT TO SHOW INVALID UI");
+                Debug.Log("ATTEMPT TO SET INVALID UI");
                 break;
         }
     }
@@ -170,7 +182,7 @@ public class UIManager : MonoBehaviour
                 break;
 
             default:
-                Debug.Log("ATTEMPT TO SHOW INVALID UI");
+                Debug.Log("ATTEMPT TO UPDATE INVALID UI");
                 break;
         }
     }
@@ -192,9 +204,9 @@ public class UIManager : MonoBehaviour
                 controlsUI.gameObject.SetActive(true);
                 break;
 
-            //case UI.Dialogue:
-            //    dialogueUI.show();
-            //    break;
+            case UI.Dialogue:
+                dialogueUI.gameObject.SetActive(true);
+                break;
 
             case UI.Inventory:
                 inventoryUI.prepareInventoryShow();
@@ -254,9 +266,9 @@ public class UIManager : MonoBehaviour
                 controlsUI.gameObject.SetActive(false);
                 break;
 
-            //case UI.Dialogue:
-            //    dialogueUI.hide();
-            //    break;
+            case UI.Dialogue:
+                dialogueUI.gameObject.SetActive(false);
+                break;
 
             case UI.Inventory:
                 inventoryUI.prepareInventoryHide();
