@@ -36,7 +36,6 @@ public class BattleManager : MonoBehaviour
 
     // Represents the current attacker in the battle.
     private Attacker attacker         = Attacker.None;
-    private Attacker previousAttacker = Attacker.None;
     private Attacker firstAttacker    = Attacker.None;
 
 
@@ -72,7 +71,7 @@ public class BattleManager : MonoBehaviour
     {
         // Retrieve the BattleUI script.
         this.battleUI = battleUI;
-
+        roundNumber++;
         UIManager.Instance.updateUI(UIManager.UI.Battle);
         if (attacker == Attacker.Enemy)  // Enemy's turn.
         {

@@ -70,7 +70,6 @@ public class BattleUI : MonoBehaviour
 
     public void updateVisuals()
     {
-
         updateTurnText();
         updateTurnCounters();
         updateHealthBars();
@@ -188,6 +187,9 @@ public class BattleUI : MonoBehaviour
         {
             skillCardButton4.interactable = interactable;
         }
+
+        inventoryButton.interactable = interactable;
+        runAwayButton.interactable   = interactable;
     }
 
 
