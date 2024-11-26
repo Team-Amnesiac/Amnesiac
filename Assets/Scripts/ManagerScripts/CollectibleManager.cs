@@ -41,19 +41,32 @@ public class CollectibleManager : MonoBehaviour
     {
         foreach (CollectibleSetSO collectibleSet in activeSets)
         {
-            if (collectibleSet.getSetType() == collectible.getSetType())  // Matching set found.
+            Set collectibleSetType = collectibleSet.getSetType();
+            if (collectibleSetType == collectible.getSetType())  // Matching set found.
             {
-                if (collectibleSet.getSetType() == Set.Trophy)
+                int collectibleCount = -1;
+                int totalCount = -2;
+                if (collectibleSetType == Set.Trophy)
                 {
                     trophyCount++;
-                    if (trophyCount == (int)SetSize.Trophy)  // Set completed.
-                    {
-                        activeSets.Remove(collectibleSet);
-                        completedSets.Add(collectibleSet);
-                    }
+                    collectibleCount = trophyCount;
+                    totalCount = (int)SetSize.Trophy;
                 }
 
-                break;
+                if (collectibleCount == totalCount)  // Set completed.
+                {
+
+                    UIManager.Instance.newNotification($"{collectibleSetType.ToString()} set complete! See the keeper.");
+                    activeSets.Remove(collectibleSet);
+                    completedSets.Add(collectibleSet);
+                }
+                else
+                {
+                    UIManager.Instance.newNotification(
+                        $"{collectibleSetType.ToString()} collected!: {collectibleCount} / {totalCount}");
+                }
+
+                return;
             }
         }
     }
