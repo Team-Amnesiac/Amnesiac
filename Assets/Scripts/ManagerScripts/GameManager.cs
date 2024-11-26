@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
             case GameState.Title:
                 Time.timeScale = 1;
                 previousScene = currentScene;
-                currentScene = SceneLoader.Scene.Title;
+                currentScene  = SceneLoader.Scene.Title;
                 // Load the title scene.
                 SceneLoader.Instance.loadScene(SceneLoader.Scene.Title);
 

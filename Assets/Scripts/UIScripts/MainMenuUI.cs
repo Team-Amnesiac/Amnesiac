@@ -10,10 +10,9 @@ public class MainMenuUI : MonoBehaviour
     [SerializeField] private Button exitButton;
 
 
-    private void Awake()
+    void Start()
     {
-        GameManager.Instance.setGameState(GameManager.GameState.Title);
-
+        UIManager.Instance.setUI(UIManager.UI.MainMenu, this);
         // Initialize the playButton onClick listener.
         playButton.onClick.AddListener(playClick);
         // Initialize the controlsButton onClick listener.
