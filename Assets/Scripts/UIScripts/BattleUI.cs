@@ -70,6 +70,7 @@ public class BattleUI : MonoBehaviour
 
     public void updateVisuals()
     {
+
         updateTurnText();
         updateTurnCounters();
         updateHealthBars();
