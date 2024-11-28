@@ -49,36 +49,6 @@ public class InventoryItemController : MonoBehaviour
     }
 
 
-    public ItemSO getItem()
-    {
-        return item;
-    }
-
-
-    public void setItem(ItemSO itemSo)
-    {
-        this.item = itemSo;
-    }
-
-
-    public void setSprite(Sprite sprite)
-    {
-        itemButton.image.sprite = sprite;
-    }
-
-
-    public void setItemName(string itemName)
-    {
-        itemNameTMP.text = itemName;
-    }
-
-
-    public void setRemovable(bool removable)
-    {
-        removeItemButton.gameObject.SetActive(removable);
-    }
-
-
     public void equipItem()
     {
         equippedImage.gameObject.SetActive(true);
@@ -88,5 +58,46 @@ public class InventoryItemController : MonoBehaviour
     public void unequipItem()
     {
         equippedImage.gameObject.SetActive(false);
+    }
+
+
+    public ItemSO getItem()
+    {
+        return item;
+    }
+
+
+    public void setItem(ItemSO item)
+    {
+        // Update the inventory item context.
+        this.item = item;                                // Set the item.
+        itemNameTMP.text = item.getItemName();           // Set the item name text.
+        itemButton.image.sprite = item.getItemSprite();  // Set the inventory item sprite.
+
+        if (item.getItemType() == ItemSO.ItemType.SkillCard)  // Item is a skill card.
+        {
+            // Cannot remove a skill card.
+            removeItemButton.gameObject.SetActive(false);
+
+            // Get the skill card script.
+            SkillCardSO skillCard = (SkillCardSO)item;
+            if (skillCard.isEquipped())  // Skill card is equipped.
+            {
+                // Display the equipped item indicator.
+                equipItem();
+
+                return;
+            }
+        }
+        // Hide the equipped item indicator, as the item is not equipped.
+        unequipItem();
+    }
+
+
+    public void setRemovable(bool removable)
+    {
+        if (item.getItemType() == ItemSO.ItemType.SkillCard) return;  // Cannot remove a skill card.
+
+        removeItemButton.gameObject.SetActive(removable);
     }
 }
