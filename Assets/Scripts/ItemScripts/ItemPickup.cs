@@ -40,16 +40,15 @@ public class ItemPickup : MonoBehaviour
         {
             QuestManager.Instance.addRelic((RelicSO)item);
         }
-        else if (itemType == ItemSO.ItemType.Collectible)  // Item is not a collectible or a relic.
+        else if (itemType == ItemSO.ItemType.Collectible)  
         {
             CollectibleManager.Instance.addCollectible((CollectibleSO)item);
             QuestManager.Instance.addCollectible((CollectibleSO)item);
         }
-        else
+        else  // Item is not a collectible or a relic.
         {
             InventoryManager.Instance.addItem(item);
         }
-        
         
         Destroy(gameObject);
     }

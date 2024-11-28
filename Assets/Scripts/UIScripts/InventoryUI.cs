@@ -23,19 +23,33 @@ public class InventoryUI : MonoBehaviour
     {
         foreach (ItemSO item in InventoryManager.Instance.getInventoryItems())
         {
-
             GameObject obj = Instantiate(inventoryItemPrefab, inventoryContent.transform);
 
             InventoryItemController controller = obj.GetComponent<InventoryItemController>();
             controller.setItem(item);
             controller.setItemName(item.getItemName());
             controller.setSprite(item.getItemSprite());
-            if (item.getItemType() == ItemSO.ItemType.SkillCard || !enableRemoveToggle.isOn)  // Item is a SkillCard or all items cannot be removed.
+            if (item.getItemType() == ItemSO.ItemType.SkillCard)  // Item is a SkillCard or all items cannot be removed.
             {
+                controller.setRemovable(false);
+                SkillCardSO skillCard = (SkillCardSO)item;
+                if (skillCard.isEquipped())
+                {
+                    controller.equipItem();
+                }
+                else
+                {
+                    controller.unequipItem();
+                }
+            }
+            else if (!enableRemoveToggle.isOn)
+            {
+                controller.unequipItem();
                 controller.setRemovable(false);
             }
             else
             {
+                controller.unequipItem();
                 controller.setRemovable(true);
             }
         }

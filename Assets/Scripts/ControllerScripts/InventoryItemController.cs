@@ -7,9 +7,9 @@ using Button = UnityEngine.UI.Button;
 public class InventoryItemController : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI itemNameTMP;
-    [SerializeField] private Image           itemImage;
     [SerializeField] private Button          itemButton;
     [SerializeField] private Button          removeItemButton;
+    [SerializeField] private Image           equippedImage;
 
     private ItemSO item;
 
@@ -30,7 +30,22 @@ public class InventoryItemController : MonoBehaviour
     public void useItem()
     {
         item.use();
-        InventoryManager.Instance.removeItem(item);
+        if (item.getItemType() == ItemSO.ItemType.SkillCard)  // Item is a skill card.
+        {
+            SkillCardSO skillCard = (SkillCardSO)item;
+            if (skillCard.isEquipped())  // Skill card was equipped.
+            {
+                equipItem();
+            }
+            else                         // Skill card was unequipped.
+            {
+                unequipItem();
+            }
+        }
+        else
+        {
+            InventoryManager.Instance.removeItem(item);
+        }
     }
 
 
@@ -48,7 +63,7 @@ public class InventoryItemController : MonoBehaviour
 
     public void setSprite(Sprite sprite)
     {
-        itemImage.sprite = sprite;
+        itemButton.image.sprite = sprite;
     }
 
 
@@ -61,5 +76,17 @@ public class InventoryItemController : MonoBehaviour
     public void setRemovable(bool removable)
     {
         removeItemButton.gameObject.SetActive(removable);
+    }
+
+
+    public void equipItem()
+    {
+        equippedImage.gameObject.SetActive(true);
+    }
+
+
+    public void unequipItem()
+    {
+        equippedImage.gameObject.SetActive(false);
     }
 }

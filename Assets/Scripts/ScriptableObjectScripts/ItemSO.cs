@@ -1,7 +1,7 @@
 using UnityEngine;
 
 
-[CreateAssetMenu(fileName = "New ItemSO", menuName = "Item/Create New ItemSO")]
+[CreateAssetMenu(fileName = "New ItemSO", menuName = "ItemSO/Create New ItemSO")]
 public class ItemSO : ScriptableObject
 {
     [SerializeField] private int      id;

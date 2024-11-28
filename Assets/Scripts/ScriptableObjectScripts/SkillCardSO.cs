@@ -18,14 +18,7 @@ public class SkillCardSO : ItemSO
     [SerializeField] private float damage;
     [SerializeField] private AttackType attackType;
     
-    private bool isEquiped = false;
-
-
-    public SkillCardSO(float damage, AttackType attackType)
-    {
-        this.damage     = damage;
-        this.attackType = attackType;
-    }
+    private bool equipped = false;
 
 
     public float getDamage()
@@ -42,7 +35,7 @@ public class SkillCardSO : ItemSO
 
     public void toggleEquip()
     {
-        if (isEquiped)
+        if (equipped)
         {
             PlayerManager.Instance.unequip(this);
         }
@@ -50,6 +43,12 @@ public class SkillCardSO : ItemSO
         {
             PlayerManager.Instance.equipSkillCard(this);
         }
-        isEquiped = !isEquiped;
+        equipped = !equipped;
+    }
+
+
+    public bool isEquipped()
+    {
+        return equipped;
     }
 }
