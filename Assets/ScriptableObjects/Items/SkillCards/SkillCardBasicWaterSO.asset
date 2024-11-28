@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SkillCardBasicWaterSO
   m_EditorClassIdentifier: 
   id: 0
-  itemName: Basic Wind
+  itemName: Basic Water
   value: 0
   sprite: {fileID: 21300000, guid: 1c42f53aede782443815db696299d2ad, type: 3}
   itemType: 3
