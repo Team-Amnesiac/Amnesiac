@@ -1,0 +1,364 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &996023771246375460
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7742929113720131142}
+  - component: {fileID: 2200067936236266246}
+  - component: {fileID: 6547488445689688364}
+  m_Layer: 0
+  m_Name: desert_house_01_LOD2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7742929113720131142
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 996023771246375460}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4889797294813324096}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &2200067936236266246
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 996023771246375460}
+  m_Mesh: {fileID: -8321302226933649013, guid: 51180790880343d41bb07744c52debfb, type: 3}
+--- !u!23 &6547488445689688364
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 996023771246375460}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: da99ad286e4f8544ca8d6dc6029b197a, type: 2}
+  - {fileID: 2100000, guid: 96bab28ad047a37469ee71f7e9c747f0, type: 2}
+  - {fileID: 2100000, guid: 567d1683a27db00469d635d49724e130, type: 2}
+  - {fileID: 2100000, guid: c8cc500e8e7031d428006e357306382a, type: 2}
+  - {fileID: 2100000, guid: abd144bf7bc77434faac459994217cfd, type: 2}
+  - {fileID: 2100000, guid: 6f7e906652dd1434f885bac0a38dcf0f, type: 2}
+  - {fileID: 2100000, guid: 53470e029b011fb4186e085693783ab2, type: 2}
+  - {fileID: 2100000, guid: 40be601aae4e9ed4bb7c2a44842357fe, type: 2}
+  - {fileID: 2100000, guid: da99ad286e4f8544ca8d6dc6029b197a, type: 2}
+  - {fileID: 2100000, guid: 9994dbf5440e6594fad75c4af46d0d01, type: 2}
+  - {fileID: 2100000, guid: 9994dbf5440e6594fad75c4af46d0d01, type: 2}
+  - {fileID: 2100000, guid: 40be601aae4e9ed4bb7c2a44842357fe, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &4889797294813364064
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4889797294813324096}
+  - component: {fileID: 4889797294800336864}
+  - component: {fileID: 8963584211542169037}
+  m_Layer: 0
+  m_Name: Prefab_desert_house_01_closed
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4889797294813324096
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4889797294813364064}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2824469787393653423}
+  - {fileID: 8001247711381805090}
+  - {fileID: 7742929113720131142}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!205 &4889797294800336864
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4889797294813364064}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0, y: 7.38132, z: 0}
+  m_Size: 19.539185
+  m_FadeMode: 1
+  m_AnimateCrossFading: 1
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.25
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 1831896471867204001}
+  - screenRelativeHeight: 0.125
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 8155267365984762596}
+  - screenRelativeHeight: 0.01
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 6547488445689688364}
+  m_Enabled: 1
+--- !u!64 &8963584211542169037
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4889797294813364064}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5334404962925722277, guid: 51180790880343d41bb07744c52debfb, type: 3}
+--- !u!1 &5462917272110354163
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2824469787393653423}
+  - component: {fileID: 436242598073505067}
+  - component: {fileID: 1831896471867204001}
+  m_Layer: 0
+  m_Name: desert_house_01_LOD0
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2824469787393653423
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5462917272110354163}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4889797294813324096}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &436242598073505067
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5462917272110354163}
+  m_Mesh: {fileID: 1040118346542607634, guid: 51180790880343d41bb07744c52debfb, type: 3}
+--- !u!23 &1831896471867204001
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5462917272110354163}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: abd144bf7bc77434faac459994217cfd, type: 2}
+  - {fileID: 2100000, guid: f09ea193b3a2c8f479c12770aaa73de6, type: 2}
+  - {fileID: 2100000, guid: da99ad286e4f8544ca8d6dc6029b197a, type: 2}
+  - {fileID: 2100000, guid: f09ea193b3a2c8f479c12770aaa73de6, type: 2}
+  - {fileID: 2100000, guid: c8cc500e8e7031d428006e357306382a, type: 2}
+  - {fileID: 2100000, guid: 6f7e906652dd1434f885bac0a38dcf0f, type: 2}
+  - {fileID: 2100000, guid: 53470e029b011fb4186e085693783ab2, type: 2}
+  - {fileID: 2100000, guid: 2651c877f423e164a9d41510927e125f, type: 2}
+  - {fileID: 2100000, guid: 12dd73b5d1e5d044682ff61de5a86386, type: 2}
+  - {fileID: 2100000, guid: da99ad286e4f8544ca8d6dc6029b197a, type: 2}
+  - {fileID: 2100000, guid: 96bab28ad047a37469ee71f7e9c747f0, type: 2}
+  - {fileID: 2100000, guid: 567d1683a27db00469d635d49724e130, type: 2}
+  - {fileID: 2100000, guid: 40be601aae4e9ed4bb7c2a44842357fe, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &8557167259626486080
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8001247711381805090}
+  - component: {fileID: 7852181949815422566}
+  - component: {fileID: 8155267365984762596}
+  m_Layer: 0
+  m_Name: desert_house_01_LOD1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8001247711381805090
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8557167259626486080}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4889797294813324096}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &7852181949815422566
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8557167259626486080}
+  m_Mesh: {fileID: -4979166480775631796, guid: 51180790880343d41bb07744c52debfb, type: 3}
+--- !u!23 &8155267365984762596
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8557167259626486080}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: c8cc500e8e7031d428006e357306382a, type: 2}
+  - {fileID: 2100000, guid: abd144bf7bc77434faac459994217cfd, type: 2}
+  - {fileID: 2100000, guid: 6f7e906652dd1434f885bac0a38dcf0f, type: 2}
+  - {fileID: 2100000, guid: 53470e029b011fb4186e085693783ab2, type: 2}
+  - {fileID: 2100000, guid: 2651c877f423e164a9d41510927e125f, type: 2}
+  - {fileID: 2100000, guid: da99ad286e4f8544ca8d6dc6029b197a, type: 2}
+  - {fileID: 2100000, guid: 12dd73b5d1e5d044682ff61de5a86386, type: 2}
+  - {fileID: 2100000, guid: 9994dbf5440e6594fad75c4af46d0d01, type: 2}
+  - {fileID: 2100000, guid: f09ea193b3a2c8f479c12770aaa73de6, type: 2}
+  - {fileID: 2100000, guid: 40be601aae4e9ed4bb7c2a44842357fe, type: 2}
+  - {fileID: 2100000, guid: 40be601aae4e9ed4bb7c2a44842357fe, type: 2}
+  - {fileID: 2100000, guid: da99ad286e4f8544ca8d6dc6029b197a, type: 2}
+  - {fileID: 2100000, guid: 96bab28ad047a37469ee71f7e9c747f0, type: 2}
+  - {fileID: 2100000, guid: 567d1683a27db00469d635d49724e130, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
