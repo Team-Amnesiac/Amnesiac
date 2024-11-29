@@ -12,9 +12,8 @@ public class SceneLoader : MonoBehaviour
     {
         Title,
         Hub,
-        World1,
-        World2,
-        Battle
+        Noryx,
+        Loikart,
     }
     
 
@@ -37,10 +36,6 @@ public class SceneLoader : MonoBehaviour
         if (scene == Scene.Title)
         {
             SceneManager.LoadScene("TitleScene");
-        }
-        else if (scene == Scene.Battle)
-        {
-            SceneManager.LoadScene("BattleScene");
         }
     }
 }

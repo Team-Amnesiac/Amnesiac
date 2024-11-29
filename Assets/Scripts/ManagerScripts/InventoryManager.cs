@@ -21,12 +21,13 @@ public class InventoryManager : MonoBehaviour
     public void addItem(ItemSO item)
     {
         inventoryItems.Add(item);
-        if (item.getItemType() == ItemSO.ItemType.SkillCard)  // Item is a skillcard.
+        if (item.getItemType() == ItemSO.ItemType.SkillCard &&   // Item is a skill card.
+            PlayerManager.Instance.hasAvailableSkillCardSlot())  // Available skill card slot.
         {
-            if (PlayerManager.Instance.hasAvailableSkillCardSlot())  // There is an empty slot available.
-            {
-                PlayerManager.Instance.equipSkillCard((SkillCardSO)item);
-            }
+            SkillCardSO skillCard = (SkillCardSO)item;
+
+            // Equip the skill card to the first available slot.
+            PlayerManager.Instance.equipSkillCard(skillCard);
         }
     }
 

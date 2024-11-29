@@ -33,7 +33,20 @@ public class ItemSO : ScriptableObject
                 break;
 
             case ItemType.SkillCard:
-                ((SkillCardSO)this).toggleEquip();
+                // Retrieve the skill card script.
+                SkillCardSO skillCard = (SkillCardSO)this;
+
+                if (skillCard.isEquipped())  // Skill card is equipped.
+                {
+                    // Unequip skill card.
+                    PlayerManager.Instance.unequipSkillCard(skillCard);
+                }
+                else                         // Skill card is not equipped.
+                {
+                    // Equip skill card.
+                    PlayerManager.Instance.equipSkillCard(skillCard);
+                }
+                
                 break;
         }
     }

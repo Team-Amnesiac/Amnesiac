@@ -193,6 +193,7 @@ public class UIManager : MonoBehaviour
         switch (ui)
         {
             case UI.Battle:
+                battleUI.prepareBattleShow();
                 battleUI.gameObject.SetActive(true);
                 break;
 
@@ -211,6 +212,7 @@ public class UIManager : MonoBehaviour
                 break;
 
             case UI.Inventory:
+                if (inventoryUI.gameObject.active) break;
                 inventoryUI.prepareInventoryShow();
                 inventoryUI.gameObject.SetActive(true);
                 break;

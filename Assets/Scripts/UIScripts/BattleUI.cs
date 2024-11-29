@@ -31,25 +31,12 @@ public class BattleUI : MonoBehaviour
     [SerializeField] private GameObject messagePrefab;
 
 
-    void Awake()
-    {
-        UIManager.Instance.setUI(UIManager.UI.Battle, this);
-    }
-
-
     /* UNITY FUNCTIONS */
 
     void Start()
     {
-        turnIndicatorTMP.gameObject.SetActive(true);
-        criticalHitTMP.gameObject.SetActive(false);
-        
-        updateSkillCardButtonText();
-
-        addOnClickListeners();
-
-        // Start the battle and pass this object to the BattleManager.
-        BattleManager.Instance.startBattle(this);
+        UIManager.Instance.setUI(UIManager.UI.Battle, this);
+        UIManager.Instance.hideUI(UIManager.UI.Battle);
     }
 
 
@@ -67,6 +54,14 @@ public class BattleUI : MonoBehaviour
 
     /* PUBLIC FUNCTIONS */
 
+
+    public void prepareBattleShow()
+    {
+        criticalHitTMP.gameObject.SetActive(false);
+        updateSkillCardButtonText();
+        addOnClickListeners();
+        BattleManager.Instance.startBattle();
+    }
 
     public void updateVisuals()
     {

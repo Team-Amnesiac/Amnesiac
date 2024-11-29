@@ -10,6 +10,8 @@ public class PlayerMovement : MonoBehaviour
     {
         animator = GetComponent<Animator>();
 
+        PlayerManager.Instance.setPlayerGameObject(this.gameObject);
+
         //not necessary anymore
         if (Camera.main != null)
         {

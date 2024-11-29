@@ -10,7 +10,7 @@ public class KeeperUI : MonoBehaviour
     [SerializeField] private Button shopButton;
     [SerializeField] private Button collectiblesButton;
     [SerializeField] private KeeperInteraction keeperInteraction;
-
+    
     void Start()
     {
         UIManager.Instance.setUI(UIManager.UI.Keeper, this);
@@ -20,7 +20,6 @@ public class KeeperUI : MonoBehaviour
         talkButton.onClick.AddListener(talkButtonOnClick);
         shopButton.onClick.AddListener(shopButtonOnClick);
         collectiblesButton.onClick.AddListener(collectiblesButtonOnClick);
-
     }
 
 

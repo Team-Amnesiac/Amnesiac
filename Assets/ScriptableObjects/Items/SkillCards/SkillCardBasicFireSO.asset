@@ -19,3 +19,4 @@ MonoBehaviour:
   itemType: 3
   damage: 25
   attackType: 1
+  equipped: 0

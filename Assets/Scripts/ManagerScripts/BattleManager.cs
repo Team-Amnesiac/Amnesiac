@@ -20,8 +20,6 @@ public class BattleManager : MonoBehaviour
 
     // The current enemy the player is engaged in battle with.
     private EnemyAI  enemyAI;
-    // A reference to the BattleUI class to update the battle visuals.
-    private BattleUI battleUI;
 
     // The current round number.
     private int   roundNumber     = 0;
@@ -57,23 +55,24 @@ public class BattleManager : MonoBehaviour
 
     public void initializeBattle(Attacker attacker, EnemyAI enemyAI)
     {
+        enemyAI.gameObject.SetActive(false);
         // Set the GameState to Battle.
         GameManager.Instance.setGameState(GameManager.GameState.Battle);
+        
         // Set the attacker to whoever attacked first.
         this.attacker = attacker;
         this.firstAttacker = attacker;
         // Set the EnemyAI of the current battle.
         this.enemyAI = enemyAI;
+        roundNumber++;
+        UIManager.Instance.updateUI(UIManager.UI.Battle);
+        UIManager.Instance.showUI(UIManager.UI.Battle);
     }
 
 
-    public void startBattle(BattleUI battleUI)
+    public void startBattle()
     {
-        // Retrieve the BattleUI script.
-        this.battleUI = battleUI;
-        roundNumber++;
-        UIManager.Instance.updateUI(UIManager.UI.Battle);
-        if (attacker == Attacker.Enemy)  // Enemy's turn.
+        if (attacker == Attacker.Enemy)  // Enemy's turn
         {
             // Play the enemy's turn.
             StartCoroutine(enemyTurn());
@@ -190,7 +189,7 @@ public class BattleManager : MonoBehaviour
 
         dealDamageToPlayer(enemyAI.getStrength());
 
-        battleUI.addCombatLogMessage($"Enemy attacked the Player for {enemyAI.getStrength()} damage !");
+        UIManager.Instance.addCombatLogMessage($"Enemy attacked the Player for {enemyAI.getStrength()} damage !");
 
         if (PlayerManager.Instance.getHealth() <= 0)  // Player defeated.
         {
@@ -202,7 +201,7 @@ public class BattleManager : MonoBehaviour
     }
 
 
-    private void swapTurns()
+    public void swapTurns()
     {
         if (attacker == Attacker.Enemy)
         {
@@ -252,7 +251,17 @@ public class BattleManager : MonoBehaviour
 
     private void endBattle()
     {
-        GameManager.Instance.setGameState(GameManager.GameState.Play);
+        UIManager.Instance.hideUI(UIManager.UI.Battle);
+        if (PlayerManager.Instance.calculateHealthPercent() == 0.0f)  // Player has been defeated.
+        {
+            // Game over.
+            GameManager.Instance.setGameState(GameManager.GameState.Title);
+        }
+        else                                                          // Enemy has been defeated.
+        {
+            Destroy(enemyAI.gameObject);
+            GameManager.Instance.setGameState(GameManager.GameState.Play);
+        }
     }
 
 

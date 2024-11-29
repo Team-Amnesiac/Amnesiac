@@ -30,6 +30,7 @@ public class InventoryItemController : MonoBehaviour
     public void useItem()
     {
         item.use();
+
         if (item.getItemType() == ItemSO.ItemType.SkillCard)  // Item is a skill card.
         {
             SkillCardSO skillCard = (SkillCardSO)item;
@@ -42,9 +43,17 @@ public class InventoryItemController : MonoBehaviour
                 unequipItem();
             }
         }
-        else
+
+        if (GameManager.Instance.getGameState() == GameManager.GameState.Battle)
         {
-            InventoryManager.Instance.removeItem(item);
+            UIManager.Instance.addCombatLogMessage($"Player used {item.getItemName()}");
+            UIManager.Instance.updateUI(UIManager.UI.Battle);
+            BattleManager.Instance.swapTurns();
+        }
+
+        if (item.getItemType() != ItemSO.ItemType.SkillCard)  // Item is not a skill card.
+        {
+            removeItem();
         }
     }
 

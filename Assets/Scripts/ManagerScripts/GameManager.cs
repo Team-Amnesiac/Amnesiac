@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
         Title,     // Game is in the Title Scene.
         Play,      // Game is in the play state (in a level).
         Pause,     // Game is in the paused state.
-        Battle,    // Game is in the Battle Scene.
+        Battle,    // Game is in the battle state.
     }
 
 
@@ -64,9 +64,7 @@ public class GameManager : MonoBehaviour
                 }
                 else if (gameState == GameState.Battle)
                 {
-                    SceneLoader.Instance.loadScene(previousScene);
-                    // Swap values of previous scene and current scene.
-                    (previousScene, currentScene) = (currentScene, previousScene);
+                    PlayerManager.Instance.enablePlayerGameObject();
                 }
 
                 break;
@@ -79,9 +77,7 @@ public class GameManager : MonoBehaviour
 
             case GameState.Battle:
                 Time.timeScale = 1;
-                previousScene = currentScene;
-                // Load the Battle scene.
-                SceneLoader.Instance.loadScene(SceneLoader.Scene.Battle);
+                PlayerManager.Instance.disablePlayerGameObject();
 
                 break;
 
@@ -93,7 +89,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
+    
     /* GET FUNCTIONS */
 
     public GameState getGameState()

@@ -29,6 +29,8 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private int experienceThreshold = 50; // eXP required for the next level
     [SerializeField] private int staminaMeter        = 100; // stamina used when skillcard used, no stamina means player cannot use skillcards.
 
+    private GameObject playerGameObject;
+
     private float playerExperience = 0.0f;
 
     [SerializeField] private SkillCardSO[] equippedSkillCardArray;
@@ -72,16 +74,17 @@ public class PlayerManager : MonoBehaviour
     }
 
 
-    public void equipSkillCard(SkillCardSO skillCardSo)
+    public void equipSkillCard(SkillCardSO skillCard)
     {
         for (int i = 0; i < MAX_EQUIPPED_SKILL_CARDS; i++)
         {
             if (equippedSkillCardArray[i] == null)
             {
-                equippedSkillCardArray[i] = skillCardSo;
-                Debug.Log($"SkillCard {skillCardSo.getItemName()} equipped!");
+                equippedSkillCardArray[i] = skillCard;
+                Debug.Log($"SkillCard {skillCard.getItemName()} equipped!");
                 
-                return;
+                skillCard.setEquipped(true);
+                break;
             }
         }
     }
@@ -105,6 +108,19 @@ public class PlayerManager : MonoBehaviour
             levelUp();
         }
     }
+
+
+    public void disablePlayerGameObject()
+    {
+        playerGameObject.SetActive(false);
+    }
+
+
+    public void enablePlayerGameObject()
+    {
+        playerGameObject.SetActive(true);
+    }
+
 
     private int CalculateThreshold()
     {
@@ -137,13 +153,15 @@ public class PlayerManager : MonoBehaviour
         UIManager.Instance.updateUI(UIManager.UI.PlayerHud);
     }
 
-    public void unequip(SkillCardSO skillCardSo)
+    public void unequipSkillCard(SkillCardSO skillCard)
     {
         for (int i = 0; i < MAX_EQUIPPED_SKILL_CARDS; i++)
         {
-            if (equippedSkillCardArray[i] == skillCardSo)
+            if (equippedSkillCardArray[i] == skillCard)
             {
+                skillCard.setEquipped(false);
                 equippedSkillCardArray[i] = null;
+                break;
             }
         }
     }
@@ -219,5 +237,11 @@ public class PlayerManager : MonoBehaviour
         {
             return false;
         }
+    }
+
+
+    public void setPlayerGameObject(GameObject playerGameObject)
+    {
+        this.playerGameObject = playerGameObject;
     }
 }

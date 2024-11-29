@@ -41,7 +41,7 @@ public class ItemPickup : MonoBehaviour
         }
         else  // Item is not a collectible or a relic.
         {
-            InventoryManager.Instance.addItem(item);
+             InventoryManager.Instance.addItem(item);
         }
         
         Destroy(gameObject);
