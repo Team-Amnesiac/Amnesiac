@@ -61,8 +61,10 @@ public class PlayerMovement : MonoBehaviour
         // Process "Enemy" triggers
         if (other.CompareTag("Enemy"))
         {
+            EnemyAI enemy = other.gameObject.GetComponent<EnemyAI>();
             Debug.Log("Player engaged an enemy, transitioning to battle scene...");
-            GameManager.Instance.setGameState(GameManager.GameState.Battle);
+            BattleManager.Instance.initializeBattle(BattleManager.Attacker.Player,
+                                                    enemy);
         }
     }
 }

@@ -153,6 +153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floatHeight: 0.25
   rotationSpeed: 30
+  itemPickup: {fileID: 4717518759653071495}
 --- !u!1 &6258239384717567240
 GameObject:
   m_ObjectHideFlags: 0
@@ -198,4 +199,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2a154e96ab3eb44390d7b542fe6b635, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Item: {fileID: 11400000, guid: 53cdd720c49b15e4d89ea42958d7dc23, type: 2}
+  item: {fileID: 0}

@@ -10,12 +10,6 @@ public class ItemPickup : MonoBehaviour
     private Animator playerAnimator;
 
 
-    private void Start()
-    {
-        GetComponentInChildren<ItemVisuals>().setItemPickup(this);
-    }
-
-
     void Update()
     {
         if (playerNearby && Input.GetKeyDown(KeyCode.E))

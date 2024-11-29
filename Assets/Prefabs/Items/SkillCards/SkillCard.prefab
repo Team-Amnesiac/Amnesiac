@@ -216,7 +216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2a154e96ab3eb44390d7b542fe6b635, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Item: {fileID: 0}
+  item: {fileID: 0}
 --- !u!1 &2386978316266896121
 GameObject:
   m_ObjectHideFlags: 0
@@ -863,6 +863,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floatHeight: 0.25
   rotationSpeed: 30
+  itemPickup: {fileID: 841069365227464408}
 --- !u!1 &8104442044311522357
 GameObject:
   m_ObjectHideFlags: 0

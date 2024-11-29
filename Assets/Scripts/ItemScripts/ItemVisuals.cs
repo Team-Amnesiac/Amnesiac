@@ -6,10 +6,10 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class ItemVisuals : MonoBehaviour
 {
-    [SerializeField] private float floatHeight   = 0.25f;
-    [SerializeField] private float rotationSpeed = 30.0f;
+    [SerializeField] private float      floatHeight   = 0.25f;
+    [SerializeField] private float      rotationSpeed = 30.0f;
+    [SerializeField] private ItemPickup itemPickup;
     private float initialY;
-    private ItemPickup itemPickup;
 
 
     void Start()
@@ -53,11 +53,5 @@ public class ItemVisuals : MonoBehaviour
             itemPickup.setPlayerAnimator(null);
             Debug.Log("Player left the item.");
         }
-    }
-
-
-    public void setItemPickup(ItemPickup itemPickup)
-    {
-        this.itemPickup = itemPickup;
     }
 }

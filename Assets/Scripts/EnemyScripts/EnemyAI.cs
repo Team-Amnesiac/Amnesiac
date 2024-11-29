@@ -79,7 +79,6 @@ public class EnemyAI : MonoBehaviour
             Debug.Log("Nightcrawler hits the player, initiating battle with enemy turn first.");
             // Start the battle.
             BattleManager.Instance.initializeBattle(BattleManager.Attacker.Enemy, this);
-            
         }
     }
 

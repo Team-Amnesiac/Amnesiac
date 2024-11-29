@@ -121,6 +121,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floatHeight: 0.25
   rotationSpeed: 30
+  itemPickup: {fileID: 6713780783899363801}
 --- !u!1 &4449267086436950201
 GameObject:
   m_ObjectHideFlags: 0
