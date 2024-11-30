@@ -267,6 +267,7 @@ public class BattleManager : MonoBehaviour
         }
         else                                                          // Enemy has been defeated.
         {
+            PlayerManager.Instance.increaseExperience(enemyAI.getExperienceReward());
             Destroy(enemyAI.gameObject);
             GameManager.Instance.setGameState(GameManager.GameState.Play);
         }
