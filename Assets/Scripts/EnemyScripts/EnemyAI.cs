@@ -11,6 +11,7 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private float speed          = 3.5f;
     [SerializeField] private float maxHealth      = 150f;
     [SerializeField] private float strength       = 15.0f;
+    [SerializeField] private int   experienceReward = 20;
 
     [SerializeField] private float health;
     [SerializeField] private bool ispatrol;
@@ -144,5 +145,11 @@ public class EnemyAI : MonoBehaviour
     public float getStrength()
     {
         return strength;
+    }
+
+
+    public int getExperienceReward()
+    {
+        return experienceReward;
     }
 }
