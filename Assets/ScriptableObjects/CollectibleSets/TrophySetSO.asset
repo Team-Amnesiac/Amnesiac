@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a9c6412f642a504bb30027a3e3c1bc7, type: 3}
+  m_Name: TrophySetSO
+  m_EditorClassIdentifier: 
+  setType: 0
+  collectiblsInSet:
+  - {fileID: 11400000, guid: bcd983f7009093f4abdcd14595e116dc, type: 2}
+  - {fileID: 11400000, guid: d124bccebc09c014da1c5874f1983650, type: 2}
+  - {fileID: 11400000, guid: 53cdd720c49b15e4d89ea42958d7dc23, type: 2}

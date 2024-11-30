@@ -1,0 +1,261 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: desert_wall_04
+  m_Shader: {fileID: 45, guid: 0000000000000000f000000000000000, type: 0}
+  m_ValidKeywords:
+  - _EMISSION
+  - _NORMALMAP
+  - _PARALLAXMAP
+  - _SPECGLOSSMAP
+  m_InvalidKeywords: []
+  m_LightmapFlags: 1
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 2800000, guid: 03affbf7ff2fe8644b68b10fcfcc9d3d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ClothEffectOffsetMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ComplexDetailMaskMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DecalMap1:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DecalMap2:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DecalMap3:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DecalMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DecalNormSpec1:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DecalNormSpec2:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _GVSnowBumpMap1:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: d1eab73632da24041ba981f21cfbd73e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 2800000, guid: d4be0fe628a44184aaa736cb4be33fb1, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SpecGlossMap:
+        m_Texture: {fileID: 2800000, guid: 1793ed617cf15a8418915cd150dd459f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _VertexColorMap1:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _VertexColorMap_AlbedoSmoothness12:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _VertexColorMap_Normal12:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _VertexColorNormal1:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _BumpScale: 1
+    - _ClothEffect: 0
+    - _ClothEffectIntensity: 0.05
+    - _ClothEffectMethod: 0
+    - _ClothEffectSpeed: 0.15
+    - _ComplexDetailUV: 0
+    - _Cull: 2
+    - _Cutoff: 0.5
+    - _DecalDetail: 0
+    - _DecalMaskSmoothness: 1
+    - _DecalMode: 1
+    - _DecalSystem: 0
+    - _DepthFactor: 0
+    - _DepthUnits: 0
+    - _DetailNormalMapScale: 1
+    - _DetailSpecularBlend: 0
+    - _Dissolve: 0
+    - _DstBlend: 0
+    - _GVSnow: 0
+    - _GVSnowAmount: 0.62
+    - _GVSnowBumpScale1: 4
+    - _GVSnowCutoffAngle: 0.774
+    - _GVSnowCutoffFade: 0.9
+    - _GVSnowFillAngle: -0.08
+    - _GVSnowFillFade: 1.8
+    - _GVSnowFlattening: 0
+    - _GVSnowSlope: 0.74
+    - _GVSnowSmooth: 3.07
+    - _GVSnowVColor: 0
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _Highlighting: 0
+    - _Metallic: 0
+    - _MetallicMultiplier: 1
+    - _Mode: 0
+    - _OcclusionStrength: 1
+    - _Parallax: 0.0131
+    - _RimAnimFrequency: 3
+    - _RimAnimPower: 7
+    - _RimDiffuse: 0
+    - _RimFactor: 3
+    - _RimMaxDistance: 68
+    - _RimMinDistance: 30
+    - _RimMinDistanceBlend: 20
+    - _RimPower: 1
+    - _SmoothnessTextureChannel: 0
+    - _SpecMultiplier: 1
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _Translucency: 0
+    - _TwoSidedLighting: 0
+    - _TwoSidedLightingOcclusion: 1
+    - _UVSec: 0
+    - _VertexColorHeightFactor: 2.2
+    - _VertexColorHeightPower: 2.5
+    - _VertexColorIntensity: 1
+    - _VertexColorMap_BlendSecondNormals1: 0
+    - _VertexColorMap_BlendSecondNormals2: 0
+    - _VertexColorMap_BlendSecondNormals3: 0
+    - _VertexColorMap_HeightBlendSize: 0.1
+    - _VertexColorMap_HeightContrast1: 1
+    - _VertexColorMap_HeightContrast2: 1
+    - _VertexColorMap_HeightMainContrast: 1
+    - _VertexColorMap_HeightMainOffset: 0
+    - _VertexColorMap_HeightMapDecalInfluence: 1
+    - _VertexColorMap_HeightOffset1: 0
+    - _VertexColorMap_HeightOffset2: 0
+    - _VertexColorMap_Occlusion1: 1
+    - _VertexColorMap_Occlusion2: 1
+    - _VertexColorMap_PowerFactor1: 0
+    - _VertexColorMap_PowerFactor2: 0
+    - _VertexColorMap_PowerFactorNormal1: -2
+    - _VertexColorMap_PowerFactorNormal2: -2
+    - _VertexColorMap_PowerFactorNormal3: -2
+    - _VertexColorMap_Smoothness1Bright: 1
+    - _VertexColorMap_Smoothness1Dark: 0
+    - _VertexColorMap_Smoothness2Bright: 1
+    - _VertexColorMap_Smoothness2Dark: 0
+    - _VertexColorMap_SpecularMetallicAlbedoMix1: 0.5
+    - _VertexColorMap_SpecularMetallicAlbedoMix2: 0.5
+    - _VertexColorMap_UVIndex: 0
+    - _VertexColorNormalFactor: 1
+    - _VertexColorNormalPower: 1
+    - _VertexColorPriority: 2.2
+    - _VertexColorSmoothness: 0.25
+    - _VertexColorSpecularPower: 1
+    - _VertexColorTerrain: 0
+    - _VertexDisplace: 0
+    - _VertexMask: 0
+    - _VertexVerticalAdjustment: 0
+    - _ZWrite: 1
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _DecalColor1: {r: 1, g: 1, b: 1, a: 1}
+    - _DecalColor2: {r: 1, g: 1, b: 1, a: 1}
+    - _DecalColor3: {r: 1, g: 1, b: 1, a: 1}
+    - _DecalDetailColor: {r: 1, g: 1, b: 1, a: 1}
+    - _DecalDetailSpecColor: {r: 1, g: 1, b: 1, a: 1}
+    - _DecalMaskSpecular: {r: 0, g: 0, b: 0, a: 0}
+    - _DecalSpecColor1: {r: 1, g: 1, b: 1, a: 1}
+    - _DetailColorBlack: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _DetailColorWhite: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _DissolveStrength: {r: 0, g: 0, b: 0, a: 0}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _GVSnowColor: {r: 0.78999996, g: 0.78999996, b: 0.78999996, a: 1}
+    - _GVSnowSpec: {r: 0, g: 0, b: 0, a: 0}
+    - _RimColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+    - _VTInfoBlock: {r: 0.015625, g: -0.015625, b: 0.6513672, a: 0.15527344}
+    - _VertexAdjustArray4: {r: 0, g: 0, b: 0, a: 0}
+    - _VertexAdjustArrayRow0: {r: 0, g: 0, b: 0, a: 0}
+    - _VertexAdjustArrayRow1: {r: 0, g: 0, b: 0, a: 0}
+    - _VertexAdjustArrayRow2: {r: 0, g: 0, b: 0, a: 0}
+    - _VertexAdjustArrayRow3: {r: 0, g: 0, b: 0, a: 0}
+    - _VertexAdjustRotationQuaternion: {r: 0, g: 0, b: 0, a: 1}
+    - _VertexBoundsMin: {r: 0, g: 0, b: 0, a: 1}
+    - _VertexBoundsScale: {r: 0, g: 0, b: 0, a: 1}
+    - _VertexColorAlbedoColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _VertexColorMap_AlbedoColor1Bright: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _VertexColorMap_AlbedoColor1Dark: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _VertexColorMap_AlbedoColor1Range: {r: 0, g: 1, b: 0, a: 0}
+    - _VertexColorMap_AlbedoColor2Bright: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _VertexColorMap_AlbedoColor2Dark: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _VertexColorMap_AlbedoColor2Range: {r: 0, g: 1, b: 0, a: 0}
+    - _VertexColorMap_HeightNormalizationFactors: {r: 0.5, g: 0.5, b: 0.5, a: 0}
+    - _VertexColorMap_Occlusion1Range: {r: 0, g: 1, b: 0, a: 0}
+    - _VertexColorMap_Occlusion2Range: {r: 0, g: 1, b: 0, a: 0}
+    - _VertexColorMap_Smoothness1Range: {r: 0, g: 1, b: 0, a: 0}
+    - _VertexColorMap_Smoothness2Range: {r: 0, g: 1, b: 0, a: 0}
+    - _VertexColorMap_SpecularMetallicColor1: {r: 0.29999998, g: 0.29999998, b: 0.29999998, a: 1}
+    - _VertexColorMap_SpecularMetallicColor2: {r: 0.29999998, g: 0.29999998, b: 0.29999998, a: 1}
+    - _VertexColorMaskColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _VertexColorSpecularColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _VertexDisplace1: {r: 0, g: 0, b: 0, a: 0}
+    - _VertexDisplace2: {r: 0, g: 0, b: 0, a: 0}
+    - _VertexDisplace3: {r: 0, g: 0, b: 0, a: 0}
+    - _VertexMaskSet1: {r: 0, g: 0, b: 0, a: 0}
+    - _VertexMaskSet2: {r: 0, g: 0, b: 0, a: 0}
+    - _VertexMaskSet3: {r: 0, g: 0, b: 0, a: 0}
+  m_BuildTextureStacks: []
