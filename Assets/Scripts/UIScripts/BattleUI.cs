@@ -2,9 +2,7 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UIElements;
-using Button = UnityEngine.UI.Button;
-using Slider = UnityEngine.UI.Slider;
+using UnityEngine.UI;
 
 public class BattleUI : MonoBehaviour
 {
@@ -30,8 +28,8 @@ public class BattleUI : MonoBehaviour
     [SerializeField] private Button skillCardButton4;
     [SerializeField] private Button inventoryButton;
     [SerializeField] private Button runAwayButton;
-    [SerializeField] private Slider playerHealthSlider;
-    [SerializeField] private Slider enemyHealthSlider;
+    [SerializeField] private Image playerHealthFillBar;
+    [SerializeField] private Image enemyHealthFillBar;
     [SerializeField] private GameObject combatLogContent;
     [SerializeField] private GameObject messagePrefab;
 
@@ -155,10 +153,10 @@ public class BattleUI : MonoBehaviour
     private void updateHealthBars()
     {
         // Set the player health bar slider to their health percentage from 1.0f to 0.0f (1.0f is full).
-        playerHealthSlider.value = PlayerManager.Instance.calculateHealthPercent();
+        playerHealthFillBar.fillAmount = PlayerManager.Instance.calculateHealthPercent();
 
-        // Set the enemy health bar slider to their health percentage from 0.0f to 1.0f (0.0f is full).
-        enemyHealthSlider.value = Mathf.Abs(BattleManager.Instance.getEnemyHealthPercentage() - 1.0f);
+        // Set the enemy health bar slider to their health percentage from 1.0f to 0.0f (1.0f is full).
+        enemyHealthFillBar.fillAmount = Mathf.Abs(BattleManager.Instance.getEnemyHealthPercentage());
 
     }
 

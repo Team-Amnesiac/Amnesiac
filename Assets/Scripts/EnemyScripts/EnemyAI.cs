@@ -12,7 +12,6 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private float maxHealth      = 150f;
     [SerializeField] private float strength       = 15.0f;
     [SerializeField] private int   experienceReward = 20;
-
     [SerializeField] private float health;
     [SerializeField] private bool ispatrol;
     [SerializeField] private List<Transform> patrols;
