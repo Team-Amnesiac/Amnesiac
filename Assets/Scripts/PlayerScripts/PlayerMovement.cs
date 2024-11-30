@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -68,5 +69,11 @@ public class PlayerMovement : MonoBehaviour
             BattleManager.Instance.initializeBattle(BattleManager.Attacker.Player,
                                                     enemy);
         }
+
+        if (other.tag == "LevelExit")
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+
     }
 }

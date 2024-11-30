@@ -12,6 +12,15 @@ EditorBuildSettings:
     path: Assets/Scenes/testplayer.unity
     guid: c74f6fe5a9318db4287a411db07d4903
   - enabled: 1
-    path: Assets/Scenes/BattleScene.unity
+    path: Assets/Scenes/battlescene.unity
     guid: 62f1e019ad8dd54418d3dc60b40e7125
+  - enabled: 1
+    path: Assets/Scenes/Hub.unity
+    guid: b7465a5b6b3fccd40b28098274c35224
+  - enabled: 1
+    path: Assets/Scenes/Noryx.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/Loikart.unity
+    guid: e153db261b09d7a42b99ce8f21c7b995
   m_configObjects: {}
