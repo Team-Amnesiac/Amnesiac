@@ -193,7 +193,6 @@ public class UIManager : MonoBehaviour
         switch (ui)
         {
             case UI.Battle:
-                battleUI.prepareBattleShow();
                 battleUI.gameObject.SetActive(true);
                 break;
 

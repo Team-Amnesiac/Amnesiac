@@ -18,5 +18,5 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: ed33874ebf226354686d65960f3490bb, type: 3}
   itemType: 3
   damage: 25
+  staminaCost: 5
   attackType: 1
-  equipped: 0

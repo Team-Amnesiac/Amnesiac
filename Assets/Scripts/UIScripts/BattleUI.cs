@@ -11,12 +11,17 @@ public class BattleUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI turnIndicatorTMP;
     [SerializeField] private TextMeshProUGUI roundTMP;
     [SerializeField] private TextMeshProUGUI playerTurnTMP;
+    [SerializeField] private TextMeshProUGUI playerStaminaTMP;
     [SerializeField] private TextMeshProUGUI enemyTurnTMP;
     [SerializeField] private TextMeshProUGUI criticalHitTMP;
     [SerializeField] private TextMeshProUGUI skillCard1TMP;
     [SerializeField] private TextMeshProUGUI skillCard2TMP;
     [SerializeField] private TextMeshProUGUI skillCard3TMP;
     [SerializeField] private TextMeshProUGUI skillCard4TMP;
+    [SerializeField] private TextMeshProUGUI skillCard1CostTMP;
+    [SerializeField] private TextMeshProUGUI skillCard2CostTMP;
+    [SerializeField] private TextMeshProUGUI skillCard3CostTMP;
+    [SerializeField] private TextMeshProUGUI skillCard4CostTMP;
 
     [SerializeField] private Button meleeAttackButton;
     [SerializeField] private Button skillCardButton1;
@@ -37,6 +42,7 @@ public class BattleUI : MonoBehaviour
     {
         UIManager.Instance.setUI(UIManager.UI.Battle, this);
         UIManager.Instance.hideUI(UIManager.UI.Battle);
+        addOnClickListeners();
     }
 
 
@@ -55,18 +61,13 @@ public class BattleUI : MonoBehaviour
     /* PUBLIC FUNCTIONS */
 
 
-    public void prepareBattleShow()
+    public void updateVisuals()
     {
         criticalHitTMP.gameObject.SetActive(false);
         updateSkillCardButtonText();
-        addOnClickListeners();
-        BattleManager.Instance.startBattle();
-    }
-
-    public void updateVisuals()
-    {
         updateTurnText();
         updateTurnCounters();
+        updatePlayerStamina();
         updateHealthBars();
         updateRoundCounter(BattleManager.Instance.getRoundNumber());
         if (BattleManager.Instance.isCriticalHit())
@@ -76,11 +77,11 @@ public class BattleUI : MonoBehaviour
 
         if (BattleManager.Instance.getAttacker() == BattleManager.Attacker.Enemy)  // Enemies turn.
         {
-            setButtonInteractability(false);
+            disableButtons();
         }
         else
         {
-            setButtonInteractability(true);
+            enableButtons();
         }
     }
 
@@ -146,6 +147,11 @@ public class BattleUI : MonoBehaviour
     /* PRIVATE FUNCTIONS */
 
 
+    private void updatePlayerStamina()
+    {
+        playerStaminaTMP.text = $"Stamina: {PlayerManager.Instance.getStamina()}";
+    }
+
     private void updateHealthBars()
     {
         // Set the player health bar slider to their health percentage from 1.0f to 0.0f (1.0f is full).
@@ -163,28 +169,51 @@ public class BattleUI : MonoBehaviour
     }
 
 
-    private void setButtonInteractability(bool interactable)
+    private void enableButtons()
     {
-        meleeAttackButton.interactable = interactable;
-        if (PlayerManager.Instance.getSkillCard(PlayerManager.SkillSlot.One) != null)
+        meleeAttackButton.interactable = true;
+
+        int playerStamina = PlayerManager.Instance.getStamina();
+        SkillCardSO skillCardOne = PlayerManager.Instance.getSkillCard(PlayerManager.SkillSlot.One);
+        if (skillCardOne != null && skillCardOne.getStaminaCost() <= playerStamina)
         {
-            skillCardButton1.interactable = interactable;
-        }
-        if (PlayerManager.Instance.getSkillCard(PlayerManager.SkillSlot.Two) != null)
-        {
-            skillCardButton2.interactable = interactable;
-        }
-        if (PlayerManager.Instance.getSkillCard(PlayerManager.SkillSlot.Three) != null)
-        {
-            skillCardButton3.interactable = interactable;
-        }
-        if (PlayerManager.Instance.getSkillCard(PlayerManager.SkillSlot.Four) != null)
-        {
-            skillCardButton4.interactable = interactable;
+            skillCardButton1.interactable = true;
         }
 
-        inventoryButton.interactable = interactable;
-        runAwayButton.interactable   = interactable;
+        SkillCardSO skillCardTwo = PlayerManager.Instance.getSkillCard(PlayerManager.SkillSlot.Two);
+        if (skillCardTwo != null && skillCardTwo.getStaminaCost() <= playerStamina)
+        {
+            skillCardButton2.interactable = true;
+        }
+
+        SkillCardSO skillCardThree = PlayerManager.Instance.getSkillCard(PlayerManager.SkillSlot.Three);
+        if (skillCardThree != null && skillCardThree.getStaminaCost() <= playerStamina)
+        {
+            skillCardButton3.interactable = true;
+        }
+
+        SkillCardSO skillCardFour = PlayerManager.Instance.getSkillCard(PlayerManager.SkillSlot.Four);
+        if (skillCardFour != null && skillCardFour.getStaminaCost() <= playerStamina)
+        {
+            skillCardButton4.interactable = true;
+        }
+
+        inventoryButton.interactable = true;
+        runAwayButton.interactable   = true;
+    }
+
+
+    private void disableButtons()
+    {
+        meleeAttackButton.interactable = false;
+        
+        skillCardButton1.interactable = false;
+        skillCardButton2.interactable = false;
+        skillCardButton3.interactable = false;
+        skillCardButton4.interactable = false;
+
+        inventoryButton.interactable = false;
+        runAwayButton.interactable   = false;
     }
 
 
@@ -219,42 +248,42 @@ public class BattleUI : MonoBehaviour
         if (PlayerManager.Instance.getSkillCard(PlayerManager.SkillSlot.One) == null)
         {
             skillCard1TMP.text = "EMPTY";
-            skillCardButton1.interactable = false;
         }
         else
         {
             SkillCardSO skillCard1 = PlayerManager.Instance.getSkillCard(PlayerManager.SkillSlot.One);
             skillCard1TMP.text = $"{skillCard1.getItemName()}";
+            skillCard1CostTMP.text = $"Stamina Cost: {skillCard1.getStaminaCost()}";
         }
         if (PlayerManager.Instance.getSkillCard(PlayerManager.SkillSlot.Two) == null)
         {
             skillCard2TMP.text = "EMPTY";
-            skillCardButton2.interactable = false;
         }
         else
         {
             SkillCardSO skillCard2 = PlayerManager.Instance.getSkillCard(PlayerManager.SkillSlot.Two);
             skillCard2TMP.text = $"{skillCard2.getItemName()}";
+            skillCard2CostTMP.text = $"Stamina Cost: {skillCard2.getStaminaCost()}";
         }
         if (PlayerManager.Instance.getSkillCard(PlayerManager.SkillSlot.Three) == null)
         {
             skillCard3TMP.text = "EMPTY";
-            skillCardButton3.interactable = false;
         }
         else
         {
             SkillCardSO skillCard3 = PlayerManager.Instance.getSkillCard(PlayerManager.SkillSlot.Three);
             skillCard3TMP.text = $"{skillCard3.getItemName()}";
+            skillCard3CostTMP.text = $"Stamina Cost: {skillCard3.getStaminaCost()}";
         }
         if (PlayerManager.Instance.getSkillCard(PlayerManager.SkillSlot.Four) == null)
         {
             skillCard4TMP.text = "EMPTY";
-            skillCardButton4.interactable = false;
         }
         else
         {
             SkillCardSO skillCard4 = PlayerManager.Instance.getSkillCard(PlayerManager.SkillSlot.Four);
             skillCard4TMP.text = $"{skillCard4.getItemName()}";
+            skillCard4CostTMP.text = $"Stamina Cost: {skillCard4.getStaminaCost()}";
         }
     }
 
@@ -274,7 +303,7 @@ public class BattleUI : MonoBehaviour
     private IEnumerator criticalHitCoroutine()
     {
         criticalHitTMP.gameObject.SetActive(true);
-        yield return new WaitForSeconds(5.0f);
+        yield return new WaitForSeconds(3.0f);
         criticalHitTMP.gameObject.SetActive(false);
     }
 }

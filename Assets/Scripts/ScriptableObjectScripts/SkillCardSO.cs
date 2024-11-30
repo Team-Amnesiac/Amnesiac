@@ -16,20 +16,21 @@ public class SkillCardSO : ItemSO
 
 
     [SerializeField] private float damage;
+    [SerializeField] private int   staminaCost;
     [SerializeField] private AttackType attackType;
     
-    [SerializeField] private bool equipped = false;
-
-
-    void Start()
-    {
-        equipped = false;
-    }
+    private bool equipped = false;
 
 
     public float getDamage()
     {
         return damage;
+    }
+
+
+    public int getStaminaCost()
+    {
+        return staminaCost;
     }
 
 

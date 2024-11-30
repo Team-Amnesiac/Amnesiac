@@ -27,7 +27,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private int currency            = 100;
     [SerializeField] private int playerLevel         = 1;
     [SerializeField] private int experienceThreshold = 50; // eXP required for the next level
-    [SerializeField] private int staminaMeter        = 100; // stamina used when skillcard used, no stamina means player cannot use skillcards.
+    [SerializeField] private int playerStamina       = 100; // stamina used when skillcard used, no stamina means player cannot use skillcards.
 
     private GameObject playerGameObject;
 
@@ -59,6 +59,12 @@ public class PlayerManager : MonoBehaviour
     {
         // Set the player to full health.
         playerHealth = maxPlayerHealth;
+    }
+
+
+    public void decreaseStamina(int cost)
+    {
+        playerStamina -= cost;
     }
 
 
@@ -140,7 +146,7 @@ public class PlayerManager : MonoBehaviour
         maxPlayerHealth += 10;       // increase max health by 10 per level.
         meleeDamage += 5;            // increase melee damage by 5 per level.
         currency += 50;              // also reward player with bonus currency.
-        staminaMeter += 20;
+        playerStamina += 20;
 
         // refill health to the new max health.
         playerHealth = maxPlayerHealth;
@@ -187,6 +193,12 @@ public class PlayerManager : MonoBehaviour
     public float getHealth()
     {
         return playerHealth;
+    }
+
+
+    public int getStamina()
+    {
+        return playerStamina;
     }
 
 

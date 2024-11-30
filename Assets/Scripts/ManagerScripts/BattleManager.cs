@@ -67,10 +67,12 @@ public class BattleManager : MonoBehaviour
         roundNumber++;
         UIManager.Instance.updateUI(UIManager.UI.Battle);
         UIManager.Instance.showUI(UIManager.UI.Battle);
+        
+        startBattle();
     }
 
 
-    public void startBattle()
+    private void startBattle()
     {
         if (attacker == Attacker.Enemy)  // Enemy's turn
         {
@@ -92,9 +94,9 @@ public class BattleManager : MonoBehaviour
 
         string combatLogMessage;
         // Get the SkillCard the Player attacked with, if they used one.
-        SkillCardSO skillCardSo = PlayerManager.Instance.getSkillCard(slot);
+        SkillCardSO skillCard = PlayerManager.Instance.getSkillCard(slot);
 
-        if (skillCardSo == null)  // Melee attack.
+        if (skillCard == null)  // Melee attack.
         {
             float damage = PlayerManager.Instance.getMeleeDamage();
             // Deal the player's melee damage to the enemy.
@@ -103,8 +105,8 @@ public class BattleManager : MonoBehaviour
         }
         else                    // SkillCard attack.
         {
-            float damage = skillCardSo.getDamage();
-            SkillCardSO.AttackType skillType = skillCardSo.getAttackType();
+            float damage = skillCard.getDamage();
+            SkillCardSO.AttackType skillType = skillCard.getAttackType();
             
             // Deal the selected skill card's type of damage to the enemy.
             dealDamageToEnemy(damage, skillType);
@@ -128,6 +130,8 @@ public class BattleManager : MonoBehaviour
                     break;
             }
 
+            PlayerManager.Instance.decreaseStamina(skillCard.getStaminaCost());
+
             combatLogMessage = $"Player {adjective} the enemy for {damage} damage !";
         }
 
@@ -136,27 +140,31 @@ public class BattleManager : MonoBehaviour
             combatLogMessage += " A critical hit !";
         }
 
-        UIManager.Instance.addCombatLogMessage(combatLogMessage);
 
         if (enemyAI.getHealth() <= 0)   // Enemy has been defeated.
         {
             Debug.Log("Enemy defeated!");
+            UIManager.Instance.addCombatLogMessage(combatLogMessage);
             // End the battle, as the enemy has been defeated.
             endBattle();
 
             return;
         }
 
-        if (criticalHit && !playerExtraTurn)  // Player landed a critical hit.
+        if (criticalHit && !playerExtraTurn)  // Player landed their first critical hit this turn.
         {
             // Player has earned their extra turn.
             playerExtraTurn = true;
+            combatLogMessage += " Earned an extra turn.";
+            UIManager.Instance.addCombatLogMessage(combatLogMessage);
             // Player's extra turn, earned from critical hit.
             playerTurn();
 
             // Exit the function.
             return;
         }
+
+        UIManager.Instance.addCombatLogMessage(combatLogMessage);
 
         // Reset player's extra turn for next round.
         playerExtraTurn = false;
