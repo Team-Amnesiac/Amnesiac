@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Item
   - Enemy
+  - Relic
+  - LevelExit
+  - Keeper
+  - Teleport
   layers:
   - Default
   - TransparentFX

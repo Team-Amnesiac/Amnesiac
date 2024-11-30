@@ -11,9 +11,12 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private float speed          = 3.5f;
     [SerializeField] private float maxHealth      = 150f;
     [SerializeField] private float strength       = 15.0f;
-    [SerializeField] private int   experienceReward = 20;
 
     [SerializeField] private float health;
+    [SerializeField] private bool ispatrol;
+    [SerializeField] private List<Transform> patrols;
+    private Transform patrol;
+
     private bool  isAggroed = false;
     private bool  specialAttackUsed = false;
 
@@ -22,6 +25,7 @@ public class EnemyAI : MonoBehaviour
     private NavMeshAgent navMeshAgent;
 
     private SkillCardSO.AttackType weakness;
+
 
     void Start()
     {
@@ -32,6 +36,11 @@ public class EnemyAI : MonoBehaviour
         if (Camera.main != null)
         {
             playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        }
+
+        if (ispatrol)
+        {
+            patrol = patrols[Random.Range(0, patrols.Count)];
         }
     }
 
@@ -56,9 +65,22 @@ public class EnemyAI : MonoBehaviour
         }
         else
         {
+            
             if (distanceToPlayer <= detectionRange)
             {
                 gainAggro();
+            }
+            else
+            {
+                if (ispatrol)
+                {
+                    navMeshAgent.isStopped = false;
+                    navMeshAgent.SetDestination(patrol.position);
+                    if(Vector3.Distance(transform.position, patrol.position) < 1)
+                    {
+                        patrol = patrols[Random.Range(0, patrols.Count)];
+                    }
+                }
             }
         }
     }
@@ -122,11 +144,5 @@ public class EnemyAI : MonoBehaviour
     public float getStrength()
     {
         return strength;
-    }
-
-
-    public int getExperienceReward()
-    {
-        return experienceReward;
     }
 }
