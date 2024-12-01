@@ -115,7 +115,6 @@ public class QuestManager : MonoBehaviour
             sideQuestTemplate.questName = $"Defeat {sideQuestTemplate.requiredAmount} Enemies";
             activeQuests.Add(sideQuestTemplate);
             Debug.Log($"New Side Quest Started: {sideQuestTemplate.questName}");
-            UIManager.Instance.newNotification($"New Side Quest: Defeat {sideQuestTemplate.requiredAmount} enemies!");
         }
     }
 
@@ -138,7 +137,6 @@ public class QuestManager : MonoBehaviour
                 // Add the completed quest snapshot to the completedQuests list
                 completedQuests.Add(completedQuestSnapshot);
                 Debug.Log($"[QuestManager] Side Quest Completed: {completedQuestSnapshot.questName}");
-                UIManager.Instance.newNotification($"Side Quest Completed: {completedQuestSnapshot.questName}");
 
                 // Reward the player
                 int experienceReward = 20 + (currentSideQuestStage * 25);

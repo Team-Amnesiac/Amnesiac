@@ -6,6 +6,7 @@ public class MainMenuUI : MonoBehaviour
 {
     // Button variables initialized in the Unity interface.
     [SerializeField] private Button playButton;
+    [SerializeField] private Button loadButton;
     [SerializeField] private Button controlsButton;
     [SerializeField] private Button exitButton;
 
@@ -33,6 +34,12 @@ public class MainMenuUI : MonoBehaviour
     private void playClick()
     {
         GameManager.Instance.setGameState(GameManager.GameState.Play);
+    }
+
+
+    private void loadButtonOnClick()
+    {
+        GameManager.Instance.setGameState(GameManager.GameState.Loading);
     }
 
 
