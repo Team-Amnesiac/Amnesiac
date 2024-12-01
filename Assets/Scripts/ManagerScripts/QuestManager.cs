@@ -28,7 +28,6 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-
     public void talkToKeeper()
     {
         if (!activeQuests.Contains(firstQuest) && !completedQuests.Contains(firstQuest))
@@ -107,5 +106,25 @@ public class QuestManager : MonoBehaviour
     public List<QuestSO> getCompletedQuests()
     {
         return completedQuests;
+    }
+
+    public QuestData SaveState()
+    {
+        return new QuestData
+        {
+            activeQuests = activeQuests.ConvertAll(q => q.questName),
+            completedQuests = completedQuests.ConvertAll(q => q.questName)
+        };
+    }
+
+    public void LoadState(QuestData data)
+    {
+        activeQuests = data.activeQuests.ConvertAll(name => FindQuestByName(name));
+        completedQuests = data.completedQuests.ConvertAll(name => FindQuestByName(name));
+    }
+
+    private QuestSO FindQuestByName(string name)
+    {
+        return Resources.Load<QuestSO>($"Quests/{name}");
     }
 }

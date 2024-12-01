@@ -60,4 +60,24 @@ public class InventoryManager : MonoBehaviour
     {
         return inventoryItems;
     }
+
+    
+    public InventoryData SaveState()
+    {
+        return new InventoryData
+        {
+            items = inventoryItems.ConvertAll(item => item.getItemName())
+        };
+    }
+
+    public void LoadState(InventoryData data)
+    {
+        inventoryItems = data.items.ConvertAll(name => FindItemByName(name));
+    }
+
+    private ItemSO FindItemByName(string name)
+    {
+        // Locate the ItemSO asset by name
+        return Resources.Load<ItemSO>($"Items/{name}");
+    }
 }
