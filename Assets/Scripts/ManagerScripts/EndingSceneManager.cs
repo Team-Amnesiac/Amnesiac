@@ -1,7 +1,7 @@
 using UnityEngine;
 using TMPro;
 
-public class EndingSceneManager : MonoBehaviour
+public class EndingSceneUI : MonoBehaviour
 {
     [SerializeField] private RectTransform videoRect;         // The RectTransform for the video area
     [SerializeField] private float scrollSpeed = 50f;         // Speed of scrolling
