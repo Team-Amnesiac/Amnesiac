@@ -32,7 +32,7 @@ public class MainMenuUI : MonoBehaviour
     ***************************************************************************/
     private void playClick()
     {
-        // TODO: LOAD THE (LOADING_SCENE / FIRST_LEVEL_SCENE)
+        GameManager.Instance.setGameState(GameManager.GameState.Play);
     }
 
 
