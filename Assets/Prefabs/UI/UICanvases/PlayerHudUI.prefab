@@ -448,7 +448,7 @@ GameObject:
   - component: {fileID: 586278738444499500}
   - component: {fileID: 3585076028269947295}
   m_Layer: 0
-  m_Name: playerHealthFillBar (1)
+  m_Name: playerStaminaFillBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -629,5 +629,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baacb2be77a7d564ba5d3639cee2a9d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHealthTMP: {fileID: 0}
+  playerHealthFillBar: {fileID: 8825600750461384771}
+  playerStaminaFillBar: {fileID: 3585076028269947295}
   playerLevelTMP: {fileID: 1948214363469214352}
