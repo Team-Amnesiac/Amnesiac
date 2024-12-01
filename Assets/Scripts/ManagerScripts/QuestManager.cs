@@ -97,6 +97,10 @@ public class QuestManager : MonoBehaviour
 
     /* GET FUNCTIONS */
 
+    public QuestSO FirstQuest => firstQuest;
+    public QuestSO SecondQuest => secondQuest;
+    public QuestSO ThirdQuest => thirdQuest;
+
     public List<QuestSO> getActiveQuests()
     {
         return activeQuests;
