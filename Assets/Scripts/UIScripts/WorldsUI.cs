@@ -15,14 +15,7 @@ public class WorldsUI : MonoBehaviour
         UIManager.Instance.setUI(UIManager.UI.Worlds, this);
         UIManager.Instance.hideUI(UIManager.UI.Worlds);
 
-        string currentScene = SceneManager.GetActiveScene().name;
-
-        if (currentScene == "Hub")
-            DisableButton(hubButton);
-        else if (currentScene == "Noryx")
-            DisableButton(noryxButton);
-        else if (currentScene == "Loikart")
-            DisableButton(loikartButton);
+        disableAppropriateWorldButtons();
 
         hubButton.onClick.AddListener(hubButtonOnClick);
         noryxButton.onClick.AddListener(noryxButtonOnClick);
@@ -57,5 +50,29 @@ public class WorldsUI : MonoBehaviour
     {
         UIManager.Instance.hideUI(UIManager.UI.Worlds);
         UIManager.Instance.showUI(UIManager.UI.Checkpoint);
+    }
+
+    private void disableAppropriateWorldButtons()
+    {
+        string currentScene = SceneManager.GetActiveScene().name;
+
+        if (currentScene == "Hub")
+        {
+            DisableButton(hubButton);
+        }
+            
+        if (currentScene == "Noryx" ||
+            (!QuestManager.Instance.getActiveQuests().Contains(QuestManager.Instance.SecondQuest) &&
+             !QuestManager.Instance.getCompletedQuests().Contains(QuestManager.Instance.SecondQuest)))
+        {
+            DisableButton(noryxButton);
+        }
+
+        if (currentScene == "Loikart" ||
+            (!QuestManager.Instance.getActiveQuests().Contains(QuestManager.Instance.ThirdQuest) &&
+             !QuestManager.Instance.getCompletedQuests().Contains(QuestManager.Instance.ThirdQuest)))
+        {
+            DisableButton(loikartButton);
+        }
     }
 }
