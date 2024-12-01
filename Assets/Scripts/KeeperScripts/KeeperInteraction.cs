@@ -48,8 +48,6 @@ public class KeeperInteraction : MonoBehaviour
         {
             UIManager.Instance.showUI(UIManager.UI.Keeper); // Show Keeper UI
             GameManager.Instance.setGameState(GameManager.GameState.Pause);
-            talkTo();
-            StartDialogue();
         }
     }
 
@@ -74,6 +72,7 @@ public class KeeperInteraction : MonoBehaviour
     public void talkTo()
     {
         QuestManager.Instance.talkToKeeper(); // Handle quest progression
+        StartDialogue();
         Debug.Log("Player interacted with Keeper and received or updated a quest.");
     }
 
@@ -85,6 +84,9 @@ public class KeeperInteraction : MonoBehaviour
 
     private void DialogueUI_OnNextDialogue(object sender, EventArgs e)
     {
+        // Update dialogue array for the next interaction
+        UpdateDialogueArray();
+
         if (currentDialogueIndex >= currentDialogueArray.Length)
         {
             currentDialogueIndex = 0;
@@ -92,8 +94,6 @@ public class KeeperInteraction : MonoBehaviour
             UIManager.Instance.hideUI(UIManager.UI.Dialogue);
             GameManager.Instance.setGameState(GameManager.GameState.Play);
 
-            // Update dialogue array for the next interaction
-            UpdateDialogueArray();
         }
         else // Continue dialogue
         {
