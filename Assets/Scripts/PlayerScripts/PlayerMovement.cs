@@ -4,8 +4,14 @@ using UnityEngine.SceneManagement;
 public class PlayerMovement : MonoBehaviour
 {
     public float speed = 5f;
+    public float jumpHeight = 1f;
+    public float jumpDuration = 1f;
     private Animator animator;
     public Transform cameraTransform;
+
+    private bool isJumping = false;
+    private float jumpStartTime;
+    private Vector3 startPosition;
 
     void Start()
     {
@@ -13,7 +19,6 @@ public class PlayerMovement : MonoBehaviour
 
         PlayerManager.Instance.setPlayerGameObject(this.gameObject);
 
-        //not necessary anymore
         if (Camera.main != null)
         {
             cameraTransform = Camera.main.transform;
@@ -41,9 +46,14 @@ public class PlayerMovement : MonoBehaviour
             animator.SetFloat("Speed", 0);
         }
 
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && !isJumping)
         {
-            animator.SetTrigger("Jump");
+            StartJump();
+        }
+
+        if (isJumping)
+        {
+            PerformJump();
         }
 
         if (Input.GetMouseButtonDown(0))
@@ -54,26 +64,49 @@ public class PlayerMovement : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        // Skip triggers with "Item" tag
         if (other.CompareTag("Item") || other.CompareTag("Relic"))
         {
             Debug.Log($"Skipping item trigger: {other.name}");
             return;
         }
 
-        // Process "Enemy" triggers
         if (other.CompareTag("Enemy"))
         {
             EnemyAI enemy = other.gameObject.GetComponent<EnemyAI>();
             Debug.Log("Player engaged an enemy, transitioning to battle scene...");
-            BattleManager.Instance.initializeBattle(BattleManager.Attacker.Player,
-                                                    enemy);
+            BattleManager.Instance.initializeBattle(BattleManager.Attacker.Player, enemy);
         }
 
         if (other.tag == "LevelExit")
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
+    }
 
+    void StartJump()
+    {
+        isJumping = true;
+        jumpStartTime = Time.time;
+        startPosition = transform.position;
+
+        animator.SetTrigger("Jump");
+    }
+
+    void PerformJump()
+    {
+        float elapsed = Time.time - jumpStartTime;
+        float normalizedTime = elapsed / jumpDuration;
+
+        if (normalizedTime <= 1f)
+        {
+            float jumpProgress = Mathf.Sin(Mathf.PI * normalizedTime);
+            float newY = startPosition.y + jumpHeight * jumpProgress;
+            transform.position = new Vector3(transform.position.x, newY, transform.position.z);
+        }
+        else
+        {
+            isJumping = false;
+            transform.position = new Vector3(transform.position.x, startPosition.y, transform.position.z);
+        }
     }
 }

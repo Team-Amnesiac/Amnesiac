@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager Instance;
@@ -251,9 +252,48 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    public string CurrentCheckpointID { get; set; }
+    private void SpawnAtCheckpoint(string checkpointID)
+    {
+        GameObject checkpoint = GameObject.Find(checkpointID);
+        if (checkpoint != null)
+        {
+            playerGameObject.transform.position = checkpoint.transform.position;
+            Debug.Log($"Spawned at checkpoint: {checkpointID}");
+        }
+        else
+        {
+            Debug.LogWarning($"Checkpoint {checkpointID} not found. Spawning at default position.");
+        }
+    }
+
+
 
     public void setPlayerGameObject(GameObject playerGameObject)
     {
         this.playerGameObject = playerGameObject;
+    }
+
+    public PlayerData SaveState()
+    {
+        return new PlayerData
+        {
+            health = playerHealth,
+            level = playerLevel,
+            stamina = playerStamina,
+            currency = currency,
+            experience = playerExperience,
+            checkpointID = CurrentCheckpointID
+        };
+    }
+
+    public void LoadState(PlayerData data)
+    {
+        playerHealth = data.health;
+        playerLevel = data.level;
+        playerStamina = data.stamina;
+        currency = data.currency;
+        playerExperience = data.experience;
+        SpawnAtCheckpoint(data.checkpointID);
     }
 }

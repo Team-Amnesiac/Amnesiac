@@ -106,4 +106,28 @@ public class CollectibleManager : MonoBehaviour
 
         return -1;
     }
+
+   public void LoadState(CollectiblesData data)
+    {
+        trophyCount = data.trophyCount;
+
+        activeSets = data.activeSets.ConvertAll(name => FindCollectibleSetByName(name));
+        
+        completedSets = data.completedSets.ConvertAll(name => FindCollectibleSetByName(name));
+    }
+
+    private CollectibleSetSO FindCollectibleSetByName(string name)
+    {
+        return Resources.Load<CollectibleSetSO>($"Collectibles/{name}");
+    }
+
+    public CollectiblesData SaveState()
+    {
+        return new CollectiblesData
+        {
+            trophyCount = trophyCount,
+            activeSets = activeSets.ConvertAll(set => set.name),
+            completedSets = completedSets.ConvertAll(set => set.name)
+        };
+    }
 }
