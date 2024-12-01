@@ -175,7 +175,7 @@ public class BattleManager : MonoBehaviour
     
     public void runAway()
     {
-        bool success = Random.Range(0, 2) == 0;
+        bool success = UnityEngine.Random.Range(0, 2) == 0;
 
         if (success)
         {
