@@ -259,6 +259,7 @@ public class BattleManager : MonoBehaviour
 
     private void endBattle()
     {
+        criticalHit = false;
         UIManager.Instance.hideUI(UIManager.UI.Battle);
         if (PlayerManager.Instance.calculateHealthPercent() == 0.0f)  // Player has been defeated.
         {
