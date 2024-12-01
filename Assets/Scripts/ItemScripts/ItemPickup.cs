@@ -10,6 +10,16 @@ public class ItemPickup : MonoBehaviour
     private Animator playerAnimator;
 
 
+    void Start()
+    {
+        ItemSO.ItemType itemType = item.getItemType();
+        if (itemObjectShouldNotSpawn())
+        {
+            gameObject.SetActive(false);
+        }
+        
+    }
+
     void Update()
     {
         if (playerNearby && Input.GetKeyDown(KeyCode.E))
@@ -57,5 +67,14 @@ public class ItemPickup : MonoBehaviour
     public void setPlayerAnimator(Animator playerAnimator)
     {
         this.playerAnimator = playerAnimator;
+    }
+
+    private bool itemObjectShouldNotSpawn()
+    {
+        ItemSO.ItemType itemType = item.getItemType();
+        return (itemType == ItemSO.ItemType.SkillCard ||
+                itemType == ItemSO.ItemType.Collectible ||
+                itemType == ItemSO.ItemType.Relic) &&
+               InventoryManager.Instance.getInventoryItems().Contains(item);
     }
 }
