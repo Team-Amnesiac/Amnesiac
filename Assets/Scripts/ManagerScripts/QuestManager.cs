@@ -99,6 +99,7 @@ public class QuestManager : MonoBehaviour
                 questSo.isCompleted = true;
                 completedQuests.Add(questSo);
                 activeQuests.Remove(questSo);
+                UIManager.Instance.newNotification("Quest complete, Return to Keeper!");
             }
         }
         else
