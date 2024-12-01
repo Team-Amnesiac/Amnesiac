@@ -1490,7 +1490,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 254215854}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
   m_Name: 
@@ -11077,6 +11077,22 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0.121307775
       objectReference: {fileID: 0}
+    - target: {fileID: 4041937377693816381, guid: ae018ca75c1b8d944983ffe6de4da057, type: 3}
+      propertyPath: m_Pitch
+      value: -1.78
+      objectReference: {fileID: 0}
+    - target: {fileID: 4041937377693816381, guid: ae018ca75c1b8d944983ffe6de4da057, type: 3}
+      propertyPath: Priority
+      value: 46
+      objectReference: {fileID: 0}
+    - target: {fileID: 4041937377693816381, guid: ae018ca75c1b8d944983ffe6de4da057, type: 3}
+      propertyPath: m_Volume
+      value: 0.142
+      objectReference: {fileID: 0}
+    - target: {fileID: 4041937377693816381, guid: ae018ca75c1b8d944983ffe6de4da057, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: fd944e20ee6444efa87cef28957898aa, type: 3}
     - target: {fileID: 4976303577756444319, guid: ae018ca75c1b8d944983ffe6de4da057, type: 3}
       propertyPath: leftDoorAnimator
       value: 
