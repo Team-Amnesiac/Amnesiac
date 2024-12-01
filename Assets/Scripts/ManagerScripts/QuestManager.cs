@@ -116,9 +116,6 @@ public class QuestManager : MonoBehaviour
             activeQuests.Add(sideQuestTemplate);
             Debug.Log($"New Side Quest Started: {sideQuestTemplate.questName}");
             UIManager.Instance.newNotification($"New Side Quest: Defeat {sideQuestTemplate.requiredAmount} enemies!");
-
-            // Notify the UI to refresh quest progress
-            UIManager.Instance.updateUI(UIManager.UI.QuestLog);
         }
     }
 
@@ -154,9 +151,6 @@ public class QuestManager : MonoBehaviour
                 int baseEnemiesCount = 3; // Starting point for enemies in the first side quest
                 sideQuestTemplate.requiredAmount = baseEnemiesCount + (currentSideQuestStage * 2);
                 sideQuestTemplate.questName = $"Defeat {sideQuestTemplate.requiredAmount} Enemies";
-
-                UIManager.Instance.updateUI(UIManager.UI.QuestLog);
-
                 StartOrUpdateSideQuest();
             }
         }
