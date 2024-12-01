@@ -29,6 +29,8 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private int playerLevel         = 1;
     [SerializeField] private int experienceThreshold = 50; // eXP required for the next level
     [SerializeField] private int playerStamina       = 100; // stamina used when skillcard used, no stamina means player cannot use skillcards.
+    [SerializeField] private int targetEnemiesToDefeat = 3;
+    public int enemiesDefeated { get; private set; } = 0;
 
     private GameObject playerGameObject;
 
@@ -96,6 +98,11 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+
+    public void IncrementEnemiesDefeated()
+    {
+        enemiesDefeated++;
+    }
 
     public void increaseHealth(int value)
     {

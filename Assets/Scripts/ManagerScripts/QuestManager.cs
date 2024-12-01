@@ -13,6 +13,8 @@ public class QuestManager : MonoBehaviour
     [SerializeField] private QuestSO firstQuest;
     [SerializeField] private QuestSO secondQuest;
     [SerializeField] private QuestSO thirdQuest;
+    [SerializeField] private QuestSO sideQuestTemplate;
+    private int currentSideQuestStage = 1;
 
 
     void Awake()
@@ -33,6 +35,9 @@ public class QuestManager : MonoBehaviour
         firstQuest.isCompleted = false;
         secondQuest.isCompleted = false;
         thirdQuest.isCompleted = false;
+        sideQuestTemplate.isCompleted = false;
+        sideQuestTemplate.requiredAmount = 3;
+        StartOrUpdateSideQuest();
     }
 
 
@@ -102,6 +107,64 @@ public class QuestManager : MonoBehaviour
         }
     }
 
+    public void StartOrUpdateSideQuest()
+    {
+        if (!activeQuests.Contains(sideQuestTemplate))
+        {
+            // Start the side quest if not already active
+            sideQuestTemplate.questName = $"Defeat {sideQuestTemplate.requiredAmount} Enemies";
+            activeQuests.Add(sideQuestTemplate);
+            Debug.Log($"New Side Quest Started: {sideQuestTemplate.questName}");
+            UIManager.Instance.newNotification($"New Side Quest: Defeat {sideQuestTemplate.requiredAmount} enemies!");
+
+            // Notify the UI to refresh quest progress
+            UIManager.Instance.updateUI(UIManager.UI.QuestLog);
+        }
+    }
+
+    public void UpdateSideQuestProgress()
+    {
+        if (activeQuests.Contains(sideQuestTemplate) && !sideQuestTemplate.isCompleted)
+        {
+            sideQuestTemplate.requiredAmount--;
+            Debug.Log($"[QuestManager] Side Quest Progress: {sideQuestTemplate.requiredAmount} enemies remaining");
+            if (sideQuestTemplate.requiredAmount <= 0)
+            {
+                // Create a snapshot of the completed quest for UI purposes
+                QuestSO completedQuestSnapshot = ScriptableObject.CreateInstance<QuestSO>();
+                completedQuestSnapshot.questName = sideQuestTemplate.questName;
+                completedQuestSnapshot.description = sideQuestTemplate.description;
+                completedQuestSnapshot.requiredAmount = sideQuestTemplate.requiredAmount;
+                completedQuestSnapshot.isCompleted = true;
+                completedQuestSnapshot.questType = sideQuestTemplate.questType;
+
+                // Add the completed quest snapshot to the completedQuests list
+                completedQuests.Add(completedQuestSnapshot);
+                Debug.Log($"[QuestManager] Side Quest Completed: {completedQuestSnapshot.questName}");
+                UIManager.Instance.newNotification($"Side Quest Completed: {completedQuestSnapshot.questName}");
+
+                // Reward the player
+                int experienceReward = 20 + (currentSideQuestStage * 25);
+                PlayerManager.Instance.increaseExperience(experienceReward);
+                Debug.Log($"Player rewarded with {experienceReward} experience points.");
+
+                // Increment the stage and prepare the next side quest
+                currentSideQuestStage++;
+                sideQuestTemplate.isCompleted = false;
+                int baseEnemiesCount = 3; // Starting point for enemies in the first side quest
+                sideQuestTemplate.requiredAmount = baseEnemiesCount + (currentSideQuestStage * 2);
+                sideQuestTemplate.questName = $"Defeat {sideQuestTemplate.requiredAmount} Enemies";
+
+                UIManager.Instance.updateUI(UIManager.UI.QuestLog);
+
+                StartOrUpdateSideQuest();
+            }
+        }
+        else
+        {
+            Debug.LogWarning($"[QuestManager] Side quest is either not active or already completed.");
+        }
+    }
 
     /* GET FUNCTIONS */
 

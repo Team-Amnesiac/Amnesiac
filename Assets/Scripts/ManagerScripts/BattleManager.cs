@@ -147,7 +147,8 @@ public class BattleManager : MonoBehaviour
             UIManager.Instance.addCombatLogMessage(combatLogMessage);
             // End the battle, as the enemy has been defeated.
             endBattle();
-
+            PlayerManager.Instance.IncrementEnemiesDefeated();
+            QuestManager.Instance.UpdateSideQuestProgress(); 
             return;
         }
 
