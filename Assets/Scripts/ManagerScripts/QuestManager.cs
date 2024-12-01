@@ -15,7 +15,7 @@ public class QuestManager : MonoBehaviour
     [SerializeField] private QuestSO thirdQuest;
 
 
-    private void Awake()
+    void Awake()
     {
         if (Instance == null)
         {
@@ -28,17 +28,25 @@ public class QuestManager : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        firstQuest.isCompleted = false;
+        secondQuest.isCompleted = false;
+        thirdQuest.isCompleted = false;
+    }
+
+
     public void talkToKeeper()
     {
-        if (!activeQuests.Contains(firstQuest) && !completedQuests.Contains(firstQuest))
+        if (playerReadyForFirstQuest())
         {
             addQuest(firstQuest);
         }
-        else if (completedQuests.Contains(firstQuest) && !activeQuests.Contains(secondQuest))
+        else if (playerReadyForSecondQuest())
         {
             addQuest(secondQuest);
         }
-        else if (completedQuests.Contains(secondQuest) && !activeQuests.Contains(thirdQuest))
+        else if (playerReadyForThirdQuest())
         {
             addQuest(thirdQuest);
         }
@@ -48,7 +56,7 @@ public class QuestManager : MonoBehaviour
     public void addRelic(RelicSO relic)
     {
         QuestSO relicQuest = relic.getRelatedQuest();
-        if (activeQuests.Contains(relicQuest) && !relicQuest.isCompleted)
+        if (activeQuests.Contains(relicQuest))
         {
             updateQuestProgress(relicQuest);
         }
@@ -130,5 +138,25 @@ public class QuestManager : MonoBehaviour
     private QuestSO FindQuestByName(string name)
     {
         return Resources.Load<QuestSO>($"Quests/{name}");
+    }
+
+    private bool playerReadyForFirstQuest()
+    {
+        return !activeQuests.Contains(firstQuest) &&
+               !completedQuests.Contains(firstQuest);
+    }
+
+    private bool playerReadyForSecondQuest()
+    {
+        return completedQuests.Contains(firstQuest) &&
+               !activeQuests.Contains(secondQuest) &&
+               !completedQuests.Contains(secondQuest);
+    }
+
+    private bool playerReadyForThirdQuest()
+    {
+        return completedQuests.Contains(secondQuest) &&
+               !activeQuests.Contains(thirdQuest) &&
+               !completedQuests.Contains(thirdQuest);
     }
 }
