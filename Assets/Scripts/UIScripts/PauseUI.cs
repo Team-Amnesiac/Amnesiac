@@ -1,42 +1,20 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PauseUI : MonoBehaviour
 {
-    private bool isPaused = false;
+    [SerializeField] private Button continueButton;
+    [SerializeField] private Button loadButton;
+    [SerializeField] private Button exitButton;
+
 
     void Start()
     {
         UIManager.Instance.setUI(UIManager.UI.PauseMenu, this);
         UIManager.Instance.hideUI(UIManager.UI.PauseMenu);
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (isPaused)
-            {
-                ResumeGame();
-            }
-            else
-            {
-                PauseGame();
-            }
-        }
-    }
-
-    public void ResumeGame()
-    {
-        UIManager.Instance.hideUI(UIManager.UI.PauseMenu);
-        Time.timeScale = 1f;
-        isPaused = false;
-    }
-
-    public void PauseGame()
-    {
-        UIManager.Instance.showUI(UIManager.UI.PauseMenu);
-        Time.timeScale = 0f;
-        isPaused = true;
+        continueButton.onClick.AddListener(continueButtonOnClick);
+        loadButton.onClick.AddListener(loadButtonOnClick);
+        exitButton.onClick.AddListener(exitButtonOnClick);
     }
 
     public void QuitGame()
@@ -47,7 +25,27 @@ public class PauseUI : MonoBehaviour
 
     public void LoadGame()
     {
-        SaveSystem.LoadGame();
-        ResumeGame();
+        GameManager.Instance.setGameState(GameManager.GameState.Loading);
+    }
+
+
+    private void continueButtonOnClick()
+    {
+        GameManager.Instance.setGameState(GameManager.GameState.Play);
+        UIManager.Instance.hideUI(UIManager.UI.PauseMenu);
+    }
+
+
+    private void loadButtonOnClick()
+    {
+        GameManager.Instance.setGameState(GameManager.GameState.Loading);
+        UIManager.Instance.hideUI(UIManager.UI.PauseMenu);
+    }
+
+
+    private void exitButtonOnClick()
+    {
+        GameManager.Instance.setGameState(GameManager.GameState.Title);
+        UIManager.Instance.hideUI(UIManager.UI.PauseMenu);
     }
 }

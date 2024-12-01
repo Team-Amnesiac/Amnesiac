@@ -14,6 +14,7 @@ public class SceneLoader : MonoBehaviour
         Hub,
         Noryx,
         Loikart,
+        Ending
     }
     
 
@@ -33,9 +34,6 @@ public class SceneLoader : MonoBehaviour
 
     public void loadScene(Scene scene)
     {
-        if (scene == Scene.Title)
-        {
-            SceneManager.LoadScene("TitleScene");
-        }
+        SceneManager.LoadScene((int)scene);
     }
 }

@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance;
 
     private BattleUI       battleUI;
+    private CheckpointUI   checkpointUI;
     private CollectiblesUI collectiblesUI;
     private ControlsUI     controlsUI;
     private DialogueUI     dialogueUI;
@@ -15,15 +16,17 @@ public class UIManager : MonoBehaviour
     private KeeperUI       keeperUI;
     private MainMenuUI     mainMenuUI;
     private NotificationUI notificationUI;
-    //private PauseMenuUI pauseMenuUI;
+    private PauseUI        pauseUI;
     private PlayerHudUI    playerHudUI;
     private QuestLogUI     questLogUI;
     private ShopUI         shopUI;
+    private WorldsUI       worldsUI;
     
 
     public enum UI
     {
         Battle,
+        Checkpoint,
         Collectibles,
         Controls,
         Dialogue,
@@ -35,6 +38,7 @@ public class UIManager : MonoBehaviour
         PlayerHud,
         QuestLog,
         Shop,
+        Worlds,
     }
 
 
@@ -78,6 +82,20 @@ public class UIManager : MonoBehaviour
                     showUI(UI.QuestLog);
                 }
             }
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                if (GameManager.Instance.getGameState() == GameManager.GameState.Pause)
+                {
+                    hideUI(UI.PauseMenu);
+                    GameManager.Instance.setGameState(GameManager.GameState.Play);
+                }
+                else
+                {
+                    showUI(UI.PauseMenu);
+                    GameManager.Instance.setGameState(GameManager.GameState.Pause);
+                }
+            }
         }
     }
 
@@ -114,6 +132,10 @@ public class UIManager : MonoBehaviour
                 battleUI = (BattleUI)uiScript;
                 break;
 
+            case UI.Checkpoint:
+                checkpointUI = (CheckpointUI)uiScript;
+                break;
+
             case UI.Collectibles:
                 collectiblesUI = (CollectiblesUI)uiScript;
                 break;
@@ -142,9 +164,9 @@ public class UIManager : MonoBehaviour
                 notificationUI = (NotificationUI)uiScript;
                 break;
 
-            //case UI.PauseMenu:
-            //    pauseMenuUI.show();
-            //    break;
+            case UI.PauseMenu:
+                pauseUI = (PauseUI)uiScript;
+                break;
 
             case UI.PlayerHud:
                 playerHudUI = (PlayerHudUI)uiScript;
@@ -156,6 +178,10 @@ public class UIManager : MonoBehaviour
 
             case UI.Shop:
                 shopUI = (ShopUI)uiScript;
+                break;
+
+            case UI.Worlds:
+                worldsUI = (WorldsUI)uiScript;
                 break;
 
             default:
@@ -201,6 +227,10 @@ public class UIManager : MonoBehaviour
                 collectiblesUI.gameObject.SetActive(true);
                 break;
 
+            case UI.Checkpoint:
+                checkpointUI.gameObject.SetActive(true);
+                break;
+
             case UI.Controls:
                 controlsUI.gameObject.SetActive(true);
                 break;
@@ -228,9 +258,9 @@ public class UIManager : MonoBehaviour
                 notificationUI.gameObject.SetActive(true);
                 break;
 
-            //case UI.PauseMenu:
-            //    pauseMenuUI.show();
-            //    break;
+            case UI.PauseMenu:
+                pauseUI.gameObject.SetActive(true);
+                break;
 
             case UI.PlayerHud:
                 playerHudUI.gameObject.SetActive(true);
@@ -246,6 +276,10 @@ public class UIManager : MonoBehaviour
                 shopUI.gameObject.SetActive(true);
                 break;
 
+            case UI.Worlds:
+                worldsUI.gameObject.SetActive(true);
+                break;
+
             default:
                 Debug.Log("ATTEMPT TO SHOW INVALID UI");
                 break;
@@ -259,6 +293,10 @@ public class UIManager : MonoBehaviour
         {
             case UI.Battle:
                 battleUI.gameObject.SetActive(false);
+                break;
+
+            case UI.Checkpoint:
+                checkpointUI.gameObject.SetActive(false);
                 break;
 
             case UI.Collectibles:
@@ -291,9 +329,9 @@ public class UIManager : MonoBehaviour
                 notificationUI.gameObject.SetActive(false);
                 break;
 
-            //case UI.PauseMenu:
-            //    pauseMenuUI.hide();
-            //    break;
+            case UI.PauseMenu:
+                pauseUI.gameObject.SetActive(false);
+                break;
 
             case UI.PlayerHud:
                 playerHudUI.gameObject.SetActive(false);
@@ -307,6 +345,10 @@ public class UIManager : MonoBehaviour
             case UI.Shop:
                 shopUI.prepareShopHide();
                 shopUI.gameObject.SetActive(false);
+                break;
+
+            case UI.Worlds:
+                worldsUI.gameObject.SetActive(false);
                 break;
 
             default:

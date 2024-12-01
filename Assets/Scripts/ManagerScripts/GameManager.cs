@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
         Play,      // Game is in the play state (in a level).
         Pause,     // Game is in the paused state.
         Battle,    // Game is in the battle state.
+        Loading,   // Game is loading game data.
     }
 
 
@@ -56,15 +57,19 @@ public class GameManager : MonoBehaviour
 
             case GameState.Play:
                 Time.timeScale = 1;
-                if (gameState == GameState.Title)  // Play button pressed.
+                if (gameState == GameState.Title)        // Play button pressed.
                 {
                     currentScene = SceneLoader.Scene.Hub;
                     // Load the Hub scene.
                     SceneLoader.Instance.loadScene(SceneLoader.Scene.Hub);
                 }
-                else if (gameState == GameState.Battle)
+                else if (gameState == GameState.Battle)  // Battle scene ended.
                 {
                     PlayerManager.Instance.enablePlayerGameObject();
+                }
+                else if (gameState == GameState.Loading)
+                {
+                    // Possible loading functionality.
                 }
 
                 break;
@@ -79,6 +84,10 @@ public class GameManager : MonoBehaviour
                 Time.timeScale = 1;
                 PlayerManager.Instance.disablePlayerGameObject();
 
+                break;
+
+            case GameState.Loading:
+                SaveSystem.LoadGame();
                 break;
 
             default:
