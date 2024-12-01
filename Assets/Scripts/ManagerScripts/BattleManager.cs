@@ -267,9 +267,14 @@ public class BattleManager : MonoBehaviour
             // Game over.
             GameManager.Instance.setGameState(GameManager.GameState.Title);
         }
-        else                                                          // Enemy has been defeated.
+        else if (enemyAI.getHealth() <= 0.0f)                         // Enemy has been defeated.
         {
             PlayerManager.Instance.increaseExperience(enemyAI.getExperienceReward());
+            Destroy(enemyAI.gameObject);
+            GameManager.Instance.setGameState(GameManager.GameState.Play);
+        }
+        else                                                          // Player has ran away.
+        {
             Destroy(enemyAI.gameObject);
             GameManager.Instance.setGameState(GameManager.GameState.Play);
         }
