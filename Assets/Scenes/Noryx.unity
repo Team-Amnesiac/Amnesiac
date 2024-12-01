@@ -848,6 +848,7 @@ MonoBehaviour:
   firstQuest: {fileID: 11400000, guid: b1c27510b506caa40813b05ee0427d0b, type: 2}
   secondQuest: {fileID: 11400000, guid: 44d388b2fadd7dd4b958bb389b23e93d, type: 2}
   thirdQuest: {fileID: 11400000, guid: 2bb0f3e231d00744c8e8831c07fbe2e9, type: 2}
+  sideQuestTemplate: {fileID: 11400000, guid: 8ab69456c01cfbe4980248949b6e7f96, type: 2}
 --- !u!114 &61976061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -906,6 +907,7 @@ MonoBehaviour:
   playerLevel: 1
   experienceThreshold: 50
   playerStamina: 100
+  targetEnemiesToDefeat: 3
   equippedSkillCardArray: []
 --- !u!114 &61976065
 MonoBehaviour:
