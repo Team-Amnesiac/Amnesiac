@@ -38,6 +38,7 @@ public static class SaveSystem
             PlayerManager.Instance.LoadState(saveData.playerData);
             CollectibleManager.Instance.LoadState(saveData.collectiblesData);
             QuestManager.Instance.LoadState(saveData.questData);
+            GameManager.Instance.setGameState(GameManager.GameState.Play);
 
             Debug.Log("Game loaded successfully.");
         }

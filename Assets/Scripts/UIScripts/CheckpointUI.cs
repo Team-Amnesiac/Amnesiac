@@ -1,33 +1,47 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CheckpointUI : MonoBehaviour
 {
-    public GameObject worldsUI;
-    public GameObject checkpointUI;
+    [SerializeField] private Button saveButton;
+    [SerializeField] private Button loadButton;
+    [SerializeField] private Button worldsButton;
+    [SerializeField] private Button exitButton;
 
-    public void SaveGame()
+
+    void Start()
+    {
+        UIManager.Instance.setUI(UIManager.UI.Checkpoint, this);
+        UIManager.Instance.hideUI(UIManager.UI.Checkpoint);
+        saveButton.onClick.AddListener(saveButtonOnClick);
+        loadButton.onClick.AddListener(loadButtonOnClick);
+        worldsButton.onClick.AddListener(worldsButtonOnClick);
+        exitButton.onClick.AddListener(exitButtonOnClick);
+    }
+
+    public void saveButtonOnClick()
     {
         SaveSystem.SaveGame();
         Debug.Log("Game saved successfully!");
     }
 
-    public void LoadGame()
+    public void loadButtonOnClick()
     {
-        SaveSystem.LoadGame();
+        GameManager.Instance.setGameState(GameManager.GameState.Loading);
+        UIManager.Instance.hideUI(UIManager.UI.Checkpoint);
         Debug.Log("Game loaded successfully!");
     }
 
-    public void OpenWorldsUI()
+    public void worldsButtonOnClick()
     {
-        worldsUI.SetActive(true);
-        checkpointUI.SetActive(false);
-        Time.timeScale = 0f;
+        UIManager.Instance.showUI(UIManager.UI.Worlds);
+        UIManager.Instance.hideUI(UIManager.UI.Checkpoint);
     }
 
-    public void CloseUI()
+
+    private void exitButtonOnClick()
     {
-        worldsUI.SetActive(false);
-        checkpointUI.SetActive(false);
-        Time.timeScale = 1f;
+        GameManager.Instance.setGameState(GameManager.GameState.Play);
+        UIManager.Instance.hideUI(UIManager.UI.Checkpoint);
     }
 }

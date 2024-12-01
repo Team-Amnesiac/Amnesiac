@@ -522,17 +522,17 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2487205441984041462}
+  - component: {fileID: 5824092967530910123}
   - component: {fileID: 2218977466095116376}
   - component: {fileID: 3393212289305298860}
   - component: {fileID: 1920568631455512850}
-  - component: {fileID: 5824092967530910123}
   m_Layer: 5
   m_Name: CheckpointUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2487205441984041462
 RectTransform:
   m_ObjectHideFlags: 0
@@ -555,6 +555,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &5824092967530910123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6401395178702214945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3073ec76d21a04e489a2b86423da0796, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saveButton: {fileID: 5148559639096498580}
+  loadButton: {fileID: 226144488525251171}
+  worldsButton: {fileID: 1501684951948616416}
+  exitButton: {fileID: 2002936209262608737}
 --- !u!223 &2218977466095116376
 Canvas:
   m_ObjectHideFlags: 0
@@ -618,20 +634,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &5824092967530910123
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6401395178702214945}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3073ec76d21a04e489a2b86423da0796, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  worldsUI: {fileID: 0}
-  checkpointUI: {fileID: 6401395178702214945}
 --- !u!1 &6738551254168594857
 GameObject:
   m_ObjectHideFlags: 0

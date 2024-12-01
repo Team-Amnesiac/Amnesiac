@@ -5,14 +5,16 @@ using TMPro;
 
 public class WorldsUI : MonoBehaviour
 {
-    public Button hubButton;
-    public Button noryxButton;
-    public Button loikartButton;
-    public Button exitButton;
-    public GameObject checkpointUI;
+    [SerializeField] private Button hubButton;
+    [SerializeField] private Button noryxButton;
+    [SerializeField] private Button loikartButton;
+    [SerializeField] private Button exitButton;
 
     private void Start()
     {
+        UIManager.Instance.setUI(UIManager.UI.Worlds, this);
+        UIManager.Instance.hideUI(UIManager.UI.Worlds);
+
         string currentScene = SceneManager.GetActiveScene().name;
 
         if (currentScene == "Hub")
@@ -21,6 +23,11 @@ public class WorldsUI : MonoBehaviour
             DisableButton(noryxButton);
         else if (currentScene == "Loikart")
             DisableButton(loikartButton);
+
+        hubButton.onClick.AddListener(hubButtonOnClick);
+        noryxButton.onClick.AddListener(noryxButtonOnClick);
+        loikartButton.onClick.AddListener(loikartButtonOnClick);
+        exitButton.onClick.AddListener(exitButtonOnClick);
     }
 
     private void DisableButton(Button button)
@@ -31,38 +38,24 @@ public class WorldsUI : MonoBehaviour
         button.colors = colors;
     }
 
-    public void LoadHub()
+    private void hubButtonOnClick()
     {
-        ChangeScene("Hub");
+        SceneLoader.Instance.loadScene(SceneLoader.Scene.Hub);
     }
 
-    public void LoadNoryx()
+    private void noryxButtonOnClick()
     {
-        ChangeScene("Noryx");
+        SceneLoader.Instance.loadScene(SceneLoader.Scene.Noryx);
     }
 
-    public void LoadLoikart()
+    private void loikartButtonOnClick()
     {
-        ChangeScene("Loikart");
+        SceneLoader.Instance.loadScene(SceneLoader.Scene.Loikart);
     }
 
-    public void BackToCheckpointUI()
+    private void exitButtonOnClick()
     {
-        gameObject.SetActive(false);
-        checkpointUI.SetActive(true);
-    }
-
-
-    private void ChangeScene(string sceneName)
-    {
-        if (SceneManager.GetActiveScene().name != sceneName)
-        {
-            Time.timeScale = 1f;
-            SceneManager.LoadScene(sceneName);
-        }
-        else
-        {
-            Debug.Log($"{sceneName} is already the current scene!");
-        }
+        UIManager.Instance.hideUI(UIManager.UI.Worlds);
+        UIManager.Instance.showUI(UIManager.UI.Checkpoint);
     }
 }

@@ -76,11 +76,6 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log("Player engaged an enemy, transitioning to battle scene...");
             BattleManager.Instance.initializeBattle(BattleManager.Attacker.Player, enemy);
         }
-
-        if (other.tag == "LevelExit")
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        }
     }
 
     void StartJump()
