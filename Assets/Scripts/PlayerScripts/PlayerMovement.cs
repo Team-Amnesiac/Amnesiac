@@ -15,6 +15,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        GameManager.Instance.setGameState(GameManager.GameState.Play);
+
         animator = GetComponent<Animator>();
 
         PlayerManager.Instance.setPlayerGameObject(this.gameObject);

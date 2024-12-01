@@ -7,8 +7,9 @@ using UnityEngine.UI;
 
 public class PlayerHudUI : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI playerHealthTMP;
-    [SerializeField]private TextMeshProUGUI playerLevelTMP;
+    [SerializeField] private Image playerHealthFillBar;
+    [SerializeField] private Image playerStaminaFillBar;
+    [SerializeField] private TextMeshProUGUI playerLevelTMP;
     
 
     void Start()
@@ -25,7 +26,8 @@ public class PlayerHudUI : MonoBehaviour
 
     public void updateVisuals()
     {
-        playerHealthTMP.text = $"HP: {PlayerManager.Instance.getHealth()}";
+        playerHealthFillBar.fillAmount  = PlayerManager.Instance.calculateHealthPercent();
+        playerStaminaFillBar.fillAmount = PlayerManager.Instance.getStamina() / 100.0f;
         playerLevelTMP.text = $"Level: {PlayerManager.Instance.getPlayerLevel()}";
     }
 

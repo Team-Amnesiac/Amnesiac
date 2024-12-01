@@ -9,7 +9,6 @@ public class BattleUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI turnIndicatorTMP;
     [SerializeField] private TextMeshProUGUI roundTMP;
     [SerializeField] private TextMeshProUGUI playerTurnTMP;
-    [SerializeField] private TextMeshProUGUI playerStaminaTMP;
     [SerializeField] private TextMeshProUGUI enemyTurnTMP;
     [SerializeField] private TextMeshProUGUI criticalHitTMP;
     [SerializeField] private TextMeshProUGUI skillCard1TMP;
@@ -29,6 +28,7 @@ public class BattleUI : MonoBehaviour
     [SerializeField] private Button inventoryButton;
     [SerializeField] private Button runAwayButton;
     [SerializeField] private Image playerHealthFillBar;
+    [SerializeField] private Image playerStaminaFillBar;
     [SerializeField] private Image enemyHealthFillBar;
     [SerializeField] private GameObject combatLogContent;
     [SerializeField] private GameObject messagePrefab;
@@ -147,7 +147,7 @@ public class BattleUI : MonoBehaviour
 
     private void updatePlayerStamina()
     {
-        playerStaminaTMP.text = $"Stamina: {PlayerManager.Instance.getStamina()}";
+        playerStaminaFillBar.fillAmount = PlayerManager.Instance.getStamina() / 100.0f;
     }
 
     private void updateHealthBars()

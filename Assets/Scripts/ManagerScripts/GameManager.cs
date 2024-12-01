@@ -88,6 +88,7 @@ public class GameManager : MonoBehaviour
 
             case GameState.Loading:
                 SaveSystem.LoadGame();
+
                 break;
 
             default:
