@@ -175,9 +175,21 @@ public class BattleManager : MonoBehaviour
     
     public void runAway()
     {
-        endBattle();
-    }
+        bool success = Random.Range(0, 2) == 0;
 
+        if (success)
+        {
+            UIManager.Instance.addCombatLogMessage("You successfully ran away!");
+            Debug.Log("Player successfully ran away!");
+            endBattle();
+        }
+        else
+        {
+            UIManager.Instance.addCombatLogMessage("You failed to run away!");
+            Debug.Log("Player failed to run away! Enemy's turn.");
+            swapTurns();
+        }
+    }
 
     /* PRIVATE FUNCTIONS */
 
