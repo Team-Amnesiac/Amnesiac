@@ -50,7 +50,7 @@ public class EnemyAI : MonoBehaviour
 
         if (isAggroed)
         {
-            if (distanceToPlayer > loseAggroRange)
+            if (distanceToPlayer > loseAggroRange || GameObject.FindGameObjectWithTag("Player") == null)
             {
                 loseAggro();
             }
