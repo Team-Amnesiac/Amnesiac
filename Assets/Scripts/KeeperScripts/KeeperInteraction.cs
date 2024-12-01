@@ -41,6 +41,7 @@ public class KeeperInteraction : MonoBehaviour
         UpdateDialogueArray();
     }
 
+
     private void Update()
     {
         if (playerInRange && Input.GetKeyDown(KeyCode.E))
