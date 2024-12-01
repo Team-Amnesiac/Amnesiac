@@ -24,7 +24,7 @@ public class EnemyAI : MonoBehaviour
     private Transform    playerTransform;
     private NavMeshAgent navMeshAgent;
 
-    private SkillCardSO.AttackType weakness;
+    public SkillCardSO.AttackType weakness;
 
 
     void Start()
