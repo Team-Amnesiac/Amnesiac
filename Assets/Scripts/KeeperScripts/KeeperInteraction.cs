@@ -132,14 +132,15 @@ public class KeeperInteraction : MonoBehaviour
         {
             currentDialogueArray = preSecondQuestDialogue; // Use the pre-second quest dialogue.
         }
-        else if (completedQuests.Contains(QuestManager.Instance.SecondQuest)) 
-        // If the second quest is completed.
+        else if (completedQuests.Contains(QuestManager.Instance.SecondQuest) && !completedQuests.Contains(QuestManager.Instance.ThirdQuest))
         {
             currentDialogueArray = preThirdQuestDialogue; // Use the pre-third quest dialogue.
         }
-        else 
+        else if (completedQuests.Contains(QuestManager.Instance.ThirdQuest))
         {
-            currentDialogueArray = preFirstQuestDialogue; // Default to pre-first quest dialogue as fallback.
+            // Default fallback, uses pre-first quest dialogue if nothing else matches
+            currentDialogueArray = preFirstQuestDialogue;
+            SceneLoader.Instance.loadScene(SceneLoader.Scene.Ending);
         }
     }
 }

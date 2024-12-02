@@ -99,7 +99,7 @@ public class EndingSceneUI : MonoBehaviour
     {
         if (SceneLoader.Instance != null)
         {
-            SceneLoader.Instance.loadScene(SceneLoader.Scene.Title);
+            GameManager.Instance.setGameState(GameManager.GameState.Title);
         }
         else
         {
