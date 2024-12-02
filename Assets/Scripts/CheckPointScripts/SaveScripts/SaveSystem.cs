@@ -13,6 +13,7 @@ public static class SaveSystem
             collectiblesData = CollectibleManager.Instance.SaveState(),
             questData = QuestManager.Instance.SaveState(),
             sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name
+            inventoryData = InventoryManager.Instance.SaveState();
         };
 
         string json = JsonUtility.ToJson(saveData, true);
@@ -39,6 +40,7 @@ public static class SaveSystem
             CollectibleManager.Instance.LoadState(saveData.collectiblesData);
             QuestManager.Instance.LoadState(saveData.questData);
             GameManager.Instance.setGameState(GameManager.GameState.Play);
+            InventoryManager.Instance.LoadState(saveData.inventoryData);
 
             Debug.Log("Game loaded successfully.");
         }
