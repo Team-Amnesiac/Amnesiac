@@ -277,6 +277,10 @@ public class UIManager : MonoBehaviour
                 playerHudUI.gameObject.SetActive(true);
                 break;
 
+            case UI.Prompt:
+                promptUI.gameObject.SetActive(true);
+                break;
+
             case UI.QuestLog:
                 questLogUI.prepareQuestLogShow();
                 questLogUI.gameObject.SetActive(true);

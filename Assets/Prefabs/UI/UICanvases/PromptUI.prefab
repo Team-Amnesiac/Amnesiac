@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4385006891988202107}
   - component: {fileID: 8987544729812777525}
   - component: {fileID: 2755052562643393635}
-  - component: {fileID: 6347513764744610310}
+  - component: {fileID: 3791224512913889363}
   m_Layer: 5
   m_Name: PromptUI
   m_TagString: Untagged
@@ -103,7 +103,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &6347513764744610310
+--- !u!114 &3791224512913889363
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -112,10 +112,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 731196931449073944}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37b3ac8bebb449247ab5e881929fd166, type: 3}
+  m_Script: {fileID: 11500000, guid: f984b5c65d81c4a4fa92323f39df6d43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notificationTMP: {fileID: 2603166212979342841}
+  promptUI: {fileID: 731196931449073944}
+  promptTMP: {fileID: 2603166212979342841}
 --- !u!1 &832738918484409908
 GameObject:
   m_ObjectHideFlags: 0
@@ -190,8 +191,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4287832848
-  m_fontColor: {r: 0.064271934, g: 0.13861932, b: 0.5773585, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

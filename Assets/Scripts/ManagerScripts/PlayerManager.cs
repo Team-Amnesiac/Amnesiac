@@ -25,7 +25,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private float maxPlayerHealth   = 150.0f;
     [SerializeField] private float playerHealth;
     [SerializeField] private float meleeDamage       = 25.0f;
-    [SerializeField] private int currency            = 100;
+    [SerializeField] private int currency            = 10;
     [SerializeField] private int playerLevel         = 1;
     [SerializeField] private int experienceThreshold = 50; // eXP required for the next level
     [SerializeField] private int playerStamina       = 100; // stamina used when skillcard used, no stamina means player cannot use skillcards.
@@ -62,7 +62,10 @@ public class PlayerManager : MonoBehaviour
     {
         // Set the player to full health.
         playerHealth = maxPlayerHealth;
-        equippedSkillCardArray = null;
+        for (int i = 0; i < MAX_EQUIPPED_SKILL_CARDS; i++)
+        {
+            equippedSkillCardArray[i] = null;
+        }
         playerStamina = 100;
         currency = 100;
         meleeDamage = 25.0f;
