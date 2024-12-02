@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2178694900321801456}
   - component: {fileID: 3345350857607670322}
   m_Layer: 0
-  m_Name: HealthGemScorpion
+  m_Name: StaminaGem
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

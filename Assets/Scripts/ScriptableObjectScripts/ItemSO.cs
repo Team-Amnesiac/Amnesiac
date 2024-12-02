@@ -12,8 +12,8 @@ public class ItemSO : ScriptableObject
 
     public enum ItemType
     {
-        Gem,
-        Potion,
+        HealthGem,
+        StaminaGem,
         Equipment,
         SkillCard,
         Collectible,
@@ -28,8 +28,12 @@ public class ItemSO : ScriptableObject
             case ItemType.Potion:
                 break;
             
-            case ItemType.Gem:
+            case ItemType.HealthGem:
                 PlayerManager.Instance.increaseHealth(value);
+                break;
+            
+            case ItemType.StaminaGem:
+                PlayerManager.Instance.increaseStamina(value);
                 break;
 
             case ItemType.SkillCard:

@@ -110,6 +110,12 @@ public class PlayerManager : MonoBehaviour
         UIManager.Instance.updateUI(UIManager.UI.PlayerHud);
     }
 
+    public void increaseStamina(int value)
+    {
+        playerStamina += value;
+        UIManager.Instance.updateUI(UIManager.UI.PlayerHud);
+    }
+
     // gain exp upon completing quest, fights, completing collectibles.
     public void increaseExperience(int value)
     {
