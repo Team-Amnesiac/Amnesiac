@@ -44,6 +44,10 @@ public class KeeperInteraction : MonoBehaviour
 
     private void Update()
     {
+        if (playerInRange)
+        {
+            UIManager.Instance.newPrompt($"Press E to interact with the Keeper.");
+        }
         if (playerInRange && Input.GetKeyDown(KeyCode.E))
         {
             UIManager.Instance.showUI(UIManager.UI.Keeper); // Show Keeper UI

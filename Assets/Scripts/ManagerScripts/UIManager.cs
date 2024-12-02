@@ -21,6 +21,7 @@ public class UIManager : MonoBehaviour
     private QuestLogUI     questLogUI;
     private ShopUI         shopUI;
     private WorldsUI       worldsUI;
+    private PromptUI       promptUI;
     
 
     public enum UI
@@ -39,6 +40,7 @@ public class UIManager : MonoBehaviour
         QuestLog,
         Shop,
         Worlds,
+        Prompt
     }
 
 
@@ -105,6 +107,11 @@ public class UIManager : MonoBehaviour
         notificationUI.showNotification(message);
     }
 
+    public void newPrompt(string message)
+    {
+        promptUI.showPrompt(message);
+    }
+
 
     public void newDialogue(string message)
     {
@@ -162,6 +169,10 @@ public class UIManager : MonoBehaviour
 
             case UI.Notification:
                 notificationUI = (NotificationUI)uiScript;
+                break;
+            
+            case UI.Prompt:
+                promptUI = (PromptUI)uiScript;
                 break;
 
             case UI.PauseMenu:
@@ -323,6 +334,10 @@ public class UIManager : MonoBehaviour
 
             case UI.MainMenu:
                 mainMenuUI.gameObject.SetActive(false);
+                break;
+
+            case UI.Prompt:
+                promptUI.gameObject.SetActive(false);
                 break;
 
             case UI.Notification:

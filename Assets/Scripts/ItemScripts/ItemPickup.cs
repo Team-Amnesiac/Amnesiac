@@ -22,8 +22,13 @@ public class ItemPickup : MonoBehaviour
 
     void Update()
     {
+        if (playerNearby)
+        {
+            UIManager.Instance.newPrompt($"Press E to pick up the item.");
+        }
         if (playerNearby && Input.GetKeyDown(KeyCode.E))
         {
+            UIManager.Instance.showUI(UIManager.UI.Prompt);
             Debug.Log("E key pressed, attempting to pick up item.");
             pickup();
         }
