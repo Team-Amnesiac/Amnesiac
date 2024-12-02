@@ -22,7 +22,7 @@ public class PlayerManager : MonoBehaviour
     // event triggered when the player levels up (via callbacks).
     public event Action<int> OnLevelUp;
 
-    [SerializeField] private float maxPlayerHealth   = 150.0f;
+    [SerializeField] private float maxPlayerHealth   = 100.0f;
     [SerializeField] private float playerHealth;
     [SerializeField] private float meleeDamage       = 25.0f;
     [SerializeField] private int currency            = 10;
