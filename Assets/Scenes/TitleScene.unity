@@ -4045,7 +4045,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playButton: {fileID: 1689302092}
-  loadButton: {fileID: 0}
+  loadButton: {fileID: 1010423026}
   controlsButton: {fileID: 762503842}
   exitButton: {fileID: 1187183817}
 --- !u!114 &1299850171

@@ -25,9 +25,6 @@ public class ItemSO : ScriptableObject
     {
         switch (itemType)
         {
-            case ItemType.Potion:
-                break;
-            
             case ItemType.HealthGem:
                 PlayerManager.Instance.increaseHealth(value);
                 break;

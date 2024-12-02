@@ -12,8 +12,8 @@ public static class SaveSystem
             playerData = PlayerManager.Instance.SaveState(),
             collectiblesData = CollectibleManager.Instance.SaveState(),
             questData = QuestManager.Instance.SaveState(),
-            sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name
-            inventoryData = InventoryManager.Instance.SaveState();
+            sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name,
+            inventoryData = InventoryManager.Instance.SaveState()
         };
 
         string json = JsonUtility.ToJson(saveData, true);

@@ -16,6 +16,8 @@ public class MainMenuUI : MonoBehaviour
         UIManager.Instance.setUI(UIManager.UI.MainMenu, this);
         // Initialize the playButton onClick listener.
         playButton.onClick.AddListener(playClick);
+        // Initialize the loadButton onClick listener.
+        loadButton.onClick.AddListener(loadButtonOnClick);
         // Initialize the controlsButton onClick listener.
         controlsButton.onClick.AddListener(controlsButtonOnClick);
         // Initialize the exitButton onClick listener.
