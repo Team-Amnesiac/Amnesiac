@@ -37,6 +37,13 @@ public class CollectibleManager : MonoBehaviour
         }
     }
 
+    public void reset()
+    {
+        activeSets.Clear();
+        completedSets.Clear();
+        trophyCount = 0;
+    }
+
     public void addCollectible(CollectibleSO collectible)
     {
         foreach (CollectibleSetSO collectibleSet in activeSets)

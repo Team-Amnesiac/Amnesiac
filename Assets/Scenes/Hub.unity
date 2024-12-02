@@ -8994,7 +8994,7 @@ MonoBehaviour:
   firstQuest: {fileID: 11400000, guid: b1c27510b506caa40813b05ee0427d0b, type: 2}
   secondQuest: {fileID: 11400000, guid: 44d388b2fadd7dd4b958bb389b23e93d, type: 2}
   thirdQuest: {fileID: 11400000, guid: 2bb0f3e231d00744c8e8831c07fbe2e9, type: 2}
-  sideQuestTemplate: {fileID: 0}
+  sideQuestTemplate: {fileID: 11400000, guid: 8ab69456c01cfbe4980248949b6e7f96, type: 2}
 --- !u!114 &1397053840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9046,8 +9046,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65a61f2b3c364f64aa1bc90c9ddb93aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxPlayerHealth: 100
-  playerHealth: 100
+  maxPlayerHealth: 150
+  playerHealth: 150
   meleeDamage: 25
   currency: 100
   playerLevel: 1

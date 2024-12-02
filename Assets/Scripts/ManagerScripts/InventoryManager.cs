@@ -7,14 +7,17 @@ public class InventoryManager : MonoBehaviour
     public static InventoryManager Instance;
 
     private List<ItemSO> inventoryItems = new List<ItemSO>();
-    
-    // The amount of set pieces collected in each collectible set.
-    private int trophyCount = 0;
 
 
     private void Awake()
     {
         Instance = this;
+    }
+
+
+    public void reset()
+    {
+        inventoryItems.Clear();
     }
 
 

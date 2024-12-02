@@ -41,6 +41,14 @@ public class QuestManager : MonoBehaviour
     }
 
 
+    public void reset()
+    {
+        activeQuests.Clear();
+        completedQuests.Clear();
+        currentSideQuestStage = 1;
+    }
+
+
     public void talkToKeeper()
     {
         if (playerReadyForFirstQuest())

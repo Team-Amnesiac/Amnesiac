@@ -899,8 +899,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65a61f2b3c364f64aa1bc90c9ddb93aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxPlayerHealth: 100
-  playerHealth: 100
+  maxPlayerHealth: 150
+  playerHealth: 150
   meleeDamage: 25
   currency: 100
   playerLevel: 1

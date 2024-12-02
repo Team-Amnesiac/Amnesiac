@@ -22,7 +22,7 @@ public class PlayerManager : MonoBehaviour
     // event triggered when the player levels up (via callbacks).
     public event Action<int> OnLevelUp;
 
-    [SerializeField] private float maxPlayerHealth   = 100.0f;
+    [SerializeField] private float maxPlayerHealth   = 150.0f;
     [SerializeField] private float playerHealth;
     [SerializeField] private float meleeDamage       = 25.0f;
     [SerializeField] private int currency            = 100;
@@ -62,6 +62,29 @@ public class PlayerManager : MonoBehaviour
     {
         // Set the player to full health.
         playerHealth = maxPlayerHealth;
+        equippedSkillCardArray = null;
+        playerStamina = 100;
+        currency = 100;
+        meleeDamage = 25.0f;
+        playerLevel = 1;
+        experienceThreshold = 50;
+        playerExperience = 0;
+    }
+
+    // Reset the all player stats and values.
+    public void reset()
+    {
+        playerHealth = maxPlayerHealth;
+        for (int i = 0; i < MAX_EQUIPPED_SKILL_CARDS; i++)
+        {
+            equippedSkillCardArray[i] = null;
+        }
+        playerStamina = 100;
+        currency = 100;
+        meleeDamage = 25.0f;
+        playerLevel = 1;
+        experienceThreshold = 50;
+        playerExperience = 0;
     }
 
 

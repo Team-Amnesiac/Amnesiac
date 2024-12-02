@@ -59,6 +59,12 @@ public class GameManager : MonoBehaviour
                 Time.timeScale = 1;
                 if (gameState == GameState.Title)        // Play button pressed.
                 {
+                    // Reset the manager values.
+                    PlayerManager.Instance.reset();
+                    QuestManager.Instance.reset();
+                    CollectibleManager.Instance.reset();
+                    InventoryManager.Instance.reset();
+
                     currentScene = SceneLoader.Scene.Hub;
                     // Load the Hub scene.
                     SceneLoader.Instance.loadScene(SceneLoader.Scene.Hub);
