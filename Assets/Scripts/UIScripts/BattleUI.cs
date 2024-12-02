@@ -58,6 +58,13 @@ public class BattleUI : MonoBehaviour
 
     /* PUBLIC FUNCTIONS */
 
+    public void prepareBattleHide()
+    {
+        foreach (Transform combatLogMessageTransform in combatLogContent.transform)
+        {
+            Destroy(combatLogMessageTransform.gameObject);
+        }
+    }
 
     public void updateVisuals()
     {

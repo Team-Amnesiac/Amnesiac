@@ -274,6 +274,9 @@ public class BattleManager : MonoBehaviour
     {
         criticalHit = false;
         UIManager.Instance.hideUI(UIManager.UI.Battle);
+        roundNumber = 0;
+        playerTurnCount = 0;
+        enemyTurnCount = 0;
         if (PlayerManager.Instance.calculateHealthPercent() == 0.0f)  // Player has been defeated.
         {
             // Game over.
