@@ -1,22 +1,28 @@
+// This class manages all aspects of the game's quest system, including active and completed quests, quest progression, 
+// handling relics and collectibles, and managing side quests with dynamic updates.
+
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 public class QuestManager : MonoBehaviour
 {
+    // Singleton instance for global access.
     public static QuestManager Instance;
 
+    // Lists of active and completed quests.
     [SerializeField] List<QuestSO> activeQuests;
     [SerializeField] List<QuestSO> completedQuests;
 
+    // Main quest references.
     [Header("Quest Assets")]
-    [SerializeField] private QuestSO firstQuest;
-    [SerializeField] private QuestSO secondQuest;
-    [SerializeField] private QuestSO thirdQuest;
-    [SerializeField] private QuestSO sideQuestTemplate;
-    private int currentSideQuestStage = 1;
+    [SerializeField] private QuestSO firstQuest;       // First main quest.
+    [SerializeField] private QuestSO secondQuest;      // Second main quest.
+    [SerializeField] private QuestSO thirdQuest;       // Third main quest.
+    [SerializeField] private QuestSO sideQuestTemplate; // Template for generating side quests.
 
+    private int currentSideQuestStage = 1; // Tracks the current stage of the side quest.
 
+    // Ensures only one instance of the QuestManager exists and persists across scenes.
     void Awake()
     {
         if (Instance == null)
@@ -30,6 +36,7 @@ public class QuestManager : MonoBehaviour
         }
     }
 
+    // Initializes quests and starts the first side quest.
     void Start()
     {
         firstQuest.isCompleted = false;
@@ -40,7 +47,7 @@ public class QuestManager : MonoBehaviour
         StartOrUpdateSideQuest();
     }
 
-
+    // Resets the quest system by clearing all data and resetting stages.
     public void reset()
     {
         activeQuests.Clear();
@@ -48,7 +55,7 @@ public class QuestManager : MonoBehaviour
         currentSideQuestStage = 1;
     }
 
-
+    // Handles interactions with the Keeper to start or progress main quests.
     public void talkToKeeper()
     {
         if (playerReadyForFirstQuest())
@@ -65,7 +72,7 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-
+    // Adds a relic to its associated quest and updates its progress.
     public void addRelic(RelicSO relic)
     {
         QuestSO relicQuest = relic.getRelatedQuest();
@@ -75,7 +82,7 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-
+    // Adds a collectible to its associated quest and updates its progress.
     public void addCollectible(CollectibleSO collectible)
     {
         QuestSO collectibleQuest = collectible.getRelatedQuest();
@@ -85,14 +92,14 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-
+    // Adds a new quest to the active quests list and notifies the player.
     private void addQuest(QuestSO newQuestSo)
     {
         activeQuests.Add(newQuestSo);
         UIManager.Instance.newNotification($"New Quest(s) in quest log!");
     }
 
-
+    // Updates the progress of an active quest and checks for completion.
     private void updateQuestProgress(QuestSO questSo)
     {
         if (activeQuests.Contains(questSo) && !questSo.isCompleted)
@@ -101,7 +108,7 @@ public class QuestManager : MonoBehaviour
             questSo.requiredAmount--;
             Debug.Log($"[QuestManager] Remaining items for quest: {questSo.requiredAmount}");
 
-            if (questSo.requiredAmount <= 0)
+            if (questSo.requiredAmount <= 0) // Quest is complete.
             {
                 Debug.Log($"[QuestManager] Quest completed: {questSo.questName}");
                 questSo.isCompleted = true;
@@ -116,26 +123,27 @@ public class QuestManager : MonoBehaviour
         }
     }
 
+    // Starts or updates the current side quest.
     public void StartOrUpdateSideQuest()
     {
-        if (!activeQuests.Contains(sideQuestTemplate))
+        if (!activeQuests.Contains(sideQuestTemplate)) // If the side quest isn't active, start it.
         {
-            // Start the side quest if not already active
             sideQuestTemplate.questName = $"Defeat {sideQuestTemplate.requiredAmount} Enemies";
             activeQuests.Add(sideQuestTemplate);
             Debug.Log($"New Side Quest Started: {sideQuestTemplate.questName}");
         }
     }
 
+    // Updates the progress of the side quest and prepares the next stage when completed.
     public void UpdateSideQuestProgress()
     {
         if (activeQuests.Contains(sideQuestTemplate) && !sideQuestTemplate.isCompleted)
         {
             sideQuestTemplate.requiredAmount--;
             Debug.Log($"[QuestManager] Side Quest Progress: {sideQuestTemplate.requiredAmount} enemies remaining");
-            if (sideQuestTemplate.requiredAmount <= 0)
+
+            if (sideQuestTemplate.requiredAmount <= 0) // Side quest is complete.
             {
-                // Create a snapshot of the completed quest for UI purposes
                 QuestSO completedQuestSnapshot = ScriptableObject.CreateInstance<QuestSO>();
                 completedQuestSnapshot.questName = sideQuestTemplate.questName;
                 completedQuestSnapshot.description = sideQuestTemplate.description;
@@ -143,19 +151,16 @@ public class QuestManager : MonoBehaviour
                 completedQuestSnapshot.isCompleted = true;
                 completedQuestSnapshot.questType = sideQuestTemplate.questType;
 
-                // Add the completed quest snapshot to the completedQuests list
                 completedQuests.Add(completedQuestSnapshot);
                 Debug.Log($"[QuestManager] Side Quest Completed: {completedQuestSnapshot.questName}");
 
-                // Reward the player
                 int experienceReward = 20 + (currentSideQuestStage * 25);
                 PlayerManager.Instance.increaseExperience(experienceReward);
                 Debug.Log($"Player rewarded with {experienceReward} experience points.");
 
-                // Increment the stage and prepare the next side quest
                 currentSideQuestStage++;
                 sideQuestTemplate.isCompleted = false;
-                int baseEnemiesCount = 3; // Starting point for enemies in the first side quest
+                int baseEnemiesCount = 3;
                 sideQuestTemplate.requiredAmount = baseEnemiesCount + (currentSideQuestStage * 2);
                 sideQuestTemplate.questName = $"Defeat {sideQuestTemplate.requiredAmount} Enemies";
                 StartOrUpdateSideQuest();
@@ -178,12 +183,12 @@ public class QuestManager : MonoBehaviour
         return activeQuests;
     }
 
-
     public List<QuestSO> getCompletedQuests()
     {
         return completedQuests;
     }
 
+    // Saves the current quest state into a data object.
     public QuestData SaveState()
     {
         return new QuestData
@@ -193,23 +198,27 @@ public class QuestManager : MonoBehaviour
         };
     }
 
+    // Loads the quest state from saved data.
     public void LoadState(QuestData data)
     {
         activeQuests = data.activeQuests.ConvertAll(name => FindQuestByName(name));
         completedQuests = data.completedQuests.ConvertAll(name => FindQuestByName(name));
     }
 
+    // Finds a quest by its name in the Resources folder.
     private QuestSO FindQuestByName(string name)
     {
         return Resources.Load<QuestSO>($"Quests/{name}");
     }
 
+    // Checks if the player is ready for the first quest.
     private bool playerReadyForFirstQuest()
     {
         return !activeQuests.Contains(firstQuest) &&
                !completedQuests.Contains(firstQuest);
     }
 
+    // Checks if the player is ready for the second quest.
     private bool playerReadyForSecondQuest()
     {
         return completedQuests.Contains(firstQuest) &&
@@ -217,6 +226,7 @@ public class QuestManager : MonoBehaviour
                !completedQuests.Contains(secondQuest);
     }
 
+    // Checks if the player is ready for the third quest.
     private bool playerReadyForThirdQuest()
     {
         return completedQuests.Contains(secondQuest) &&
