@@ -140,6 +140,7 @@ public class KeeperInteraction : MonoBehaviour
         {
             // Default fallback, uses pre-first quest dialogue if nothing else matches
             currentDialogueArray = preFirstQuestDialogue;
+            Time.timeScale = 1.0f;
             SceneLoader.Instance.loadScene(SceneLoader.Scene.Ending);
         }
     }
