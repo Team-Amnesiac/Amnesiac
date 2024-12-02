@@ -1,11 +1,14 @@
 using System;
 using UnityEngine;
 
+// This class handles player interactions with "The Keeper" NPC in the game.
+// It manages dialogue, quest progression, and player proximity detection.
 public class KeeperInteraction : MonoBehaviour
 {
+    // Tracks whether the player is within interaction range of The Keeper.
     private bool playerInRange = false;
 
-    // Dialogue sets for different quest stages
+    // Dialogue sets for different stages of quest progression.
     [SerializeField] private string[] preFirstQuestDialogue = {
         "Hey, You Must Be Thinking How Strange Of A Place You Have Waken Up In.",
         "As You Can See, The World Is Gone, And There Is No One Around, Except For Vile Creatures.",
@@ -33,104 +36,110 @@ public class KeeperInteraction : MonoBehaviour
         "Don't Let The Harsh Environment Taunt You And Please Come Back In One Piece!"
     };
 
+    // Tracks the current dialogue set and index.
     private string[] currentDialogueArray;
     private int currentDialogueIndex = 0;
 
+    // Unity's Start method, initializes the dialogue array.
     private void Start()
     {
-        UpdateDialogueArray();
+        UpdateDialogueArray(); // Set the initial dialogue based on quest progression.
     }
 
-
+    // Unity's Update method, checks for player interaction.
     private void Update()
     {
-        if (playerInRange)
+        if (playerInRange) // If the player is within range of The Keeper.
         {
-            UIManager.Instance.newPrompt($"Press E to interact with the Keeper.");
+            UIManager.Instance.newPrompt($"Press E to interact with the Keeper."); // Show interaction prompt.
         }
-        if (playerInRange && Input.GetKeyDown(KeyCode.E))
+        if (playerInRange && Input.GetKeyDown(KeyCode.E)) // If the player presses 'E' while in range.
         {
-            UIManager.Instance.showUI(UIManager.UI.Keeper); // Show Keeper UI
-            GameManager.Instance.setGameState(GameManager.GameState.Pause);
+            UIManager.Instance.showUI(UIManager.UI.Keeper); // Display the Keeper's UI.
+            GameManager.Instance.setGameState(GameManager.GameState.Pause); // Pause the game while interacting.
         }
     }
 
+    // Detects when the player enters The Keeper's interaction range.
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player")) // Check if the object is the player.
         {
-            playerInRange = true;
-            Debug.Log("Player in range of The Keeper.");
+            playerInRange = true; // Mark the player as being in range.
+            Debug.Log("Player in range of The Keeper."); // Log the event.
         }
     }
 
+    // Detects when the player exits The Keeper's interaction range.
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player")) // Check if the object is the player.
         {
-            playerInRange = false;
-            Debug.Log("Player left the range of The Keeper.");
+            playerInRange = false; // Mark the player as no longer being in range.
+            Debug.Log("Player left the range of The Keeper."); // Log the event.
         }
     }
 
+    // Handles player interaction with The Keeper.
     public void talkTo()
     {
-        QuestManager.Instance.talkToKeeper(); // Handle quest progression
-        StartDialogue();
-        Debug.Log("Player interacted with Keeper and received or updated a quest.");
+        QuestManager.Instance.talkToKeeper(); // Notify the QuestManager of the interaction.
+        StartDialogue(); // Begin the dialogue sequence.
+        Debug.Log("Player interacted with Keeper and received or updated a quest."); // Log the interaction.
     }
 
+    // Starts the dialogue sequence.
     private void StartDialogue()
     {
-        UIManager.Instance.getDialogueUI().onNextDialogue += DialogueUI_OnNextDialogue;
-        DialogueUI_OnNextDialogue(this, EventArgs.Empty);
+        UIManager.Instance.getDialogueUI().onNextDialogue += DialogueUI_OnNextDialogue; 
+        // Subscribe to the dialogue progression event.
+        DialogueUI_OnNextDialogue(this, EventArgs.Empty); // Trigger the first dialogue line.
     }
 
+    // Handles the dialogue progression logic.
     private void DialogueUI_OnNextDialogue(object sender, EventArgs e)
     {
-        // Update dialogue array for the next interaction
-        UpdateDialogueArray();
+        UpdateDialogueArray(); // Update the dialogue array based on quest progression.
 
-        if (currentDialogueIndex >= currentDialogueArray.Length)
+        if (currentDialogueIndex >= currentDialogueArray.Length) // Check if the dialogue has ended.
         {
-            currentDialogueIndex = 0;
-            UIManager.Instance.getDialogueUI().onNextDialogue -= DialogueUI_OnNextDialogue;
-            UIManager.Instance.hideUI(UIManager.UI.Dialogue);
-            GameManager.Instance.setGameState(GameManager.GameState.Play);
-
+            currentDialogueIndex = 0; // Reset the dialogue index.
+            UIManager.Instance.getDialogueUI().onNextDialogue -= DialogueUI_OnNextDialogue; 
+            // Unsubscribe from the dialogue progression event.
+            UIManager.Instance.hideUI(UIManager.UI.Dialogue); // Hide the dialogue UI.
+            GameManager.Instance.setGameState(GameManager.GameState.Play); // Resume the game.
         }
-        else // Continue dialogue
+        else // If there are more dialogue lines to show.
         {
-            // Show the next dialogue line
-            UIManager.Instance.newDialogue(currentDialogueArray[currentDialogueIndex]);
-            currentDialogueIndex++;
+            UIManager.Instance.newDialogue(currentDialogueArray[currentDialogueIndex]); 
+            // Display the next dialogue line.
+            currentDialogueIndex++; // Move to the next line.
         }
     }
 
+    // Updates the dialogue array based on completed quests.
     private void UpdateDialogueArray()
     {
-        var completedQuests = QuestManager.Instance.getCompletedQuests();
+        var completedQuests = QuestManager.Instance.getCompletedQuests(); // Get the list of completed quests.
 
-        if (completedQuests.Count == 0)
+        if (completedQuests.Count == 0) // If no quests are completed.
         {
-            // Before any quests are completed, used pre-first quest dialogue
-            currentDialogueArray = preFirstQuestDialogue;
+            currentDialogueArray = preFirstQuestDialogue; // Use the pre-first quest dialogue.
         }
         else if (completedQuests.Contains(QuestManager.Instance.FirstQuest) &&
-                 !completedQuests.Contains(QuestManager.Instance.SecondQuest))
+                 !completedQuests.Contains(QuestManager.Instance.SecondQuest)) 
+        // If the first quest is completed but not the second.
         {
-            // After completing the first quest but before the second
-            currentDialogueArray = preSecondQuestDialogue;
+            currentDialogueArray = preSecondQuestDialogue; // Use the pre-second quest dialogue.
         }
-        else if (completedQuests.Contains(QuestManager.Instance.SecondQuest))
+        else if (completedQuests.Contains(QuestManager.Instance.SecondQuest)) 
+        // If the second quest is completed.
         {
-            // After completing the second quest
-            currentDialogueArray = preThirdQuestDialogue;
+            currentDialogueArray = preThirdQuestDialogue; // Use the pre-third quest dialogue.
         }
-        else
+        else 
         {
-            // Default fallback, uses pre-first quest dialogue if nothing else matches
-            currentDialogueArray = preFirstQuestDialogue;
+            currentDialogueArray = preFirstQuestDialogue; // Default to pre-first quest dialogue as fallback.
         }
     }
 }
