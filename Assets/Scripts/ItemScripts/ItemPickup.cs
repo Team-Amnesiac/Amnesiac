@@ -1,10 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
-// This class handles the logic for picking up items in the game.
-// It includes interaction detection, player animations, and adding items to relevant systems.
-
 
 public class ItemPickup : MonoBehaviour
 {
@@ -14,6 +8,7 @@ public class ItemPickup : MonoBehaviour
     private bool playerNearby = false;
     // Reference to the player's animator for triggering pickup animations.
     private Animator playerAnimator;
+    private bool hasPromptShown = false; // Tracks whether the prompt has already been displayed.
 
     // Start method, initializes item behavior and checks if it should spawn.
     void Start()
@@ -28,17 +23,25 @@ public class ItemPickup : MonoBehaviour
     // Update method, checks for player interaction with the item.
     void Update()
     {
-        if (playerNearby) // If the player is near the item.
+        if (playerNearby && !hasPromptShown) // If the player is near the item and the prompt hasn't been shown.
         {
-            UIManager.Instance.newPrompt($"Press E to pick up the item."); // Show a prompt to pick up the item.
+            UIManager.Instance.newPrompt(this.gameObject, $"Press E to pick up the item."); // Show a prompt to pick up the item.
+            hasPromptShown = true; // Mark the prompt as shown.
         }
+
         if (playerNearby && Input.GetKeyDown(KeyCode.E)) // If the player presses the 'E' key while nearby.
         {
-            UIManager.Instance.showUI(UIManager.UI.Prompt); // Show the relevant UI.
             Debug.Log("E key pressed, attempting to pick up item."); // Log the action.
             pickup(); // Attempt to pick up the item.
+            hasPromptShown = false; // Reset the prompt so it can reappear for other items or scenarios if needed.
+        }
+
+        if (!playerNearby && hasPromptShown) // If the player moves away and the prompt was shown.
+        {
+            hasPromptShown = false; // Reset the prompt state, allowing it to reappear when re-entering the vicinity.
         }
     }
+
 
     // Handles the logic for picking up the item.
     void pickup()
@@ -88,7 +91,7 @@ public class ItemPickup : MonoBehaviour
         return (itemType == ItemSO.ItemType.SkillCard || // Check if the item is a skill card.
                 itemType == ItemSO.ItemType.Collectible || // Check if the item is a collectible.
                 itemType == ItemSO.ItemType.Relic) && // Check if the item is a relic.
-               InventoryManager.Instance.getInventoryItems().Contains(item); 
-               // Ensure the item is not already in the inventory.
+               InventoryManager.Instance.getInventoryItems().Contains(item);
+        // Ensure the item is not already in the inventory.
     }
 }

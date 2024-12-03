@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections.Generic;
 
 // This class manages the various UI components in the game, allowing them to be shown, hidden, or updated.
 // It uses a singleton pattern for global access and ensures smooth interaction between UI elements and the game state.
@@ -114,9 +113,9 @@ public class UIManager : MonoBehaviour
     }
 
     // Displays a prompt message.
-    public void newPrompt(string message)
+    public void newPrompt(GameObject entity, string message)
     {
-        promptUI.showPrompt(message);
+        promptUI.showPrompt(entity, message);
     }
 
     // Displays a dialogue message.

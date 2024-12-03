@@ -7,6 +7,7 @@ public class KeeperInteraction : MonoBehaviour
 {
     // Tracks whether the player is within interaction range of The Keeper.
     private bool playerInRange = false;
+    private bool hasPromptShown = false;
 
     // Dialogue sets for different stages of quest progression.
     [SerializeField] private string[] preFirstQuestDialogue = {
@@ -49,14 +50,24 @@ public class KeeperInteraction : MonoBehaviour
     // Unity's Update method, checks for player interaction.
     private void Update()
     {
-        if (playerInRange) // If the player is within range of The Keeper.
+        if (playerInRange && !hasPromptShown) // If the player is within range and the prompt hasn't been shown.
         {
-            UIManager.Instance.newPrompt($"Press E to interact with the Keeper."); // Show interaction prompt.
+            UIManager.Instance.newPrompt(this.gameObject, $"Press E to interact with the Keeper."); // Show the interaction prompt.
+            hasPromptShown = true; // Mark the prompt as shown.
         }
+
         if (playerInRange && Input.GetKeyDown(KeyCode.E)) // If the player presses 'E' while in range.
         {
             UIManager.Instance.showUI(UIManager.UI.Keeper); // Display the Keeper's UI.
+            UIManager.Instance.hideUI(UIManager.UI.Prompt); // Hide the prompt UI.
             GameManager.Instance.setGameState(GameManager.GameState.Pause); // Pause the game while interacting.
+            hasPromptShown = false; // Reset the prompt so it can be shown again if necessary.
+        }
+
+        if (!playerInRange && hasPromptShown) // If the player moves out of range and the prompt was shown.
+        {
+            UIManager.Instance.hideUI(UIManager.UI.Prompt); // Hide the prompt UI.
+            hasPromptShown = false; // Reset the prompt state for future interactions.
         }
     }
 

@@ -167,4 +167,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floatHeight: 0.25
   rotationSpeed: 30
-  itemPickup: {fileID: 0}
+  itemPickup: {fileID: 3345350857607670322}

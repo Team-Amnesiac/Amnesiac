@@ -14,13 +14,18 @@ public class WorldsUI : MonoBehaviour
     [SerializeField] private Button loikartButton; // Button to travel to the Loikart world.
     [SerializeField] private Button exitButton;   // Button to exit the Worlds UI and return to the Checkpoint UI.
 
+    void Update()
+    {
+        toggleAppropriateWorldButtons();
+    }
+
     // Initializes the Worlds UI, attaches button listeners, and disables buttons for unavailable worlds.
     private void Start()
     {
         UIManager.Instance.setUI(UIManager.UI.Worlds, this); // Register the Worlds UI with the UIManager.
         UIManager.Instance.hideUI(UIManager.UI.Worlds); // Hide the Worlds UI initially.
 
-        disableAppropriateWorldButtons(); // Disable buttons based on the current scene and quest progress.
+        toggleAppropriateWorldButtons(); // Disable buttons based on the current scene and quest progress.
 
         // Attach listeners to button click events.
         hubButton.onClick.AddListener(hubButtonOnClick);
@@ -29,13 +34,16 @@ public class WorldsUI : MonoBehaviour
         exitButton.onClick.AddListener(exitButtonOnClick);
     }
 
-    // Disables a button and changes its color to grey.
+    // Disables a button.
     private void DisableButton(Button button)
     {
         button.interactable = false; // Make the button non-interactable.
-        ColorBlock colors = button.colors;
-        colors.normalColor = Color.grey; // Change the button color to indicate it's disabled.
-        button.colors = colors;
+    }
+
+    // Enables a button.
+    private void enableButton(Button button)
+    {
+        button.interactable = true;  // Make the button interactable.
     }
 
     // Handles the Hub button click, loading the Hub scene.
@@ -64,13 +72,17 @@ public class WorldsUI : MonoBehaviour
     }
 
     // Disables buttons for worlds that are unavailable based on the current scene or quest progress.
-    private void disableAppropriateWorldButtons()
+    private void toggleAppropriateWorldButtons()
     {
         string currentScene = SceneManager.GetActiveScene().name; // Get the name of the current scene.
 
         if (currentScene == "Hub")
         {
             DisableButton(hubButton); // Disable the Hub button if the player is already in the Hub world.
+        }
+        else
+        {
+            enableButton(hubButton);
         }
 
         // Disable the Noryx button if the player is already in Noryx or hasn't unlocked the quest for Noryx.
@@ -80,6 +92,10 @@ public class WorldsUI : MonoBehaviour
         {
             DisableButton(noryxButton);
         }
+        else
+        {
+            enableButton(noryxButton);
+        }
 
         // Disable the Loikart button if the player is already in Loikart or hasn't unlocked the quest for Loikart.
         if (currentScene == "Loikart" ||
@@ -87,6 +103,10 @@ public class WorldsUI : MonoBehaviour
              !QuestManager.Instance.getCompletedQuests().Contains(QuestManager.Instance.ThirdQuest)))
         {
             DisableButton(loikartButton);
+        }
+        else
+        {
+            enableButton(loikartButton);
         }
     }
 }

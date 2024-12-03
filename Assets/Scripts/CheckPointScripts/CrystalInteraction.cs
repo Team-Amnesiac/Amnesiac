@@ -6,19 +6,30 @@ public class CrystalInteraction : MonoBehaviour
     // A private boolean variable to track whether the player is near the crystal or not.
     private bool isPlayerNearby = false;
 
+
+
+    private bool hasPromptShown = false;
+
     private void Update()
     {
-        // Unity's Update method is called once per frame.
+        // Check if the player is nearby and the prompt hasn't been shown yet.
+        if (isPlayerNearby && !hasPromptShown)
+        {
+            UIManager.Instance.newPrompt(this.gameObject, $"Press E to interact with the World Crystal.");
+            hasPromptShown = true; // Mark the prompt as shown.
+        }
 
         if (isPlayerNearby && Input.GetKeyDown(KeyCode.E))
         {
-            // Check if the player is nearby (`isPlayerNearby` is true) and the 'E' key was pressed this frame.
-            
+            // Show the Checkpoint UI and pause the game only when the player interacts.
             UIManager.Instance.showUI(UIManager.UI.Checkpoint);
-            // Show the Checkpoint UI using the UIManager instance.
-            
             GameManager.Instance.setGameState(GameManager.GameState.Pause);
-            // Pause the game by setting the game state to Pause using GameManager.
+        }
+
+        // Reset the prompt state if the player is no longer nearby.
+        if (!isPlayerNearby && hasPromptShown)
+        {
+            hasPromptShown = false; // Allow the prompt to be shown again when the player re-enters the vicinity.
         }
     }
 

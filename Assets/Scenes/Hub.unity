@@ -13918,12 +13918,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4866561292638846735, guid: ae018ca75c1b8d944983ffe6de4da057, type: 3}
       propertyPath: Priority
-      value: 45
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 4866561292638846735, guid: ae018ca75c1b8d944983ffe6de4da057, type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: fd944e20ee6444efa87cef28957898aa, type: 3}
+      objectReference: {fileID: 8300000, guid: 989c645726cca46c090eaf9f914579ed, type: 3}
     - target: {fileID: 4976303577756444319, guid: ae018ca75c1b8d944983ffe6de4da057, type: 3}
       propertyPath: leftDoorAnimator
       value: 
